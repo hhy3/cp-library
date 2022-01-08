@@ -8,8 +8,8 @@
  * 简介: https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm
  * 模板题: https://www.luogu.com.cn/problem/P3375
  * 
- * @param s 
- * @param p 
+ * @param s 待匹配字符串
+ * @param p 模式串
  * @return std::pair<std::vector<int>, std::vector<int>> 
  *         返回值为 {匹配到的位置, 前缀函数}
  */
