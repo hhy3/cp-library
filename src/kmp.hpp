@@ -5,8 +5,8 @@
 
 /**
  * @brief kmp (Knuth–Morris–Pratt) 算法
- * 简介: https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm
- * 模板题: https://www.luogu.com.cn/problem/P3375
+ *        简介: https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm
+ *        模板题: https://www.luogu.com.cn/problem/P3375
  * 
  * @param s 待匹配字符串
  * @param p 模式串
@@ -15,7 +15,7 @@
  */
 std::pair<std::vector<int>, std::vector<int>> kmp(const std::string &s, const std::string &p) {
   int n = s.size(), m = p.size();
-  vector<int> pi(m + 1), ans;
+  std::vector<int> pi(m + 1), ans;
   for (int i = 1, j = 0; i < m; ++i) {
     while (j > 0 && p[i] != p[j]) {
       j = pi[j];
