@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include <cassert>
+#include <functional>
 
 /**
  * @brief 匈牙利算法 (hungarian algorithm) 求二分图最大匹配
@@ -14,13 +16,13 @@
  * @param one_indexed 
  * @return int 
  */
-int hungarian(const vector<vector<int>> &G, int n, vector<int> &match, int m, bool one_indexed=true) {
+int hungarian(const std::vector<std::vector<int>> &G, int n, std::vector<int> &match, int m, bool one_indexed=true) {
   int offset = int(one_indexed);
   assert(G.size() >= n + offset);
-  vector<bool> vis(m + offset);
-  match = vector<int>(m + offset, 0);
+  std::vector<bool> vis(m + offset);
+  match.assign(m + offset, 0);
   
-  function<bool(int)> dfs = [&] (int u) {
+  std::function<bool(int)> dfs = [&] (int u) {
     for (auto v : G[u]) if (!vis[v]) {
       if (!match[v] || dfs(match[v])) {
         match[v] = u;
