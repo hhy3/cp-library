@@ -6,8 +6,11 @@
 
 /**
  * @brief 匈牙利算法 (hungarian algorithm) 求二分图最大匹配
+ *        
  *        简介: https://www.renfei.org/blog/bipartite-matching.html
  *        模板题: https://www.luogu.com.cn/problem/P3386
+ *        
+ *        Time Complexity: O(m * n)
  * 
  * @param G 
  * @param n 

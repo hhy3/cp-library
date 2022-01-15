@@ -6,9 +6,12 @@
 
 /**
  * @brief 倍增求树上最近公共祖先 (Lowest common ancestor)
+ *        
  *        简介: https://cp-algorithms.com/graph/lca_binary_lifting.html
  *        模板题: https://www.luogu.com.cn/problem/P3379
  * 
+ *        Time Complexity: O(m * n)
+ *        
  */
 class LCA {
 
