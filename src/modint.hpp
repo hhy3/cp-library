@@ -3,6 +3,7 @@
 #include <istream>
 #include <ostream>
 #include <type_traits>
+#include <cassert>
 
 /**
  * @brief 模M剩余类集合
