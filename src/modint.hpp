@@ -16,12 +16,12 @@ class modint {
 private:
 
   uint64_t _x;  
-  bool M_prime;
+  bool M_prime = is_prime_constexpr<M>;
 
 public:
 
   template <typename T>
-  modint(T x=0): M_prime(is_prime(M)) {
+  modint(T x=0) {
     if (std::is_signed<T>::value) {
       _x = (x % T(M) + T(M)) % T(M);
     } else {
@@ -144,11 +144,13 @@ private:
   template <typename T>
   static constexpr bool is_prime(T x) {
     if (x < 2) return false;
-    for (int i = 2; i <= x / i; ++i) {
+    for (T i = 2; i <= x / i; ++i) {
       if (x % i == 0) return false;
     }
     return true;
   }
+	template <uint64_t n> 
+	static constexpr bool is_prime_constexpr = is_prime(n);
 
   template <typename T>
   static T extgcd(T a, T b, T& x, T& y) {
