@@ -28,6 +28,7 @@ public:
   explicit 
   union_find(size_t n): __n(n), __parent(n + 1), __size(n + 1) {
     std::iota(__parent.begin(), __parent.end(), 0);
+    std::fill(__size.begin() + 1, __size.end(), 1);
   } 
 
   /**
@@ -71,6 +72,17 @@ public:
   bool is_connected(int u, int v) {
     assert(u >= 1 && u <= __n && v >= 1 && v <= __n);
     return find(u) == find(v);
+  }
+
+  /**
+   * @brief u所在集合元素个数
+   * 
+   * @param u 
+   * @return int 
+   */
+  int size(int u) {
+    assert(u >= 1 && u <= __n);
+    return __size[find(u)];
   }
   
 };
