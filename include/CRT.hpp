@@ -5,16 +5,6 @@
 #include <cstdint>
 #include <cassert>
 
-template <typename T>
-static T extgcd(T a, T b, T& x, T& y) {
-  if (b == 0) {
-    x = 1, y = 0;
-    return a;
-  }
-  T d = extgcd(b, a % b, y, x);
-  y -= a / b * x;
-  return d;
-}
 
 /**
  * @brief 中国剩余定理 (Chinese Reminder Theorem)
@@ -29,6 +19,17 @@ static T extgcd(T a, T b, T& x, T& y) {
  */
 template<typename T>
 T CRT(const std::vector<T> &bs, const std::vector<T> &ns) {
+
+  std::function<T(T, T, T, T)> extgcd = [&] (T a, T b, T& x, T& y) {
+    if (b == 0) {
+      x = 1, y = 0;
+      return a;
+    }
+    T d = extgcd(b, a % b, y, x);
+    y -= a / b * x;
+    return d;
+  };
+
   assert(bs.size() == ns.size());
   int n = bs.size();
   T N = 1;
