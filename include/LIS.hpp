@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <functional>
 
 /**
  * @brief 最长递增子序列 (Longest increasing subsequence) 问题 
@@ -11,13 +12,27 @@
  * @param lis 
  * @return int 
  */
-template <typename T>
-int LIS(const std::vector<T> &a, std::vector<T> lis) {
+template <typename T, typename Compare>
+int LIS(const std::vector<T> &a, 
+        std::vector<T> &lis, 
+        Compare cmp) {
   lis.clear();
-  for (auto x : a) {
-    auto it = lower_bound(lis.begin(), lis.end(), x);
-    if (it == lis.end()) lis.push_back(x);
-    else *it = x;
+  int n = a.size();
+  std::vector<int> dp(n);
+  for (int i = 0; i < n; ++i) {
+    auto it = lower_bound(lis.begin(), lis.end(), a[i], cmp);
+    dp[i] = it - lis.begin();
+    if (it == lis.end()) lis.push_back(a[i]);
+    else *it = a[i];
   }
-  return lis.size(); 
+  int len_lis = lis.size();
+  lis.clear();
+  for (int i = n-1, j = len_lis - 1; i >= 0; --i) {
+    if (dp[i] == j) {
+      lis.push_back(a[i]);
+      j--;
+    }
+  }
+  reverse(lis.begin(), lis.end());
+  return len_lis;
 }
