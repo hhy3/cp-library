@@ -21,7 +21,7 @@
  */
 int hungarian(const std::vector<std::vector<int>> &G, int n, std::vector<int> &match, int m, bool one_indexed=true) {
   int offset = int(one_indexed);
-  assert(G.size() >= n + offset);
+  assert(int(G.size()) >= n + offset);
   std::vector<bool> vis(m + offset);
   match.assign(m + offset, 0);
   

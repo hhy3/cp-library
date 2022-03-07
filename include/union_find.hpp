@@ -15,8 +15,8 @@ class union_find {
 
 private:
 
-  size_t __n;
-  std::vector<int> __parent, __size;
+  int _n;
+  std::vector<int> _parent, _size;
 
 public:
 
@@ -26,9 +26,9 @@ public:
    * @param n
    */
   explicit 
-  union_find(size_t n): __n(n), __parent(n + 1), __size(n + 1) {
-    std::iota(__parent.begin(), __parent.end(), 0);
-    std::fill(__size.begin() + 1, __size.end(), 1);
+  union_find(size_t n): _n(n), _parent(n + 1), _size(n + 1) {
+    std::iota(_parent.begin(), _parent.end(), 0);
+    std::fill(_size.begin() + 1, _size.end(), 1);
   } 
 
   /**
@@ -38,8 +38,8 @@ public:
    * @return int 
    */
   int find(int u) {
-    assert(u >= 1 && u <= __n);
-    return u == __parent[u]? u : __parent[u] = find(__parent[u]);
+    assert(u >= 1 && u <= _n);
+    return u == _parent[u]? u : _parent[u] = find(_parent[u]);
   }
 
   /**
@@ -51,12 +51,12 @@ public:
    * @return false 
    */
   bool merge(int u, int v) {
-    assert(u >= 1 && u <= __n && v >= 1 && v <= __n);
+    assert(u >= 1 && u <= _n && v >= 1 && v <= _n);
     if (int pu = find(u), pv = find(v); pu == pv) {
       return false;
     } else {
-      __size[pv] += __size[pu];
-      __parent[pu] = pv;
+      _size[pv] += _size[pu];
+      _parent[pu] = pv;
       return true;
     } 
   }
@@ -70,7 +70,7 @@ public:
    * @return false 
    */
   bool is_connected(int u, int v) {
-    assert(u >= 1 && u <= __n && v >= 1 && v <= __n);
+    assert(u >= 1 && u <= _n && v >= 1 && v <= _n);
     return find(u) == find(v);
   }
 
@@ -81,8 +81,8 @@ public:
    * @return int 
    */
   int size(int u) {
-    assert(u >= 1 && u <= __n);
-    return __size[find(u)];
+    assert(u >= 1 && u <= _n);
+    return _size[find(u)];
   }
   
 };
