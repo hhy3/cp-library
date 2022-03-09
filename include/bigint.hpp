@@ -13,9 +13,8 @@
  * @brief 
  * 
  */
+template <int base=10>
 struct bigint {
-
-  constexpr static int base = 10;
 
   std::vector<int> dat;
   
@@ -29,12 +28,19 @@ struct bigint {
     }
   }
 
-
   explicit bigint(const std::string &x) {
-    for (int i = x.size()-1; i >= 0; --i) {
+    for (int i = (int)x.size()-1; i >= 0; --i) {
       assert(x[i] >= '0' && x[i] <= '9');
       dat.push_back(x[i]-'0');
     }
+  }
+
+  template <typename T>
+  explicit bigint(const std::vector<T> &x) {
+    for (int i = 0; i < (int)x.size(); ++i) {
+      assert(x[i] >= 0 && x[i] <= 9);
+      dat.push_back(x[i]);
+    } 
   }
 
   bigint(const bigint &rhs)
@@ -106,6 +112,47 @@ struct bigint {
     return bigint(*this) += rhs;
   }
 
+  bigint &operator -= (const bigint &rhs) {
+    assert(*this >= rhs);
+    for (int i = 0, r = 0; i < (int)dat.size(); ++i) {
+      if (i < rhs.size()) dat[i] -= rhs[i];
+      dat[i] -= r;
+      if (dat[i] < 0) {
+        dat[i] += base;
+        r = 1;
+      } else {
+        r = 0;
+      }
+    }
+    while (dat.size() && dat.back() == 0) {
+      dat.pop_back();
+    }
+    return *this;
+  }
+
+  bigint operator - (const bigint &rhs) {
+    return bigint(*this) -= rhs;
+  }
+
+  bigint operator * (const bigint &rhs) {
+    int m = size(), n = rhs.size();
+    std::vector<int> tmp(m + n);
+    for (int i = 0; i < m + n - 1; ++i) {
+      for (int j = 0; j <= i; ++j) {
+        if (j < m && i - j < n) {
+          tmp[i] += dat[j] * rhs[i-j];
+        }
+      }
+      if (tmp[i] >= 10) {
+        tmp[i+1] += tmp[i] / base;
+        tmp[i] %= base;
+      }
+    }
+    while (tmp.size() && tmp.back() == 0) {
+      tmp.pop_back();
+    }
+    return bigint(tmp);
+  }
 
   friend bool operator == (const bigint &lhs, const bigint &rhs) {
     if (lhs.size() != rhs.size()) {
@@ -117,6 +164,10 @@ struct bigint {
       }
     }
     return true;
+  }
+
+  friend bool operator != (const bigint &lhs, const bigint &rhs) {
+    return !(lhs == rhs);
   }
 
   friend bool operator < (const bigint &lhs, const bigint &rhs) {
