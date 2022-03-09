@@ -1,5 +1,6 @@
 #pragma once
 
+#include <bigint.hpp>
 #include <CRT.hpp>
 #include <fenwick_tree.hpp>
 #include <hungarian.hpp>
