@@ -4,6 +4,9 @@
 #include <array>
 #include <cmath>
 
+namespace hy {
+namespace ds {
+
 /**
  * @brief 倍增求树上最近公共祖先 (Lowest common ancestor)
  *        
@@ -70,3 +73,7 @@ private:
   }
 
 };
+
+
+} // namespace ds
+} // namespace hy

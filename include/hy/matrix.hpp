@@ -7,6 +7,9 @@
 #include <cassert>
 #include <cstdint>
 
+namespace hy {
+namespace math {
+
 /**
  * @brief TODO
  * 
@@ -190,3 +193,7 @@ struct matrix {
   }
 
 };
+
+
+} // namespace math
+} // namespace hy

@@ -3,6 +3,9 @@
 #include <vector>
 #include <cstdint>
 
+namespace hy {
+namespace _math {
+
 /**
  * @brief 动态维护F_{2}^{n}中向量的线性基
  *        简介: https://zhuanlan.zhihu.com/p/139074556
@@ -56,3 +59,7 @@ struct linear_bases {
 	}
 
 };
+
+
+} // namespace math
+} // namespace hy

@@ -2,6 +2,9 @@
 
 #include <vector>
 
+namespace hy {
+namespace math {
+
 /**
  * @brief 求出1-n的关于质数p的乘法逆元
  *        
@@ -22,3 +25,6 @@ std::vector<int> multinv(int n, int p) {
   }
   return inv;
 }
+
+} // namespace math
+} // namespace hy

@@ -5,6 +5,9 @@
 #include <type_traits>
 #include <cassert>
 
+namespace hy {
+namespace math {
+
 /**
  * @brief 模M剩余类集合
  * 
@@ -164,3 +167,7 @@ private:
   }
 
 };
+
+
+} // namespace math
+} // namespace hy

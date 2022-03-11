@@ -2,9 +2,12 @@
 
 #include <vector>
 #include <functional>
+
 #include <cstdint>
 #include <cassert>
 
+namespace hy {
+namespace math {
 
 /**
  * @brief 中国剩余定理 (Chinese Reminder Theorem)
@@ -43,3 +46,7 @@ T CRT(const std::vector<T> &bs, const std::vector<T> &ns) {
   }
   return ans;
 }
+
+
+} // namespace math
+} // namespace hy

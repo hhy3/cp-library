@@ -4,6 +4,9 @@
 #include <numeric>
 #include <cassert>
 
+namespace hy {
+namespace ds {
+
 /**
  * @brief 并查集 (union find)
  * 1-indexed 实现
@@ -86,6 +89,10 @@ public:
   }
   
 };
+
+
+} // namespace ds
+} // namespace hy
 
 
 

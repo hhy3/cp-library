@@ -4,6 +4,9 @@
 #include <cassert>
 #include <functional>
 
+namespace hy {
+namespace graph {
+
 /**
  * @brief 匈牙利算法 (hungarian algorithm) 求二分图最大匹配
  *        
@@ -42,3 +45,6 @@ int hungarian(const std::vector<std::vector<int>> &G, int n, std::vector<int> &m
   }
   return cnt;
 }
+
+} // namespace graph
+} // namespace hy

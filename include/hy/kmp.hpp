@@ -3,6 +3,9 @@
 #include <vector>
 #include <string>
 
+namespace hy {
+namespace string {
+
 /**
  * @brief kmp (Knuth–Morris–Pratt) 算法
  *        
@@ -42,3 +45,7 @@ std::pair<std::vector<int>, std::vector<int>> kmp(const std::string &s, const st
   }
   return {ans, pi};
 }
+
+
+} // namespace string
+} // namespace hy

@@ -3,6 +3,9 @@
 #include <vector>
 #include <functional>
 
+namespace hy {
+namespace dp {
+
 /**
  * @brief 最长递增子序列 (Longest increasing subsequence) 问题 
  *        简介: https://en.wikipedia.org/wiki/Longest_increasing_subsequence
@@ -36,3 +39,7 @@ int LIS(const std::vector<T> &a,
   reverse(lis.begin(), lis.end());
   return len_lis;
 }
+
+
+} // namespace dp
+} // namespace hy

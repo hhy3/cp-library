@@ -4,13 +4,15 @@
 #include <string>
 #include <istream>
 #include <ostream>
-#include <iostream>
 #include <type_traits>
+
 #include <cassert>
 
+namespace hy {
+namespace math {
 
 /**
- * @brief 
+ * @brief TODO 
  * 
  */
 template <int base=10>
@@ -197,3 +199,6 @@ struct bigint {
   }
 
 };
+
+} // namespace math
+} // namespace hy

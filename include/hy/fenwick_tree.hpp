@@ -1,6 +1,10 @@
 #pragma once
 
 #include <vector>
+#include <cassert>
+
+namespace hy {
+namespace ds {
 
 /**
  * @brief 树状数组 (fenwick tree / binary indexed tree)
@@ -115,3 +119,7 @@ private:
   }
 
 };
+
+
+} // namespace ds
+} // namespace hy
