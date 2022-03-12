@@ -6,6 +6,7 @@
 #include <cstdint>
 #include <cassert>
 
+
 namespace hy {
 namespace math {
 
@@ -46,7 +47,6 @@ T CRT(const std::vector<T> &bs, const std::vector<T> &ns) {
   }
   return ans;
 }
-
 
 } // namespace math
 } // namespace hy

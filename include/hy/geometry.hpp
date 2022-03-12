@@ -15,6 +15,7 @@ constexpr double EPS = 1e-10;
 
 template <typename T> struct Point;
 template <typename T> struct Circle;
+template <typename T> struct Polygon;
 
 
 template <typename T=double>
@@ -28,7 +29,7 @@ struct Point {
 
   T dist2(const Point& rhs) const {
     T dx = x - rhs.x, dy = y - rhs.y;
-    return sqrt(dx * dx + dy * dy);
+    return dx * dx + dy * dy;
   }
 
   T dist(const Point& rhs) const {
