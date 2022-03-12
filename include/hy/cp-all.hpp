@@ -3,6 +3,7 @@
 #include <hy/bigint.hpp>
 #include <hy/CRT.hpp>
 #include <hy/fenwick_tree.hpp>
+#include <hy/geometry.hpp>
 #include <hy/hungarian.hpp>
 #include <hy/kmp.hpp>
 #include <hy/LCA.hpp>
