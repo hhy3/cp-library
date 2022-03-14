@@ -19,7 +19,6 @@ class modint {
 private:
 
   uint64_t _x;  
-  bool M_prime = is_prime_constexpr<M>;
 
 public:
 
@@ -33,7 +32,7 @@ public:
   }
 
   modint(const modint& rhs)
-    : _x(rhs._x), M_prime(rhs.M_prime) {}
+    : _x(rhs._x) {}
 
   modint& operator = (const modint& rhs) {
     _x = rhs._x;
@@ -82,20 +81,15 @@ public:
   }
 
   modint& operator /= (const modint& rhs) {
-    _x = _x * rhs.inv();
-    return *this;
+    return *this *= rhs.inv();
   } 
 
-  modint inv() {
+  modint inv() const {
     assert(_x > 0);
-    if (M_prime) {
-      return fastpow(M - 2);
-    } else {
-      int64_t u, v;
-      int64_t d = extgcd(int64_t(_x), int64_t(M), u, v);
-      assert(d == 1);
-      return modint(u);
-    }
+    int64_t u, v;
+    int64_t d = extgcd(int64_t(_x), int64_t(M), u, v);
+    assert(d == 1);
+    return modint(u);
   }
 
   modint fastpow(int b) {
@@ -143,17 +137,6 @@ public:
   }
 
 private: 
-
-  template <typename T>
-  static constexpr bool is_prime(T x) {
-    if (x < 2) return false;
-    for (T i = 2; i <= x / i; ++i) {
-      if (x % i == 0) return false;
-    }
-    return true;
-  }
-	template <uint64_t n> 
-	static constexpr bool is_prime_constexpr = is_prime(n);
 
   template <typename T>
   static T extgcd(T a, T b, T& x, T& y) {

@@ -15,15 +15,13 @@ namespace dp {
  * @param lis 
  * @return int 
  */
-template <typename T, typename Compare>
-int LIS(const std::vector<T> &a, 
-        std::vector<T> &lis, 
-        Compare cmp) {
+template <typename T>
+int LIS(const std::vector<T> &a, std::vector<T> &lis) {
   lis.clear();
   int n = a.size();
   std::vector<int> dp(n);
   for (int i = 0; i < n; ++i) {
-    auto it = lower_bound(lis.begin(), lis.end(), a[i], cmp);
+    auto it = lower_bound(lis.begin(), lis.end(), a[i]);
     dp[i] = it - lis.begin();
     if (it == lis.end()) lis.push_back(a[i]);
     else *it = a[i];

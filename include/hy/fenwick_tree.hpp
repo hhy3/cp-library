@@ -16,7 +16,7 @@ namespace ds {
  * @tparam T 
  */
 template <typename T>
-class fenwick_tree {
+struct fenwick_tree {
 
 private:
 
@@ -101,6 +101,7 @@ public:
       return query(dat, R) - query(dat, L - 1);
     }
   }
+
 
 private:
 

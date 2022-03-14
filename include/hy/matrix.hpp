@@ -4,6 +4,8 @@
 #include <ostream>
 #include <istream>
 #include <random>
+#include <utility>
+
 #include <cassert>
 #include <cstdint>
 
@@ -49,6 +51,10 @@ struct matrix {
     std::swap(lhs.m, rhs.m);
     std::swap(lhs.n, rhs.n);
     std::swap(lhs.dat, rhs.dat);
+  }
+
+  std::pair<int, int> shape() const {
+    return std::make_pair(m, n);
   }
 
   matrix operator - () {
@@ -158,9 +164,8 @@ struct matrix {
 
   static matrix rand(int m, int n, int64_t lo, int64_t hi) {
     matrix tmp(m, n);
-    std::random_device dev;
-    std::mt19937_64 rng(dev());
-    std::uniform_int_distribution<std::mt19937_64::result_type> dist(lo, hi);
+    std::mt19937_64 rng;
+    std::uniform_int_distribution<int64_t> dist(lo, hi);
     for (int i = 0; i < m; ++i) {
       for (int j = 0; j < n; ++j) {
         tmp.dat[i][j] = dist(rng);

@@ -24,7 +24,7 @@ struct bigint {
 
   template <typename T, 
     typename std::enable_if<std::is_integral_v<T>, T>::type* = nullptr>
-  explicit bigint(T x) {
+  bigint(T x) {
     for (; x; x /= 10) {
       dat.push_back(x % 10);
     }
@@ -35,6 +35,9 @@ struct bigint {
       assert(x[i] >= '0' && x[i] <= '9');
       dat.push_back(x[i]-'0');
     }
+    while (dat.size() && dat.back() == 0) {
+      dat.pop_back();
+    }
   }
 
   template <typename T>
@@ -43,6 +46,9 @@ struct bigint {
       assert(x[i] >= 0 && x[i] <= 9);
       dat.push_back(x[i]);
     } 
+    while (dat.size() && dat.back() == 0) {
+      dat.pop_back();
+    }
   }
 
   bigint(const bigint &rhs)
@@ -91,6 +97,17 @@ struct bigint {
     }
     return os;
   }
+
+  friend std::string to_string(const bigint& rhs) {
+    if (rhs == 0) {
+      return "0";
+    }
+    std::string s;
+    for (int i = (int)rhs.size()-1; i >= 0; --i) {
+      s.push_back(rhs[i]+'0');
+    }
+    return s;
+  } 
 
   bigint &operator += (const bigint &rhs) {
     for (int i = 0, r = 0; i < (int)dat.size() || i < (int)rhs.dat.size() || r; ++i) {
