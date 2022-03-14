@@ -33,11 +33,3 @@ TEST(UnionFindTest, TestSize) {
 	uf.merge(2, 9);
 	EXPECT_EQ(uf.size(1), 7);
 }
-
-
-int main(int argc, char *argv[]) {
-	::testing::InitGoogleTest(&argc, argv);
-
-	return RUN_ALL_TESTS();
-
-}

@@ -20,8 +20,3 @@ TEST(FenwickTreeTest, RangeUpdate) {
   ft.update(2, 5, -1);
   EXPECT_EQ(ft.query(3, 5), 5);
 }
-
-int main(int argc, char *argv[]) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}

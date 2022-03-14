@@ -6,9 +6,13 @@ CXX := g++
 CXXFLAGS := -Wall -Wextra -Werror -O -ggdb -std=c++17 -I$(include_path) 
 LDLIBS := -lgtest -lgtest_main -lpthread 
 
-targets := fenwick_tree_test \
-      		 union_find_test \
+targets := bigint_test \
+           fenwick_tree_test \
 			     LIS_test \
+					 matrix_test \
+					 modint_test \
+      		 union_find_test \
+
 
 default: $(targets)
 
