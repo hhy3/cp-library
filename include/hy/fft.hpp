@@ -33,7 +33,8 @@ void fft(std::vector<C>& a, bool invert) {
   }
 }
 
-std::vector<int64_t> convolution(const std::vector<int64_t>& a, const std::vector<int64_t>& b) {
+template <typename T=int64_t>
+std::vector<T> convolution(const std::vector<T>& a, const std::vector<T>& b) {
   int n1 = a.size(), n2 = b.size(), n = 1;
   while (n < n1 + n2) n <<= 1;
   std::vector<C> fa(a.begin(), a.end()), fb(b.begin(), b.end());
@@ -45,7 +46,7 @@ std::vector<int64_t> convolution(const std::vector<int64_t>& a, const std::vecto
   for (int i = 0; i < n; i++) fa[i] *= fb[i];
   fft(fa, true);
 
-  std::vector<int64_t> ans(n);
+  std::vector<T> ans(n);
   for (int i = 0; i < n; i++) ans[i] = round(fa[i].real());
   return ans;
 }

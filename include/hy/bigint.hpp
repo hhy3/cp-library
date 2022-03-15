@@ -8,6 +8,8 @@
 
 #include <cassert>
 
+#include "hy/fft.hpp"
+
 namespace hy {
 namespace math {
 
@@ -154,23 +156,11 @@ struct bigint {
   }
 
   bigint operator * (const bigint &rhs) {
-    int m = size(), n = rhs.size();
-    std::vector<int> tmp(m + n);
-    for (int i = 0; i < m + n - 1; ++i) {
-      for (int j = 0; j <= i; ++j) {
-        if (j < m && i - j < n) {
-          tmp[i] += dat[j] * rhs[i-j];
-        }
-      }
-      if (tmp[i] >= 10) {
-        tmp[i+1] += tmp[i] / base;
-        tmp[i] %= base;
-      }
+    auto conv = convolution(dat, rhs.dat);
+    while (conv.size() && conv.back() == 0) {
+      conv.pop_back();
     }
-    while (tmp.size() && tmp.back() == 0) {
-      tmp.pop_back();
-    }
-    return bigint(tmp);
+    return bigint(conv);
   }
 
   friend bool operator == (const bigint &lhs, const bigint &rhs) {

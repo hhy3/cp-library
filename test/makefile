@@ -15,6 +15,7 @@ targets := bigint_test \
 					 modint_test \
       		 union_find_test \
 					 trie_test \
+					 fft_test \
 
 
 default: $(targets)
