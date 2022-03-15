@@ -3,7 +3,9 @@ include_path := ../include
 VPATH := $(include_path)
 CC := g++
 CXX := g++
-CXXFLAGS := -Wall -Wextra -Werror -O -ggdb -std=c++17 -I$(include_path) 
+CXXFLAGS := -Wall -Wextra -Werror -O -ggdb \
+            -std=c++17 -I$(include_path) \
+						-fsanitize=address,leak
 LDLIBS := -lgtest -lgtest_main -lpthread 
 
 targets := bigint_test \
@@ -12,6 +14,7 @@ targets := bigint_test \
 					 matrix_test \
 					 modint_test \
       		 union_find_test \
+					 trie_test \
 
 
 default: $(targets)
