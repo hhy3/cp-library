@@ -160,6 +160,10 @@ struct bigint {
     while (conv.size() && conv.back() == 0) {
       conv.pop_back();
     }
+    for (int i = 0; i <= size() + rhs.size() - 2; ++i) {
+      conv[i+1] += conv[i] / base;
+      conv[i] %= base;
+    }
     return bigint(conv);
   }
 
