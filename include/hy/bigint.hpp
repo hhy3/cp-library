@@ -157,12 +157,12 @@ struct bigint {
 
   bigint operator * (const bigint &rhs) {
     auto conv = convolution(dat, rhs.dat);
-    while (conv.size() && conv.back() == 0) {
-      conv.pop_back();
-    }
     for (int i = 0; i <= size() + rhs.size() - 2; ++i) {
       conv[i+1] += conv[i] / base;
       conv[i] %= base;
+    }
+    while (conv.size() && conv.back() == 0) {
+      conv.pop_back();
     }
     return bigint(conv);
   }
