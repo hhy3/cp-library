@@ -8,6 +8,29 @@
 namespace hy {
 namespace string {
 
+
+/**
+ * @brief 前缀函数
+ *        简介: https://cp-algorithms.com/string/prefix-function.html
+ *        
+ *        Time Complexity: O(n)
+ * 
+ */
+std::vector<int> prefix_function(std::string_view s) {
+  int n = (int)s.size();
+  std::vector<int> pi(n+1);
+  for (int i = 1, j = 0; i < n; ++i) {
+    while (j > 0 && s[i] != s[j]) {
+      j = pi[j];
+    }
+    if (s[i] == s[j]) {
+      j++;
+    } 
+    pi[i + 1] = j;
+  }
+  return pi;
+}
+
 /**
  * @brief kmp (Knuth–Morris–Pratt) 算法
  *        
@@ -16,38 +39,23 @@ namespace string {
  * 
  *        Time Complexity: O(n + m)
  * 
- * @param s 待匹配字符串
- * @param p 模式串
- * @return std::pair<std::vector<int>, std::vector<int>> 
- *         返回值为 {匹配到的位置, 前缀函数}
  */
-std::pair<std::vector<int>, std::vector<int>> kmp(const std::string &s, const std::string &p) {
+std::vector<int> kmp(std::string_view s, std::string_view p) {
   int n = s.size(), m = p.size();
-  std::vector<int> pi(m + 1), ans;
-  for (int i = 1, j = 0; i < m; ++i) {
-    while (j > 0 && p[i] != p[j]) {
-      j = pi[j];
-    }
-    if (p[i] == p[j]) {
-      j++;
-    } 
-    pi[i + 1] = j;
-  }
+  auto pi = prefix_function(p);
+  std::vector<int> matches;
   for (int i = 0, j = 0; i < n; ++i) {
-    while (j > 0 && s[i] != p[j]) {
+    while (j && s[i] != p[j]) {
       j = pi[j];
     }
-    if (s[i] == p[j]) {
-      j++;
-    }
+    j += (s[i] == p[j]);
     if (j == m) {
-      ans.push_back(i - m + 1);
+      matches.push_back(i - m + 1);
       j = pi[j];
     }
   }
-  return {ans, pi};
+  return matches;
 }
-
 
 /**
  * @brief 字符串哈希
