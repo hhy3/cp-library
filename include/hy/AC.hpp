@@ -21,6 +21,7 @@ namespace ds {
  *        模板题:
  *            https://www.luogu.com.cn/problem/P3808
  *            https://www.luogu.com.cn/problem/P3796
+ *            https://www.luogu.com.cn/problem/P5357
  * 
  */
 template <typename T=char, int N=1024*1024>
@@ -30,8 +31,7 @@ struct AC {
     int p = -1;
     T pch;
     int link = -1;
-    int word_count = 0;
-    int prefix_count = 0;
+		int leaf = 0;
     std::unordered_map<T, int> nxt;
     std::unordered_map<T, int> go;
 
@@ -46,7 +46,7 @@ struct AC {
   }
 
   template <typename Iter>
-  void insert(Iter first, Iter last) {
+  int insert(Iter first, Iter last) {
     int u = 0;
     for (; first != last; ++first) {
       if (!nodes[u].nxt.count(*first)) {
@@ -54,14 +54,14 @@ struct AC {
         nodes.emplace_back(u, *first);
       }
       u = nodes[u].nxt[*first];
-      nodes[u].prefix_count++;
     }
-    nodes[u].word_count++;
+    nodes[u].leaf++;
+		return u;
   }
 
-  void insert(std::string_view s) {
+  int insert(std::string_view s) {
     assert((std::is_same_v<T, char>));
-    insert(s.begin(), s.end());
+    return insert(s.begin(), s.end());
   }
 
   int go(int u, const T& x) {
@@ -94,7 +94,7 @@ struct AC {
       u = go(u, *first);
       for (int v = u; v; v = get_link(v)) {
         if (!vis.count(v)) {
-          ans += nodes[v].word_count;
+          ans += nodes[v].leaf;
           vis.insert(v);
         } else {
           break;

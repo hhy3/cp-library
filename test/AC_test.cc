@@ -7,7 +7,7 @@ TEST(ACTest, TestInsert) {
   AC ac;
   ac.insert("hello");
   EXPECT_EQ(ac.nodes.size(), 6);
-  EXPECT_EQ(ac.nodes[5].word_count, 1);
+  EXPECT_EQ(ac.nodes[5].leaf, 1);
   EXPECT_EQ(ac.nodes[5].p, 4);
   EXPECT_EQ(ac.nodes[5].pch, 'o');
   ac.insert("heworld");
