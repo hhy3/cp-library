@@ -82,6 +82,9 @@ std::vector<int> kmp(std::string_view s, std::string_view p) {
  *        
  *        模板题: 
  *            luogu.com.cn/problem/P3370
+ *       
+ *         练习题:
+ *             https://www.luogu.com.cn/problem/P4551
  * 
  */
 template <uint64_t K=13331>
