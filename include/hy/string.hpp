@@ -11,8 +11,19 @@ namespace string {
 
 /**
  * @brief 前缀函数
- *        简介: https://cp-algorithms.com/string/prefix-function.html
+ *        pi[i]表示s长度为n的前缀中最长公共真前后缀
+ *        即 pi[i] = max_{k=0}^{i-1} \{len : s[0...k-1] = s[i-k...i-1]\}
  *        
+ *        简介: 
+ *            https://cp-algorithms.com/string/prefix-function.html
+ * 
+ *        模板题:
+ *            https://www.luogu.com.cn/problem/P3375      
+ * 
+ *        练习题: 
+ *            https://codeforces.com/problemset/problem/126/B
+ *            https://codeforces.com/problemset/problem/432/D
+ * 
  *        Time Complexity: O(n)
  * 
  */
@@ -34,8 +45,14 @@ std::vector<int> prefix_function(std::string_view s) {
 /**
  * @brief kmp (Knuth–Morris–Pratt) 算法
  *        
- *        简介: https://cp-algorithms.com/string/prefix-function.html
- *        模板题: https://www.luogu.com.cn/problem/P3375
+ *        简介: 
+ *            https://cp-algorithms.com/string/prefix-function.html
+ *            
+ *        模板题: 
+ *            https://www.luogu.com.cn/problem/P3375
+ *        
+ *        练习题:
+ *            TODO
  * 
  *        Time Complexity: O(n + m)
  * 
@@ -60,10 +77,12 @@ std::vector<int> kmp(std::string_view s, std::string_view p) {
 /**
  * @brief 字符串哈希
  * 
- *        简介: https://oi-wiki.org/string/hash/
- *        模板题: luogu.com.cn/problem/P3370
+ *        简介: 
+ *            https://oi-wiki.org/string/hash/
+ *        
+ *        模板题: 
+ *            luogu.com.cn/problem/P3370
  * 
- * @tparam K 
  */
 template <uint64_t K=13331>
 struct string_hash {
@@ -88,7 +107,7 @@ struct string_hash {
   }
 
   /**
-   * @brief get hash value of substring s[l:r] 
+   * @brief Get hash value of substring s[l:r] 
    *        
    *        Time Complexity: O(1)
    * 
@@ -98,7 +117,7 @@ struct string_hash {
   }
 
   /**
-   * @brief get hash value of the whole string s
+   * @brief Get hash value of the whole string s
    *        
    *        Time Complexity: O(1)
    * 
@@ -108,6 +127,41 @@ struct string_hash {
   }
 
 };
+
+/**
+ * @brief Z函数 (扩展KMP)
+ *        
+ *        简介: 
+ *            https://cp-algorithms.com/string/z-function.html
+ *        
+ *        模板题: 
+ *            https://www.luogu.com.cn/problem/P5410
+ *        
+ *        练习题: 
+ *            TODO
+ *        
+ *        Time Complexity: O(n)
+ * 
+ */
+std::vector<int> Z(std::string_view s) {
+  int n = (int)s.size();
+  std::vector<int> z(n);
+  for (int i = 1, l = 0, r = 0; i < n; ++i) {
+    if (i <= r) {
+      z[i] = std::min(z[i-l], r - i + 1);
+    }
+    while (i + z[i] < n && s[i+z[i]] == s[z[i]]) {
+      z[i]++;
+    }
+    if (i + z[i] - 1 > r) {
+      l = i, r = i + z[i] - 1;
+    }
+  }
+  return z;
+
+}
+
+
 
 } // namespace string
 } // namespace hy
