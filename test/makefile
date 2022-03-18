@@ -19,6 +19,7 @@ targets := bigint_test \
 					 string_test \
 					 AC_test \
 					 segtree_test \
+					 sparse_table_test \
 
 
 default: $(targets)
