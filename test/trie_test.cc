@@ -13,9 +13,9 @@ TEST(TrieTest, TestInsert) {
   std::string s = "world";
   tr.insert(s);
   EXPECT_EQ(tr.nodes.size(), 11);
-  EXPECT_EQ(tr.nodes[5].count, 1);
-  EXPECT_EQ(tr.nodes[10].count, 1);
-  EXPECT_EQ(tr.nodes[7].count, 0);
+  EXPECT_EQ(tr.nodes[5].word_count, 1);
+  EXPECT_EQ(tr.nodes[10].word_count, 1);
+  EXPECT_EQ(tr.nodes[7].word_count, 0);
 }
 
 TEST(TrieTest, TestErase) {
