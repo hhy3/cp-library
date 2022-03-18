@@ -18,6 +18,7 @@ targets := bigint_test \
 					 fft_test \
 					 string_test \
 					 AC_test \
+					 segtree_test \
 
 
 default: $(targets)
