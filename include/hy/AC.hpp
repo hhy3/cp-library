@@ -31,7 +31,7 @@ struct AC {
     int p = -1;
     T pch;
     int link = -1;
-		int leaf = 0;
+    int leaf = 0;
     std::unordered_map<T, int> nxt;
     std::unordered_map<T, int> go;
 
@@ -56,7 +56,7 @@ struct AC {
       u = nodes[u].nxt[*first];
     }
     nodes[u].leaf++;
-		return u;
+    return u;
   }
 
   int insert(std::string_view s) {
@@ -105,6 +105,7 @@ struct AC {
   }
 
   int count_pattern_in_text(std::string_view text) {
+    assert((std::is_same_v<T, char>));
     return count_pattern_in_text(text.begin(), text.end());
   }
 
