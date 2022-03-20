@@ -10,24 +10,20 @@ namespace graph {
 /**
  * @brief 匈牙利算法 (hungarian algorithm) 求二分图最大匹配
  *        
- *        简介: https://www.renfei.org/blog/bipartite-matching.html
- *        模板题: https://www.luogu.com.cn/problem/P3386
+ *        简介: 
+ *            https://www.renfei.org/blog/bipartite-matching.html
+ *        
+ *        模板题: 
+ *            https://www.luogu.com.cn/problem/P3386
  *        
  *        Time Complexity: O(m * n)
  * 
- * @param G 
- * @param n 
- * @param match 
- * @param m 
- * @param one_indexed 
- * @return int 
  */
-int hungarian(const std::vector<std::vector<int>> &G, int n, std::vector<int> &match, int m, bool one_indexed=true) {
-  int offset = int(one_indexed);
-  assert(int(G.size()) >= n + offset);
-  std::vector<bool> vis(m + offset);
-  match.assign(m + offset, 0);
-  
+int hungarian(const std::vector<std::vector<int>> &G, int n, std::vector<int> &match, int m) {
+  assert(int(G.size()) >= n);
+  std::vector<bool> vis(m);
+  match.assign(m, 0);
+
   std::function<bool(int)> dfs = [&] (int u) {
     for (auto v : G[u]) if (!vis[v]) {
       if (!match[v] || dfs(match[v])) {
@@ -39,7 +35,7 @@ int hungarian(const std::vector<std::vector<int>> &G, int n, std::vector<int> &m
   };
   
   int cnt = 0;
-  for (int i = offset; i < n + offset; ++i) {
+  for (int i = 0; i < n; ++i) {
     fill(vis.begin(), vis.end(), 0);
     if (dfs(i)) cnt++;
   }

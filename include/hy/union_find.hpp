@@ -8,7 +8,7 @@ namespace hy {
 namespace ds {
 
 /**
- * @brief 并查集 (union find) 1-indexed 实现
+ * @brief 并查集 (union find) 0-indexed 实现
  *     
  *        简介: 
  *            https://cp-algorithms.com/data_structures/disjoint_set_union.html

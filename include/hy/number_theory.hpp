@@ -12,14 +12,14 @@ namespace math {
 
 /**
  * @brief 中国剩余定理 (Chinese Reminder Theorem)
- *        nZ_{n} = Z_{n_{1}} \times Z_{n_{2}} \times \cdots \times Z_{n_{k}}
- *        简介: https://crypto.stanford.edu/pbc/notes/numbertheory/crt.html 
- *        模板题: https://www.luogu.com.cn/problem/P1495
- * 
- * @tparam T 
- * @param bs 
- * @param ns 
- * @return T 
+ *        Z_{n} = Z_{n_{1}} \times Z_{n_{2}} \times \cdots \times Z_{n_{k}}
+ *        
+ *        简介: 
+ *            https://crypto.stanford.edu/pbc/notes/numbertheory/crt.html 
+ *        
+ *        模板题: 
+ *            https://www.luogu.com.cn/problem/P1495
+
  */
 template<typename T>
 T CRT(const std::vector<T> &bs, const std::vector<T> &ns) {

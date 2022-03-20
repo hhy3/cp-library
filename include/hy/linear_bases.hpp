@@ -4,17 +4,18 @@
 #include <cstdint>
 
 namespace hy {
-namespace _math {
+namespace math {
 
 /**
  * @brief 动态维护F_{2}^{n}中向量的线性基
- *        简介: https://zhuanlan.zhihu.com/p/139074556
- *              https://oi-wiki.org/math/basis/
- *        模板题: https://www.luogu.com.cn/problem/P3812
+ *        
+ *        简介: 
+ *            https://zhuanlan.zhihu.com/p/139074556
+ *            https://oi-wiki.org/math/basis/
+ *        
+ *        模板题: 
+ *            https://www.luogu.com.cn/problem/P3812
  * 
- * 
- * @tparam T 
- * @tparam M 
  */
 template <typename T=uint64_t, int M=8*sizeof(T)>
 struct linear_bases {
