@@ -83,8 +83,8 @@ std::vector<int> kmp(std::string_view s, std::string_view p) {
  *        模板题: 
  *            luogu.com.cn/problem/P3370
  *       
- *         练习题:
- *             https://www.luogu.com.cn/problem/P4551
+ *        练习题:
+ *            https://www.luogu.com.cn/problem/P4551
  * 
  */
 template <uint64_t K=13331>
@@ -161,6 +161,60 @@ std::vector<int> Z(std::string_view s) {
     }
   }
   return z;
+
+}
+
+
+/**
+ * @brief Manacher算法 求字符串中所有回文子串
+ * 
+ *        简介:
+ *            https://cp-algorithms.com/string/manacher.html
+ *            https://oi-wiki.org/string/manacher/
+ * 
+ *        模板题:
+ *            https://www.luogu.com.cn/problem/P3805
+ * 
+ *        练习题:
+ *            https://codeforces.com/contest/1326
+ * 
+ * 
+ *        Time Complexity: O(n)
+ * 
+ */
+void manacher(std::string_view s, std::vector<int>& d1, std::vector<int>& d2) {
+
+  int n = (int)s.size();
+  d1.assign(n, 0);
+  d2.assign(n, 0);
+  
+  for (int i = 0, l = 0, r = -1; i < n; ++i) {
+    if (i <= r) {
+      d1[i] = std::min(d1[l + r - i], r - i);
+    }
+    while (i - d1[i] - 1 >= 0 && i + d1[i] + 1 < n && 
+            s[i - d1[i] - 1] == s[i + d1[i] + 1]) {
+      d1[i]++;
+    }
+    if (i + d1[i] > r) {
+      l = i - d1[i];
+      r = i + d1[i];
+    }
+  }
+
+  for (int i = 0, l = 0, r = -1; i < n; ++i) {
+    if (i < r) {
+      d2[i] = std::min(d2[l + r - i - 1], r - i);
+    }
+    while (i - d2[i] >= 0 && i + d2[i] + 1 < n &&
+           s[i - d2[i]] == s[i + d2[i] + 1]) {
+      d2[i]++;
+    }
+    if (i + d2[i] > r) {
+      l = i - d2[i] + 1;
+      r = i + d2[i];
+    }
+  }
 
 }
 

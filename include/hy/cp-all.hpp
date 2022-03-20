@@ -12,7 +12,9 @@
 #include <hy/matrix.hpp>
 #include <hy/modint.hpp>
 #include <hy/number_theory.hpp>
+#include <hy/segtree.hpp>
 #include <hy/shortest_path.hpp>
+#include <hy/sparse_table.hpp>
 #include <hy/string.hpp>
 #include <hy/trie.hpp>
 #include <hy/union_find.hpp>

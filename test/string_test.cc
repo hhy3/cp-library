@@ -5,6 +5,7 @@ using hy::string::prefix_function;
 using hy::string::kmp;
 using hy::string::string_hash;
 using hy::string::Z;
+using hy::string::manacher;
 
 TEST(StringTest, TestPrefixFunction) {
   auto pi = prefix_function("abcabcd");
@@ -31,4 +32,17 @@ TEST(StringTest, TestZ) {
             (std::vector<int>{0, 2, 1, 0, 2, 1, 0}));
   EXPECT_EQ(Z("abacaba"), 
             (std::vector<int>{0, 0, 1, 0, 3, 0, 1}));
+}
+
+TEST(StringTest, TestManacher) {
+  std::vector<int> d1, d2;
+  manacher("aaa", d1, d2);
+  EXPECT_EQ(d1, (std::vector<int>{0, 1, 0}));
+  EXPECT_EQ(d2, (std::vector<int>{1, 1, 0}));
+  manacher("cbaabd", d1, d2);
+  EXPECT_EQ(d1, (std::vector<int>{0, 0, 0, 0, 0, 0}));
+  EXPECT_EQ(d2, (std::vector<int>{0, 0, 2, 0, 0, 0}));
+  manacher("abababc", d1, d2);
+  EXPECT_EQ(d1, (std::vector<int>{0, 1, 2, 2, 1, 0, 0}));
+  EXPECT_EQ(d2, (std::vector<int>{0, 0, 0, 0, 0, 0, 0}));
 }
