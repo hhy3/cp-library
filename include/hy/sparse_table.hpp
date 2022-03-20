@@ -4,8 +4,16 @@
 #include <functional>
 
 /**
- * @brief TODO
+ * @brief 稀疏表 (sparse table)
+ *        
+ *        简介:
+ *            https://cp-algorithms.com/data_structures/sparse-table.html
+ *      
+ *        模板题:
+ *            https://www.luogu.com.cn/problem/P3865
  * 
+ *        练习题:
+ *            https://www.luogu.com.cn/problem/P2251
  */
 template <typename T=int>
 struct sparse_table {
