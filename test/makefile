@@ -10,7 +10,6 @@ LDLIBS := -lgtest -lgtest_main -lpthread
 
 targets := bigint_test \
            fenwick_tree_test \
-			     LIS_test \
 					 matrix_test \
 					 modint_test \
       		 union_find_test \
