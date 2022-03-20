@@ -4,7 +4,7 @@
 
 TEST(UnionFindTest, TestInit) {
 	hy::ds::union_find uf(10);
-	for (int i = 1; i <= 10; ++i) {
+	for (int i = 0; i < 10; ++i) {
 		EXPECT_EQ(uf.find(i), i);
 		EXPECT_EQ(uf.size(i), 1);
 	}
@@ -12,7 +12,7 @@ TEST(UnionFindTest, TestInit) {
 
 
 TEST(UnionFindTest, TestMerge) {
-	hy::ds::union_find uf(10);
+	hy::ds::union_find uf(11);
 	uf.merge(1, 2);
 	uf.merge(2, 5);
 	uf.merge(3, 4);
@@ -22,14 +22,17 @@ TEST(UnionFindTest, TestMerge) {
 }
 
 TEST(UnionFindTest, TestSize) {
-	hy::ds::union_find uf(10);
+	hy::ds::union_find uf(11);
 	uf.merge(1, 2);
 	uf.merge(2, 5);
 	uf.merge(3, 4);
 	uf.merge(4, 10);
 	EXPECT_EQ(uf.size(2), 3);
+	EXPECT_EQ(uf.num_component, 7);
 	uf.merge(10, 9);
 	EXPECT_EQ(uf.size(10), 4);
+	EXPECT_EQ(uf.num_component, 6);
 	uf.merge(2, 9);
 	EXPECT_EQ(uf.size(1), 7);
+	EXPECT_EQ(uf.num_component, 5);
 }
