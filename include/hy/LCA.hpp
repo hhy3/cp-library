@@ -10,32 +10,33 @@ namespace ds {
 /**
  * @brief 倍增求树上最近公共祖先 (Lowest common ancestor)
  *        
- *        简介: https://cp-algorithms.com/graph/lca_binary_lifting.html
- *        模板题: https://www.luogu.com.cn/problem/P3379
- * 
- *        Time Complexity: O(m * n)
+ *        简介: 
+ *            https://cp-algorithms.com/graph/lca_binary_lifting.html
  *        
+ *        模板题: 
+ *            https://www.luogu.com.cn/problem/P3379
+ *        
+ *        练习题:
+ *            TODO
+ * 
  */
-class LCA {
-
-private:
+struct LCA {
 
   using graph = std::vector<std::vector<int>>;
 
+  const static int MAXM = 20;
+
   graph G;
   int n, r;
-
-  const static int MAXM = 20;
   std::vector<std::array<int, MAXM>> up;
   std::vector<int> depth;
 
-public:
-
   LCA(const graph &G, int n, int r)
       : G(G), n(n), r(r), up(n + 1), depth(n + 1) {
-    init();
+    dfs(r, 0);
   }
 
+  // Time Complexity: O(logn)
   int get_lca(int u, int v) {
     if (depth[u] < depth[v]) {
       std::swap(u, v);
@@ -55,12 +56,7 @@ public:
     return up[u][0];
   }
 
-private:
-
-  void init() {
-    dfs(r, 0);
-  }
-
+  // Time Complexity: O(nlogn)
   void dfs(int u, int p) {
     depth[u] = depth[p] + 1;
     up[u][0] = p;
