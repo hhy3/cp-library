@@ -11,7 +11,6 @@ namespace math {
 /**
  * @brief 模M剩余类集合
  * 
- * @tparam M 
  */
 template <uint64_t M>
 class modint {
@@ -22,8 +21,10 @@ private:
 
 public:
 
+  modint(): modint(0) {}
+
   template <typename T>
-  modint(T x=0) {
+  modint(T x) {
     if (std::is_signed<T>::value) {
       _x = (x % T(M) + T(M)) % T(M);
     } else {
@@ -92,7 +93,7 @@ public:
     return modint(u);
   }
 
-  modint fastpow(int b) {
+  modint pow(int b) {
     assert(b >= 0);
     modint ret = 1, tmp = *this;
     for (; b; b >>= 1) {
