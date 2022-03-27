@@ -108,7 +108,7 @@ struct matrix {
 
   matrix operator * (const matrix &rhs) {
     matrix tmp = *this;
-    return this *= rhs;
+    return *this *= rhs;
   }
 
   matrix& modmul_inplace(const matrix &rhs, uint64_t mod) {
