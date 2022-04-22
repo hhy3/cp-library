@@ -55,7 +55,7 @@ int64_t lucas(int64_t m, int64_t n, int64_t p) {
 
   auto comb = [&] (auto m, auto n, auto p) {
     return m >= n? fac[m] * ifac[n] % p * ifac[m-n] % p : 0;
-  }
+  };
 
   std::function<int64_t(int64_t, int64_t, int64_t)> 
   lucas_ = [&] (int64_t m, int64_t n, int64_t p) {
