@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <string_view>
+#include <cassert>
 
 
 namespace hy {
@@ -218,6 +219,37 @@ void manacher(std::string_view s, std::vector<int>& d1, std::vector<int>& d2) {
 
 }
 
+
+/**
+ * @brief 字符串最小表示
+ *   
+ *        简介:
+ *            https://en.wikipedia.org/wiki/Lexicographically_minimal_string_rotation
+ *     
+ *        模板题:
+ *            https://www.luogu.com.cn/problem/P1368
+ * 
+ */
+int minimum_rotation(std::vector<int> s) {
+  int n = s.size();
+  int i = 0, j = 1, k = 0;
+  while (i < n && j < n && k < n) {
+    if (s[(i+k)%n] == s[(j+k)%n]) {
+      k++;
+    } else {
+      if (s[(i+k)%n] > s[(j+k)%n]) {
+        i += k + 1;
+      } else {
+        j += k + 1;
+      }
+      if (i == j) {
+        i++;
+      }
+      k = 0;
+    }
+  }
+  return min(i, j);
+}
 
 
 } // namespace string
