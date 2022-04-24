@@ -15,7 +15,6 @@ namespace math {
 /**
  * @brief TODO
  * 
- * @tparam T 
  */
 template <typename T=int64_t>
 struct matrix {
@@ -111,24 +110,6 @@ struct matrix {
     return *this *= rhs;
   }
 
-  matrix& modmul_inplace(const matrix &rhs, uint64_t mod) {
-    assert(n == rhs.m);
-    matrix tmp(m, n);
-    for (int i = 0; i < m; ++i) {
-      for (int k = 0; k < n; ++k) {
-        for (int j = 0; j < rhs.n; ++j) {
-          tmp[i][j] = (tmp[i][j] + dat[i][k] * rhs.dat[k][j]) % mod;
-        }
-      }
-    }
-    return *this = tmp;
-  } 
-
-  matrix modmul(const matrix &rhs, uint64_t mod) {
-    matrix tmp = *this;
-    return tmp.modmul_inplace(rhs, mod);
-  }
-
   matrix pow(int64_t p) {
     assert(m == n && p >= 0);
     assert(p >= 0);
@@ -137,17 +118,6 @@ struct matrix {
     for (; p; p >>= 1) {
       if (p & 1) ans *= tmp;
       tmp *= tmp;
-    }
-    return ans;
-  }
-
-  matrix modpow(int64_t p, uint64_t mod) {
-    assert(m == n && p >= 0);
-    matrix ans = eye(m);
-    matrix tmp = *this;
-    for (; p; p >>= 1) {
-      if (p & 1) ans.modmul_inplace(tmp, mod);
-      tmp.modmul_inplace(tmp, mod);
     }
     return ans;
   }
