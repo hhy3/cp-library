@@ -2,7 +2,10 @@
 
 #include <vector>
 #include <functional>
+#include <stdint.h>
 
+namespace hy {
+namespace ds {
 
 /**
  * @brief 线段树
@@ -17,65 +20,184 @@
  *            https://www.luogu.com.cn/problem/P3373
  *  
  */
-template <typename T=int64_t, T id=T()>
-struct segtree {
+template <typename T=int64_t>
+struct SegTree {
 
-  struct node {
-    T val = id;
-    int l, r;
+  T id = T();
+
+  std::function<T(T, T)> combine = [&] (const T& x, const T& y) {
+    return x + y;
   };
 
   int n;
-  std::vector<node> nodes;
-  std::function<T(T, T)> combine;
+  std::vector<T> dat;
 
-  segtree(int n, std::function<T(T, T)> combine=[](T x, T y) { return x + y; })
-    : n(n), nodes(4*n), combine(combine) {
+  SegTree() {}
+  
+  SegTree(int n): n(n), dat(4*n) {}
+
+  template <typename Iter>
+  SegTree(Iter first, Iter last): n(last-first), dat(4*n) {
+    function<void(int, int, int)> build = [&] (int p, int l, int r) {
+      if (l == r) {
+        dat[p] = *(first + l - 1);
+        return;
+      }
+      int mid = l + r >> 1;
+      build(p<<1, l, mid);
+      build(p<<1|1, mid+1, r);
+      dat[p] = combine(dat[p<<1], dat[p<<1|1]);
+    };
     build(1, 1, n);
   }
 
-  void build(int u, int L, int R) {
-    nodes[u].l = L;
-    nodes[u].r = R;
-    if (L == R) {
+  void reserve(int n) {
+    this->n = n;
+    dat.resize(4*n);
+  }
+
+  void set(int i, int x) { 
+    return set(i, x, 1, 1, n);
+  }
+
+  void set(int i, int x, int p, int l, int r) {
+    if (l == r) {
+      dat[p] = x;
       return;
     }
-    int mid = (L + R) >> 1;
-    build(2*u, L, mid);
-    build(2*u+1, mid+1, R);
-    nodes[u].val = combine(nodes[2*u].val, nodes[2*u+1].val);
-  }
+    int mid = l + r >> 1;
+    if (i <= mid) {
+      set(i, x, p<<1, l, mid);
+    } else {
+      set(i, x, p<<1|1, mid+1, r);
+    }
+    dat[p] = combine(dat[p<<1], dat[p<<1|1]); 
+  } 
 
   T reduce(int L, int R) {
-    return reduce(1, L, R);
+    return reduce(L, R, 1, 1, n);
   }
 
-  T reduce(int u, int L, int R) {
-    if (nodes[u].l >= L && nodes[u].r <= R) {
-      return nodes[u].val;
+  T reduce(int L, int R, int p, int l, int r) {
+    if (L <= l && r <= R) {
+      return dat[p];
     }
-    if (nodes[u].l > R || nodes[u].r < L) {
+    if (r < L || R < l) {
       return id;
     }
-    return combine(reduce(2*u, L, R), reduce(2*u+1, L, R));
-  }
-
-  void update(int idx, const T& val) {
-    update(1, idx, val);
-  }
-
-  void update(int u, int idx, const T& val) {
-    if (nodes[u].l == nodes[u].r) {
-      nodes[u].val = val;
-      return;
-    }
-    int mid = (nodes[u].l + nodes[u].r) >> 1;
-    if (idx <= mid) {
-      update(2*u, idx, val);
-    } else {
-      update(2*u+1, idx, val);
-    }
-    nodes[u].val = combine(nodes[2*u].val, nodes[2*u+1].val);
+    int mid = l + r >> 1;
+    T lval = reduce(L, R, p<<1, l, mid);
+    T rval = reduce(L, R, p<<1|1, mid+1, r);
+    return combine(lval, rval); 
   }
 
 };
+
+
+template <typename T=int64_t>
+struct LazySegTree {
+
+  T id = T();
+
+  std::function<T(T, T)> combine = [&] (const T& x, const T& y) {
+    return x + y;
+  };
+
+  int n;
+  std::vector<T> dat, lazy;
+
+  LazySegTree() {}
+
+  LazySegTree(int n): n(n), dat(4*n), lazy(4*n) {}
+
+  template <typename Iter>
+  LazySegTree(Iter first, Iter last): n(last-first), dat(4*n), lazy(4*n) {
+    function<void(int, int, int)> build = [&] (int p, int l, int r) {
+      if (l == r) {
+        dat[p] = *(first + l - 1);
+        return;
+      }
+      int mid = l + r >> 1;
+      build(p<<1, l, mid);
+      build(p<<1|1, mid+1, r);
+      dat[p] = combine(dat[p<<1], dat[p<<1|1]);
+    };
+    build(1, 1, n);
+  }
+
+  void reserve(int n) {
+    this->n = n;
+    dat.resize(4*n);
+  }
+
+  void pushdown(int p, int l, int r) {
+    int mid = l + r >> 1;
+    dat[p<<1] += lazy[p] * (mid - l + 1);
+    dat[p<<1|1] += lazy[p] * (r - mid);
+    lazy[p<<1] += lazy[p];
+    lazy[p<<1|1] += lazy[p];
+    lazy[p] = 0;
+  }
+
+  void set(int i, T x) { 
+    return set(i, x, 1, 1, n);
+  }
+
+  void set(int i, T x, int p, int l, int r) {
+    if (l == r) {
+      dat[p] = x;
+      return;
+    }
+    pushdown(p, l, r);
+    int mid = l + r >> 1;
+    if (i <= mid) {
+      set(i, x, p<<1, l, mid);
+    } else {
+      set(i, x, p<<1|1, mid+1, r);
+    }
+    dat[p] = combine(dat[p<<1], dat[p<<1|1]); 
+  } 
+
+  void add_range(int L, int R, T x) {
+    add_range(L, R, x, 1, 1, n);
+  }
+
+  void add_range(int L, int R, T x, int p, int l, int r) {
+    if (L <= l && r <= R) {
+      dat[p] += x * (r - l + 1);
+      lazy[p] += x;
+      return;
+    }
+    if (r < L || R < l) {
+      return;
+    }
+    pushdown(p, l, r);
+    int mid = l + r >> 1;
+    add_range(L, R, x, p<<1, l, mid);
+    add_range(L, R, x, p<<1|1, mid+1, r);
+    dat[p] = combine(dat[p<<1], dat[p<<1|1]); 
+  }
+
+  T reduce(int L, int R) {
+    return reduce(L, R, 1, 1, n);
+  }
+
+  T reduce(int L, int R, int p, int l, int r) {
+    if (L <= l && r <= R) {
+      return dat[p];
+    }
+    if (r < L || R < l) {
+      return id;
+    }
+    pushdown(p, l, r);
+    int mid = l + r >> 1;
+    T lval = reduce(L, R, p<<1, l, mid);
+    T rval = reduce(L, R, p<<1|1, mid+1, r);
+    return combine(lval, rval); 
+  }
+
+};
+
+
+} // namespace ds
+} // namespace hy

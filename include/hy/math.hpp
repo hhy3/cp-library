@@ -102,5 +102,26 @@ T CRT(const std::vector<T> &bs, const std::vector<T> &ns) {
   return ans;
 }
 
+
+vector<int> iterate_subsets(int state) {
+  vector<int> ans;
+  for (int s = state; s; s = (s - 1) & state) {
+    ans.push_back(s);
+  }
+  ans.push_back(0);
+  return ans;
+}
+
+vector<int> GospersHack(int n, int k) {
+  vector<int> ans;
+  for (int i = (1 << k) - 1; i < 1 << n; ) {
+    ans.push_back(i);
+    int lb = cur & -cur;
+    int r = cur + lb;
+    cur = ((r ^ cur) >> __builtin_ctz(lb) + 2) | r;
+  }
+  return ans;
+}
+
 }
 }
