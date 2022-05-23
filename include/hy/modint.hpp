@@ -13,13 +13,9 @@ namespace math {
  * 
  */
 template <uint64_t M>
-class modint {
+struct modint {
   
-private:
-
   uint64_t _x;  
-
-public:
 
   modint(): modint(0) {}
 
@@ -136,8 +132,6 @@ public:
     is >> rhs._x;
     return is;
   }
-
-private: 
 
   template <typename T>
   static T extgcd(T a, T b, T& x, T& y) {
