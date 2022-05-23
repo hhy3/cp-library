@@ -36,6 +36,10 @@ struct modint {
     return *this;
   }
 
+  operator uint64_t() {
+    return this->_x;
+  }
+
   uint64_t val() {
     return _x;
   }
