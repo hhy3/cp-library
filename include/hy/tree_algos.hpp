@@ -136,5 +136,78 @@ struct heavy_light_decomposition {
 
 };
 
+
+/**
+ * @brief Prufer 编码 
+ * 
+ *        无根树与 Prufer 编码之间存在双射关系
+ *        Cayley's formula: 大小为 $n$ 的完全图中共有 $n^{n-2}$ 个不同的生成树
+ *      
+ *        简介:
+ *            https://cp-algorithms.com/graph/pruefer_code.html
+ *        
+ *        模板题:
+ *            https://cses.fi/problemset/task/1134/
+ * 
+ *        练习题:
+ *            TODO
+ * 
+ */
+struct Prufer {
+
+  static std::vector<int> encode(const std::vector<std::vector<int>> &G) {
+    int n = G.size();
+    std::vector<int> parent(n, -1), code(n-2), deg(n);
+    std::function<void(int)> dfs = [&] (int u) {
+      for (auto v : G[u]) if (v != parent[u]) {
+        parent[v] = u;
+        dfs(v);
+      }
+    };
+    dfs(n-1);
+    int ptr = -1;
+    for (int i = 0; i < n; ++i) {
+      deg[i] = (int)G[i].size();
+      if (deg[i] == 1 && ptr == -1) {
+        ptr = i;
+      }
+    }
+    for (int i = 0, u = ptr; i < n-2; ++i) {
+      int v = parent[u];
+      code[i] = v;
+      if (--deg[v] == 1 && v <= ptr) {
+        u = v;
+      } else {
+        while (deg[++ptr] != 1);
+        u = ptr;
+      }
+    }
+    return code;
+  }
+
+  static std::vector<std::vector<int>> decode(const std::vector<int> &code) {
+    int n = code.size() + 2;
+    std::vector<int> deg(n, 1);
+    for (auto x : code) deg[x]++;
+    int ptr = -1;
+    while (deg[++ptr] != 1);
+    int u = ptr;
+    std::vector<std::vector<int>> G(n);
+    for (auto v : code) {
+      G[u].push_back(v);
+      G[v].push_back(u);
+      if (--deg[v] == 1 && v <= ptr) {
+        u = v;
+      } else {
+        while (deg[++ptr] != 1);
+        u = ptr;
+      }
+    }
+    G[u].push_back(n-1);
+    G[n-1].push_back(u);
+    return G;
+  }
+};
+
 }
 }
