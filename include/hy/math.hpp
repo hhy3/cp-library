@@ -8,6 +8,30 @@ namespace hy {
 namespace math {
 
 /**
+ * @brief 线性筛区间 $[1, n]$ 中的素数
+ * 
+ *        简介:
+ *            https://cp-algorithms.com/algebra/prime-sieve-linear.html#correctness-proof
+ *            https://codeforces.com/blog/entry/54090
+ *
+ *        模板题:
+ *            https://www.luogu.com.cn/problem/P3383
+ */
+std::vector<int> prime_sieve(int n, std::vector<int> &sieve) {
+  sieve.resize(n+1);
+  vector<int> primes;
+  for (int i = 2; i <= n; ++i) {
+    if (!sieve[i]) primes.push_back(i);
+    for (auto p : primes) {
+      if (i * p > n) break;
+      seive[i * p] = p;
+      if (i % p == 0) break;
+    }
+  }
+  return primes;
+}
+
+/**
  * @brief 求出1-n的关于质数p的乘法逆元
  *        
  *        简介: 
