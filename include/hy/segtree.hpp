@@ -38,7 +38,7 @@ struct SegTree {
 
   template <typename Iter>
   SegTree(Iter first, Iter last): n(last-first), dat(4*n) {
-    function<void(int, int, int)> build = [&] (int p, int l, int r) {
+    std::function<void(int, int, int)> build = [&] (int p, int l, int r) {
       if (l == r) {
         dat[p] = *(first + l - 1);
         return;
@@ -49,11 +49,6 @@ struct SegTree {
       dat[p] = combine(dat[p<<1], dat[p<<1|1]);
     };
     build(1, 1, n);
-  }
-
-  void reserve(int n) {
-    this->n = n;
-    dat.resize(4*n);
   }
 
   void set(int i, int x) { 
@@ -97,107 +92,117 @@ struct SegTree {
 template <typename T=int64_t>
 struct LazySegTree {
 
-  T id = T();
+  int n;
 
-  std::function<T(T, T)> combine = [&] (const T& x, const T& y) {
-    return x + y;
+  struct node {
+    T x = 0;
+    T add = 0;
+    T set = 0;
   };
 
-  int n;
-  std::vector<T> dat, lazy;
+  std::vector<node> tr;
 
   LazySegTree() {}
 
-  LazySegTree(int n): n(n), dat(4*n), lazy(4*n) {}
+  LazySegTree(int n): n(n), tr(4*n+1) {}
 
   template <typename Iter>
-  LazySegTree(Iter first, Iter last): n(last-first), dat(4*n), lazy(4*n) {
-    function<void(int, int, int)> build = [&] (int p, int l, int r) {
+  LazySegTree(Iter first, Iter last): n(last-first), tr(4*n+1) {
+    std::function<void(int, int, int)> build = [&] (int p, int l, int r) {
       if (l == r) {
-        dat[p] = *(first + l - 1);
+        tr[p].x = *(first + l - 1);
         return;
       }
       int mid = l + r >> 1;
       build(p<<1, l, mid);
       build(p<<1|1, mid+1, r);
-      dat[p] = combine(dat[p<<1], dat[p<<1|1]);
+      pushup(p, l, r);
     };
     build(1, 1, n);
   }
 
-  void reserve(int n) {
-    this->n = n;
-    dat.resize(4*n);
+  void pushup(int p, int l, int r) {
+    tr[p].x = tr[p<<1].x + tr[p<<1|1].x;
   }
 
   void pushdown(int p, int l, int r) {
     int mid = l + r >> 1;
-    dat[p<<1] += lazy[p] * (mid - l + 1);
-    dat[p<<1|1] += lazy[p] * (r - mid);
-    lazy[p<<1] += lazy[p];
-    lazy[p<<1|1] += lazy[p];
-    lazy[p] = 0;
+    if (tr[p].set) {
+      tr[p<<1].x = tr[p].set * (mid - l + 1);
+      tr[p<<1|1].x = tr[p].set * (r - mid);
+      tr[p<<1].set = tr[p<<1|1].set = tr[p].set;
+      tr[p<<1].add = tr[p<<1|1].add = tr[p].add = 0;
+    }
+    if (tr[p].add) {
+      tr[p<<1].x += tr[p].add * (mid - l + 1);
+      tr[p<<1|1].x += tr[p].add * (r - mid);
+      for (auto pp : {p<<1, p<<1|1}) {
+        if (tr[pp].set) tr[pp].set += tr[p].add;
+        else tr[pp].add += tr[p].add;
+      }
+    }
+    tr[p].set = tr[p].add = 0;
   }
 
-  void set(int i, T x) { 
-    return set(i, x, 1, 1, n);
+  void set(int L, int R, T x) {
+    return set(1, 1, n, L, R, x);
   }
 
-  void set(int i, T x, int p, int l, int r) {
-    if (l == r) {
-      dat[p] = x;
+  void set(int p, int l, int r, int L, int R, T x) {
+    if (l >= L && r <= R) {
+      tr[p].x = x * (r - l + 1);
+      tr[p].set = x;
+      tr[p].add = 0;
+      return;
+    }
+    if (l > R || r < L) {
       return;
     }
     pushdown(p, l, r);
     int mid = l + r >> 1;
-    if (i <= mid) {
-      set(i, x, p<<1, l, mid);
-    } else {
-      set(i, x, p<<1|1, mid+1, r);
-    }
-    dat[p] = combine(dat[p<<1], dat[p<<1|1]); 
-  } 
-
-  void add_range(int L, int R, T x) {
-    add_range(L, R, x, 1, 1, n);
+    set(p<<1, l, mid, L, R, x);
+    set(p<<1|1, mid+1, r, L, R, x);
+    pushup(p, l, r);
   }
 
-  void add_range(int L, int R, T x, int p, int l, int r) {
-    if (L <= l && r <= R) {
-      dat[p] += x * (r - l + 1);
-      lazy[p] += x;
+  void add(int L, int R, T x) {
+    add(1, 1, n, L, R, x);
+  }
+
+  void add(int p, int l, int r, int L, int R, T x) {
+    if (l >= L && r <= R) {
+      tr[p].x += x * (r - l + 1);
+      if (tr[p].set) tr[p].set += x;
+      else tr[p].add += x;
       return;
     }
-    if (r < L || R < l) {
+    if (l > R || r < L) {
       return;
     }
     pushdown(p, l, r);
     int mid = l + r >> 1;
-    add_range(L, R, x, p<<1, l, mid);
-    add_range(L, R, x, p<<1|1, mid+1, r);
-    dat[p] = combine(dat[p<<1], dat[p<<1|1]); 
+    add(p<<1, l, mid, L, R, x);
+    add(p<<1|1, mid+1, r, L, R, x);
+    pushup(p, l, r);
   }
 
-  T reduce(int L, int R) {
-    return reduce(L, R, 1, 1, n);
+  T sum(int L, int R) {
+    return sum(1, 1, n, L, R);
   }
 
-  T reduce(int L, int R, int p, int l, int r) {
-    if (L <= l && r <= R) {
-      return dat[p];
+  T sum(int p, int l, int r, int L, int R) {
+    if (l >= L && r <= R) {
+      return tr[p].x;
     }
-    if (r < L || R < l) {
-      return id;
+    if (l > R || r < L) {
+      return 0;
     }
     pushdown(p, l, r);
     int mid = l + r >> 1;
-    T lval = reduce(L, R, p<<1, l, mid);
-    T rval = reduce(L, R, p<<1|1, mid+1, r);
-    return combine(lval, rval); 
+    return sum(p<<1, l, mid, L, R) + sum(p<<1|1, mid+1, r, L, R);
   }
 
 };
-
 
 } // namespace ds
 } // namespace hy
