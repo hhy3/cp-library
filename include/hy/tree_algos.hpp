@@ -9,7 +9,7 @@ namespace tree {
 
 
 /**
- * @brief 倍增求树上最近公共祖先 (Lowest common ancestor)
+ * @brief 倍增求树上最近公共祖先 (Lowest common ancestor) 1-indexed
  *        
  *        简介: 
  *            https://cp-algorithms.com/graph/lca_binary_lifting.html
@@ -23,16 +23,16 @@ namespace tree {
  */
 struct LCA {
 
-  using graph = std::vector<std::vector<int>>;
+  using tree_t = std::vector<std::vector<int>>;
 
-  const static int MAXM = 20;
+  static constexpr int MAXM = 20;
 
-  graph G;
+  tree_t& G;
   int n, r;
   std::vector<std::array<int, MAXM>> up;
   std::vector<int> depth;
 
-  LCA(const graph &G, int n, int r)
+  LCA(tree_t& G, int n, int r)
       : G(G), n(n), r(r), up(n + 1), depth(n + 1) {
     dfs(r, 0);
   }
