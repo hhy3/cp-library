@@ -14,7 +14,7 @@ struct SP {
 
   using graph = std::vector<std::vector<std::pair<int, int64_t>>>;
 
-  void dijkstra(const graph &G, int src, std::vector<int64_t> &dist) {
+  static void dijkstra(const graph &G, int src, std::vector<int64_t> &dist) {
     int n = G.size();
     dist.assign(n, INF);
     dist[src] = 0;
@@ -35,7 +35,7 @@ struct SP {
     }
   }
     
-}
+};
 
 } // namespace shortest_path
 } // namespace graph

@@ -12,7 +12,7 @@ struct FFT {
 
   using C = std::complex<double>;
 
-  void fft(std::vector<C>& a, bool invert) {
+  static void fft(std::vector<C>& a, bool invert) {
     int n = a.size();
     if (n <= 1) return;
     std::vector<C> a0(n/2), a1(n/2);
@@ -35,7 +35,7 @@ struct FFT {
     }
   }
 
-  std::vector<int64_t> convolution(const std::vector<int64_t>& a, const std::vector<int64_t>& b) {
+  static std::vector<int64_t> convolution(const std::vector<int64_t>& a, const std::vector<int64_t>& b) {
     int n1 = a.size(), n2 = b.size(), n = 1;
     while (n < n1 + n2) n <<= 1;
     std::vector<C> fa(a.begin(), a.end()), fb(b.begin(), b.end());
