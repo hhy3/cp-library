@@ -248,7 +248,7 @@ int minimum_rotation(std::vector<int> s) {
       k = 0;
     }
   }
-  return min(i, j);
+  return std::min(i, j);
 }
 
 

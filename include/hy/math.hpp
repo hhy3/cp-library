@@ -19,12 +19,12 @@ namespace math {
  */
 std::vector<int> prime_sieve(int n, std::vector<int> &sieve) {
   sieve.resize(n+1);
-  vector<int> primes;
+  std::vector<int> primes;
   for (int i = 2; i <= n; ++i) {
     if (!sieve[i]) primes.push_back(i);
     for (auto p : primes) {
       if (i * p > n) break;
-      seive[i * p] = p;
+      sieve[i * p] = p;
       if (i % p == 0) break;
     }
   }
@@ -127,8 +127,8 @@ T CRT(const std::vector<T> &bs, const std::vector<T> &ns) {
 }
 
 
-vector<int> iterate_subsets(int state) {
-  vector<int> ans;
+std::vector<int> iterate_subsets(int state) {
+  std::vector<int> ans;
   for (int s = state; s; s = (s - 1) & state) {
     ans.push_back(s);
   }
@@ -136,13 +136,13 @@ vector<int> iterate_subsets(int state) {
   return ans;
 }
 
-vector<int> GospersHack(int n, int k) {
-  vector<int> ans;
+std::vector<int> GospersHack(int n, int k) {
+  std::vector<int> ans;
   for (int i = (1 << k) - 1; i < 1 << n; ) {
     ans.push_back(i);
-    int lb = cur & -cur;
-    int r = cur + lb;
-    cur = ((r ^ cur) >> __builtin_ctz(lb) + 2) | r;
+    int lb = i & -i;
+    int r = i + lb;
+    i = ((r ^ i) >> __builtin_ctz(lb) + 2) | r;
   }
   return ans;
 }
