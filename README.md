@@ -61,6 +61,8 @@
 
 - [最短路径](https://github.com/hhy3/cp-library/blob/master/include/hy/shortest_path.hpp#11)
 
+- [强连通分量](https://github.com/hhy3/cp-library/blob/master/include/hy/SCC.hpp#L9)
+
 ## 树
 
 - [LCA](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L24)

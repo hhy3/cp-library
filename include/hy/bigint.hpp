@@ -156,15 +156,20 @@ struct bigint {
   }
 
   bigint operator * (const bigint &rhs) {
-    auto conv = convolution(dat, rhs.dat);
-    for (int i = 0; i <= size() + rhs.size() - 2; ++i) {
-      conv[i+1] += conv[i] / base;
-      conv[i] %= base;
+    std::vector<int> v(size()+rhs.size()); 
+    for (int i = 0; i < size(); ++i) {
+      for (int j = 0; j < rhs.size(); ++j) {
+        v[i+j] += dat[i] * rhs[j];
+      }
     }
-    while (conv.size() && conv.back() == 0) {
-      conv.pop_back();
+    for (int i = 0; i < (int)v.size() - 1; ++i) {
+      v[i+1] += v[i] / 10;
+      v[i] %= 10;
     }
-    return bigint(conv);
+    while (v.size() && v.back() == 0) {
+      v.pop_back();
+    }
+    return bigint(v);
   }
 
   friend bool operator == (const bigint &lhs, const bigint &rhs) {
