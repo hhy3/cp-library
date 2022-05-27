@@ -8,7 +8,6 @@
 
 #include <cassert>
 
-#include "hy/fft.hpp"
 
 namespace hy {
 namespace math {
