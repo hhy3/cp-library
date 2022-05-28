@@ -73,5 +73,4 @@
 
 ## 计算几何
 
-- TODO
-
+- [凸包](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L131)
