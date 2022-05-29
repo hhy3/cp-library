@@ -14,42 +14,22 @@ template <typename T>
 using P = std::complex<T>;
 
 template <typename T>
-bool lt(const P<T>& p1, const P<T>& p2) {
-  return (p1.X < p2.X) || (p1.X == p2.X && p1.Y < p2.Y);
-}
-
+bool lt(const P<T>& p1, const P<T>& p2) { return (p1.X < p2.X) || (p1.X == p2.X && p1.Y < p2.Y); }
 template <typename T>
-P<T> max(const P<T>& p1, const P<T>& p2) {
-  if (lt(p1, p2)) return p2;
-  else return p1;
-}
+P<T> max(const P<T>& p1, const P<T>& p2) { return lt(p1, p2)? p2 : p1; }
 template <typename T>
-P<T> min(const P<T>& p1, const P<T>& p2) {
-  if (lt(p1, p2)) return p1;
-  else return p2;
-}
-
+P<T> min(const P<T>& p1, const P<T>& p2) { return lt(p1, p2)? p1 : p2; }
 template <typename T=int64_t>
-T crossp(const P<T>& x, const P<T>& y) {
-  return (conj(x) * y).Y;
-}
+T crossp(const P<T>& x, const P<T>& y) { return (conj(x) * y).Y; }
 
 template <typename T=int64_t>
 struct segment {
   P<T> s, e;
-
   segment(P<T> s_, P<T> e_): s(s_), e(e_) {}
 
-  int side(const P<T>& p) { // -1: left, 0: touch, 1: right
-    if (T cp = crossp(e-s, e-p); cp < 0) return -1;
-    else if (cp == 0) return 0;
-    else return 1;
-  }
+  int side(const P<T>& p) { /* <0: left, =0: touch, >0: right */ return crossp(e-s, e-p); }
 
-  segment sort() {
-    if (s.X > e.X || s.X == e.X && s.Y > e.Y) swap(s, e);
-    return *this;
-  }
+  segment sort() { if (s.X > e.X || s.X == e.X && s.Y > e.Y) swap(s, e); return *this; }
 
   bool intersect(const P<T>& p) {
     return crossp(e - s, p - s) == 0 && (min(s.X, e.X) <= p.X && max(s.X, e.X) >= p.X) && (min(s.Y, e.Y) <= p.Y && max(s.Y, e.Y) >= p.Y);
@@ -74,29 +54,17 @@ struct segment {
       else return 0;
     }
   }
-
 };
 
 
 template <typename T>
 struct polygon {
-
   std::vector<P<T>> points;
-
   polygon() = default;
 
-  P<T> operator [] (int idx) {
-    return points[idx];
-  }
-
-  int size() {
-    return (int)points.size();
-  }
-  
-  void push_back(const P<T>& p) {
-    points.push_back(p);
-  }
-
+  P<T> operator [] (int idx) { return points[idx]; }
+  int size() { return (int)points.size(); }
+  void push_back(const P<T>& p) { points.push_back(p); }
   P<T> pop_back() {
     auto p = points.back();
     points.pop_back();
@@ -105,24 +73,19 @@ struct polygon {
 
   T area() { // return 2a where a = area of this polygon
     T ans = 0;
-    for (int i = 0; i < size(); ++i) {
-      ans += crossp(points[i], points[(i+1)%size()]);
-    }
+    for (int i = 0; i < size(); ++i) ans += crossp(points[i], points[(i+1)%size()]);
     return abs(ans);
   }
 
-  int where(const P<T>& p) { // 0: outside, 1: boundary, 2: inside
+  int where(const P<T>& p) { // 0: outside, 1: inside, 2: boundary
     int cnt = 0;
     for (int i = 0; i < size(); ++i) {
       auto p1 = points[i], p2 = points[(i+1)%size()];
-      if (segment(p1, p2).intersect(p)) {
-        return 1;
-      } 
-      if (p1.X <= p.X && p2.X > p.X && crossp(p2 - p1, p - p1) < 0) cnt++ ;
-      else if (p1.X > p.X && p2.X <= p.X && crossp(p1 - p2, p - p2) < 0) cnt++ ;
+      if (segment(p1, p2).intersect(p)) return 2;
+      if (p1.X <= p.X && p2.X > p.X && crossp(p2 - p1, p - p1) < 0) cnt ^= 1;
+      else if (p1.X > p.X && p2.X <= p.X && crossp(p1 - p2, p - p2) < 0) cnt ^= 1;
     }
-    if (cnt % 2) return 2;
-    else return 0;
+    return cnt;
   }
 
 };
@@ -134,11 +97,10 @@ polygon<T> convex_hull(std::vector<P<T>> points) {
   polygon<T> pg;
   pg.push_back(points[0]);
   for (int i = 1; i <= 2 * n - 2; ++i) {
-    int idx = i < n? i : 2 * n - i - 2;
-    while (pg.size() >= 2 && crossp(pg[pg.size()-1]-pg[pg.size()-2], points[idx] - pg[pg.size()-1]) > 0) pg.pop_back();
+    int idx = i < n? i : 2 * n - i - 2, m = pg.size();
+    while (m >= 2 && crossp(pg[m-1]-pg[m-2], points[idx] - pg[m-1]) > 0) pg.pop_back(), m--;
     if (idx != 0) pg.push_back(points[idx]);
   }
-
   return pg;
 }
 
