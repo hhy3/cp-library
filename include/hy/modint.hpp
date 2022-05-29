@@ -8,41 +8,27 @@
 namespace hy {
 namespace math {
 
-/**
- * @brief 模M剩余类集合
- * 
- */
+
 template <uint64_t M>
 struct modint {
-  
   uint64_t _x;  
-
   modint(): modint(0) {}
-
   template <typename T>
   modint(T x) {
-    if (std::is_signed<T>::value) {
-      _x = (x % T(M) + T(M)) % T(M);
-    } else {
-      _x = x % M;
-    }
+    if (std::is_signed<T>::value) _x = (x % T(M) + T(M)) % T(M);
+    else _x = x % M;
   }
 
-  modint(const modint& rhs)
-    : _x(rhs._x) {}
+  modint(const modint& rhs): _x(rhs._x) {}
 
   modint& operator = (const modint& rhs) {
     _x = rhs._x;
     return *this;
   }
 
-  operator uint64_t() {
-    return this->_x;
-  }
+  operator uint64_t() { return this->_x; }
 
-  uint64_t val() {
-    return _x;
-  }
+  uint64_t val() { return _x; }
 
   modint& operator ++ () {
     _x = (_x + 1) % M;
@@ -87,8 +73,7 @@ struct modint {
 
   modint inv() const {
     assert(_x > 0);
-    int64_t u, v;
-    int64_t d = extgcd(int64_t(_x), int64_t(M), u, v);
+    int64_t u, v, d = extgcd(int64_t(_x), int64_t(M), u, v);
     assert(d == 1);
     return modint(u);
   }
@@ -106,37 +91,29 @@ struct modint {
   friend modint operator + (const modint& lhs, const modint &rhs) {
     return modint(lhs) += rhs;
   }
-
   friend modint operator - (const modint& lhs, const modint &rhs) {
     return modint(lhs) -= rhs;
   }
-
   friend modint operator * (const modint& lhs, const modint &rhs) {
     return modint(lhs) *= rhs;
   }
-
   friend modint operator / (const modint& lhs, const modint &rhs) {
     return modint(lhs) /= rhs;
   }
-
   friend bool operator == (const modint& lhs, const modint &rhs) {
     return lhs._x == rhs._x;
   }
-
   friend bool operator != (const modint& lhs, const modint &rhs) {
     return lhs._x != rhs._x;
   }
-
   friend std::ostream& operator << (std::ostream& os, const modint& rhs) {
     os << rhs._x;
     return os;
   }
-
   friend std::istream& operator >> (std::istream& is, modint& rhs) {
     is >> rhs._x;
     return is;
   }
-
   template <typename T>
   static T extgcd(T a, T b, T& x, T& y) {
     if (b == 0) {

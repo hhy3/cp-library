@@ -7,19 +7,6 @@
 namespace hy {
 namespace ds {
 
-/**
- * @brief 线段树
- *        
- *        简介: 
- *            https://cp-algorithms.com/data_structures/segment_tree.html
- *            https://oi-wiki.org/ds/seg/
- *            
- *        模板题: 
- *            https://leetcode-cn.com/problems/range-sum-query-mutable/
- *            https://www.luogu.com.cn/problem/P3372 
- *            https://www.luogu.com.cn/problem/P3373
- *  
- */
 template <typename T=int64_t>
 struct SegTree {
 

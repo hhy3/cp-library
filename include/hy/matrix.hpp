@@ -12,76 +12,48 @@
 namespace hy {
 namespace math {
 
-/**
- * @brief TODO
- * 
- */
+
 template <typename T=int64_t>
 struct matrix {
-  
   int m, n;
   std::vector<std::vector<T>> dat;
-
   matrix()
     : matrix(0) {}
-
   matrix(int m, int n)
     : m(m), n(n), dat(m, std::vector<T>(n)) {}
-  
   explicit matrix(int m) 
     : matrix(m, m) {}
-
   explicit matrix(const std::vector<std::vector<T>> &vec)
     : m(vec.size()), n(vec[0].size()), dat(vec) {}
-
   matrix(const matrix &rhs)
     : m(rhs.m), n(rhs.n), dat(rhs.dat) {}
-
   matrix(matrix &&rhs) {
     swap(*this, rhs);
   }
-
   matrix &operator = (matrix rhs) {
     swap(*this, rhs);
     return *this;
   }
-
   friend void swap(matrix &lhs, matrix &rhs) noexcept {
     std::swap(lhs.m, rhs.m);
     std::swap(lhs.n, rhs.n);
     std::swap(lhs.dat, rhs.dat);
   }
-
-  std::pair<int, int> shape() const {
-    return std::make_pair(m, n);
-  }
-
+  std::pair<int, int> shape() const { return std::make_pair(m, n); }
   matrix operator - () {
     matrix ans = *this;
-    for (int i = 0; i < m; ++i) {
-      for (int j = 0; j < n; ++j) {
-        ans.dat[i][j] *= -1;
-      }
-    }
+    for (int i = 0; i < m; ++i) for (int j = 0; j < n; ++j) ans.dat[i][j] *= -1;
     return ans;
   }
-
   matrix &operator += (const matrix &rhs) {
-    assert(m == rhs.m);
-    assert(n == rhs.n);
-    for (int i = 0; i < m; ++i) {
-      for (int j = 0; j < n; ++j) {
-        dat[i][j] += rhs.data[i][j];
-      }
-    }
+    assert(m == rhs.m && n == rhs.n);
+    for (int i = 0; i < m; ++i) for (int j = 0; j < n; ++j) dat[i][j] += rhs.data[i][j];
     return *this;
   }
 
   matrix operator + (const matrix &rhs) {
-    assert(m == rhs.m);
-    assert(n == rhs.n);
-    matrix tmp = *this;
-    return tmp += rhs;
+    assert(m == rhs.m && n == rhs.n);
+    return matrix(*this) += rhs;
   }
 
   matrix &operator -= (const matrix &rhs) {
@@ -95,12 +67,8 @@ struct matrix {
   matrix &operator *= (const matrix &rhs) {
     assert(n == rhs.m);
     matrix tmp(m, n);
-    for (int i = 0; i < m; ++i) {
-      for (int k = 0; k < n; ++k) {
-        for (int j = 0; j < rhs.n; ++j) {
-          tmp[i][j] += dat[i][k] * rhs.dat[k][j];
-        }
-      }
+    for (int i = 0; i < m; ++i) for (int k = 0; k < n; ++k) for (int j = 0; j < rhs.n; ++j) {
+      tmp[i][j] += dat[i][k] * rhs.dat[k][j];
     }
     return *this = tmp;
   }
@@ -112,9 +80,7 @@ struct matrix {
 
   matrix pow(int64_t p) {
     assert(m == n && p >= 0);
-    assert(p >= 0);
-    matrix ans = eye(m);
-    matrix tmp = *this;
+    matrix ans = eye(m), tmp = *this;
     for (; p; p >>= 1) {
       if (p & 1) ans *= tmp;
       tmp *= tmp;
@@ -122,9 +88,7 @@ struct matrix {
     return ans;
   }
 
-  std::vector<T> &operator [] (int i) {
-    return dat[i];
-  }
+  std::vector<T> &operator [] (int i) { return dat[i]; }
 
   static matrix eye(int n) {
     matrix tmp(n, n);
@@ -136,35 +100,10 @@ struct matrix {
     matrix tmp(m, n);
     std::mt19937_64 rng;
     std::uniform_int_distribution<int64_t> dist(lo, hi);
-    for (int i = 0; i < m; ++i) {
-      for (int j = 0; j < n; ++j) {
-        tmp.dat[i][j] = dist(rng);
-      }
+    for (int i = 0; i < m; ++i) for (int j = 0; j < n; ++j) {
+      tmp.dat[i][j] = dist(rng);
     }
     return tmp;
-  }
-
-  friend std::ostream &operator << (std::ostream &os, matrix rhs) {
-    os << "matrix:\n";
-    for (int i = 0; i < rhs.m; ++i) {
-      os << "[ ";
-      for (int j = 0; j < rhs.n; ++j) {
-        os << rhs[i][j] << " ";
-      }
-      os << "]\n";
-    }
-    return os;
-  } 
-
-  friend std::istream &operator >> (std::istream &is, matrix rhs) {
-    is >> rhs.m >> rhs.n;
-    rhs = matrix(rhs.m, rhs.n);
-    for (int i = 0; i < rhs.m; ++i) {
-      for (int j = 0; j < rhs.n; ++j) {
-        is >> rhs[i][j];
-      }
-    }
-    return is;
   }
 
 };

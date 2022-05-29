@@ -1,8 +1,8 @@
 #pragma once
 
 #include <vector>
-#include <unordered_map>
-#include <unordered_set>
+#include <map>
+#include <map>
 #include <string_view>
 #include <type_traits>
 
@@ -11,19 +11,6 @@
 namespace hy {
 namespace ds {
 
-
-/**
- * @brief AC自动机 (Aho-Corasick algorithm)
- *        
- *        简介:
- *            https://cp-algorithms.com/string/aho_corasick.html#construction-of-an-automaton
- *   
- *        模板题:
- *            https://www.luogu.com.cn/problem/P3808
- *            https://www.luogu.com.cn/problem/P3796
- *            https://www.luogu.com.cn/problem/P5357
- * 
- */
 template <typename T=char, int N=1024*1024>
 struct AC {
   
@@ -32,8 +19,8 @@ struct AC {
     T pch;
     int link = -1;
     int leaf = 0;
-    std::unordered_map<T, int> nxt;
-    std::unordered_map<T, int> go;
+    std::map<T, int> nxt;
+    std::map<T, int> go;
 
     node(int p, const T& pch): p(p), pch(pch) {}
 
