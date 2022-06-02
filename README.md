@@ -8,6 +8,7 @@
 	- [Trie](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp#L11-L114)
 	- [并查集](https://github.com/hhy3/cp-library/blob/master/include/hy/union_find.hpp#L10-L51)
 	- [Ranges](https://github.com/hhy3/cp-library/blob/master/include/hy/Ranges.hpp#L9-L27)
+  - [莫队分块](https://github.com/hhy3/cp-library/blob/master/include/hy/Mo.hpp#L12-L43)
 - 字符串
 	- [前缀函数](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L13-L31)
 	- [字符串哈希](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L24-L33)
@@ -28,7 +29,8 @@
 	- [模M剩余类](https://github.com/hhy3/cp-library/blob/master/include/hy/modint.hpp#L15)
 - 图论
 	- [二分图最大匹配](https://github.com/hhy3/cp-library/blob/master/include/hy/hungarian.hpp#L22)
-	- [最短路径](https://github.com/hhy3/cp-library/blob/master/include/hy/shortest_path.hpp#11)
+	- [Dijkstra](https://github.com/hhy3/cp-library/blob/master/include/hy/shortest_path.hpp#11)
+  - [传递闭包](https://github.com/hhy3/cp-library/blob/master/include/hy/transitive_closure.hpp#L8-L18)
 	- [强连通分量](https://github.com/hhy3/cp-library/blob/master/include/hy/SCC.hpp#L9)
 - 树
 	- [LCA](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L24)

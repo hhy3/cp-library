@@ -7,6 +7,10 @@ namespace hy {
 namespace geo {
 
 
+// 距离: abs(p)
+// 角度: arg(p)
+// 旋转: p * polar(1.0L, x)
+// 缩放: p * polar(k, 0.0L)
 #define X real()
 #define Y imag()
 
@@ -19,6 +23,7 @@ template <typename T>
 P<T> max(const P<T>& p1, const P<T>& p2) { return lt(p1, p2)? p2 : p1; }
 template <typename T>
 P<T> min(const P<T>& p1, const P<T>& p2) { return lt(p1, p2)? p1 : p2; }
+// 二维叉积
 template <typename T=int64_t>
 T crossp(const P<T>& x, const P<T>& y) { return (conj(x) * y).Y; }
 
@@ -75,6 +80,14 @@ struct polygon {
     T ans = 0;
     for (int i = 0; i < size(); ++i) ans += crossp(points[i], points[(i+1)%size()]);
     return abs(ans);
+  }
+
+  T perimeter() {
+    T ans = 0;
+    for (int i = 0; i < size(); ++i) {
+      ans += abs(points[i] - points[(i+1)%size()]);
+    }
+    return ans;
   }
 
   int where(const P<T>& p) { // 0: outside, 1: inside, 2: boundary

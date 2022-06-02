@@ -93,8 +93,7 @@ struct Prufer {
     dfs(n-1);
     int ptr = -1;
     for (int i = 0; i < n; ++i) {
-      deg[i] = (int)G[i].size();
-      if (deg[i] == 1 && ptr == -1) ptr = i;
+      if ((deg[i] = (int)G[i].size()) == 1 && ptr == -1) ptr = i;
     }
     for (int i = 0, u = ptr; i < n-2; ++i) {
       int v = parent[u];
@@ -117,16 +116,14 @@ struct Prufer {
     int u = ptr;
     std::vector<std::vector<int>> G(n);
     for (auto v : code) {
-      G[u].push_back(v);
-      G[v].push_back(u);
+      G[u].push_back(v), G[v].push_back(u);
       if (--deg[v] == 1 && v <= ptr) u = v;
       else {
         while (deg[++ptr] != 1);
         u = ptr;
       }
     }
-    G[u].push_back(n-1);
-    G[n-1].push_back(u);
+    G[u].push_back(n-1), G[n-1].push_back(u);
     return G;
   }
 };

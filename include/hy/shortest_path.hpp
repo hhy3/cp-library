@@ -13,6 +13,7 @@ struct SP {
   static constexpr int64_t INF = static_cast<int64_t>(1e18);
 
   using graph = std::vector<std::vector<std::pair<int, int64_t>>>;
+  using adjMatrix = std::vector<std::vector<int64_t>>;
 
   static void dijkstra(const graph &G, int src, std::vector<int64_t> &dist) {
     int n = G.size();
