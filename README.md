@@ -3,35 +3,33 @@
 
 ## 数据结构
 
-- [AC自动机](https://github.com/hhy3/cp-library/blob/master/include/hy/AC.hpp#L27)
+- [AC自动机](https://github.com/hhy3/cp-library/blob/master/include/hy/AC.hpp#L14-L99)
 
-- [树状数组](https://github.com/hhy3/cp-library/blob/master/include/hy/fenwick_tree.hpp#L25)
+- [树状数组](https://github.com/hhy3/cp-library/blob/master/include/hy/fenwick_tree.hpp#L10-L50)
 
-- [线段树](https://github.com/hhy3/cp-library/blob/master/include/hy/segtree.hpp#L23)
+- [线段树](https://github.com/hhy3/cp-library/blob/master/include/hy/segtree.hpp#L10-L47)
 
-- [Lazy线段树](https://github.com/hhy3/cp-library/blob/master/include/hy/segtree.hpp#L92)
+- [Lazy线段树](https://github.com/hhy3/cp-library/blob/master/include/hy/segtree.hpp#L50-L131)
 
-- [稀疏表](https://github.com/hhy3/cp-library/blob/master/include/hy/sparse_table.hpp#L18)
+- [稀疏表](https://github.com/hhy3/cp-library/blob/master/include/hy/sparse_table.hpp#L6-L29)
 
-- [Trie](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp#L26)
+- [Trie](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp#L11-L114)
 
-- [并查集](https://github.com/hhy3/cp-library/blob/master/include/hy/union_find.hpp#L24)
+- [并查集](https://github.com/hhy3/cp-library/blob/master/include/hy/union_find.hpp#L10-L51)
 
-- [Ranges](https://github.com/hhy3/cp-library/blob/master/include/hy/Ranges.hppp#L9-L27)
+- [Ranges](https://github.com/hhy3/cp-library/blob/master/include/hy/Ranges.hpp#L9-L27)
 
 ## 字符串
 
-- [前缀函数](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L31)
+- [前缀函数](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L13-L31)
 
-- [KMP](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L61)
+- [字符串哈希](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L24-L33)
 
-- [字符串哈希](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L91)
+- [Z函数](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L36-L45)
 
-- [Z函数](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L150)
+- [Manacher](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L48-L61)
 
-- [Manacher](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L186)
-
-- [最小表示](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L233)
+- [最小表示](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L64-L77)
 
 ## 数学
 

@@ -16,11 +16,9 @@ struct sparse_table {
     for (int i = 2; i <= n; ++i) log[i] = log[i>>1] + 1;
     f.assign(log[n]+1, std::vector<T>(n));
     for (int i = 0; i < n; ++i) f[0][i] = v[i];
-    for (int i = 1; i <= log[n]; ++i) {
-      for (int j = 0; j + (1 << i) - 1 < n; ++j) {
+    for (int i = 1; i <= log[n]; ++i) 
+      for (int j = 0; j + (1 << i) - 1 < n; ++j) 
         f[i][j] = op(f[i-1][j], f[i-1][j+(1<<(i-1))]);
-      }
-    }
   }
 
   T query(int L, int R) {
