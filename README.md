@@ -17,6 +17,7 @@
 	- [最小表示](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L64-L77)
 - 数学
 	- 数论
+		- [扩展GCD](https://github.com/hhy3/cp-library/blob/master/include/hy/math.hpp#L122-L130)
 		- [素数筛](https://github.com/hhy3/cp-library/blob/master/include/hy/math.hpp#L20)
 		- [乘法逆元](https://github.com/hhy3/cp-library/blob/master/include/hy/math.hpp#L46)
 		- [中国剩余定理](https://github.com/hhy3/cp-library/blob/master/include/hy/math.hpp#L102)

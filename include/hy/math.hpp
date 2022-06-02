@@ -89,8 +89,8 @@ std::vector<int> GospersHack(int n, int k) {
   return ans;
 }
 
-std::vector<std::vector<int>> comb(int n, int64_t mod) {
-  std::vector<std::vector<int>> C(n+1, std::vector<int>(n+1));
+std::vector<std::vector<int64_t>> comb(int n, int64_t mod) {
+  std::vector<std::vector<int64_t>> C(n+1, std::vector<int64_t>(n+1));
   C[1][1] = 1;
   for (int i = 2; i <= n; ++i) {
     C[i][0] = C[i][i] = 1;
@@ -99,8 +99,8 @@ std::vector<std::vector<int>> comb(int n, int64_t mod) {
   return C;
 }
 
-std::vector<int> Catalan(int n, int64_t mod) {
-  std::vector<int> cat(n+1);
+std::vector<int64_t> Catalan(int n, int64_t mod) {
+  std::vector<int64_t> cat(n+1);
   cat[0] = cat[1] = 1;
   for (int i = 2; i <= n; ++i) for (int j = 0; j < i; ++j) 
     cat[i] = (cat[i] + cat[i-j-1] * cat[j]) % mod;
@@ -116,6 +116,17 @@ int64_t InclusionExclusion(int n) {
     if (__builtin_popcount(s) % 2) ans += calc(s);
     else ans -= calc(s);  
   }
+  return ans;
+}
+
+int64_t extgcd(int64_t a, int64_t b, int64_t& x, int64_t& y) {
+  if (!b) {
+    x = 1, y = 0;
+    return a;
+  }
+  int64_t d = extgcd(b, a % b, y, x);
+  y -= a / b * x;
+  return d;
 }
 
 }
