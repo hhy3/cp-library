@@ -29,12 +29,13 @@
 	- [模M剩余类](https://github.com/hhy3/cp-library/blob/master/include/hy/modint.hpp#L15)
 - 图论
 	- [二分图最大匹配](https://github.com/hhy3/cp-library/blob/master/include/hy/hungarian.hpp#L22)
-	- [Dijkstra](https://github.com/hhy3/cp-library/blob/master/include/hy/shortest_path.hpp#11)
+	- [Dijkstra](https://github.com/hhy3/cp-library/blob/master/include/hy/shortest_path.hpp#L18-L37)
+	- [Floyd](https://github.com/hhy3/cp-library/blob/master/include/hy/shortest_path.hpp#L39-L43)
   - [传递闭包](https://github.com/hhy3/cp-library/blob/master/include/hy/transitive_closure.hpp#L8-L18)
-	- [强连通分量](https://github.com/hhy3/cp-library/blob/master/include/hy/SCC.hpp#L9)
+  - [强连通分量](https://github.com/hhy3/cp-library/blob/master/include/hy/SCC.hpp#L9)
 - 树
 	- [LCA](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L24)
 	- [轻重链剖分](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L91)
 	- [Prufer编码](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L156)
 - 计算几何
-	- [凸包](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L131)
+	- [二维凸包](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L131)
