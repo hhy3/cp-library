@@ -17,6 +17,8 @@
 
 - [并查集](https://github.com/hhy3/cp-library/blob/master/include/hy/union_find.hpp#L24)
 
+- [Ranges](https://github.com/hhy3/cp-library/blob/master/include/hy/Ranges.hppp#L9-L27)
+
 ## 字符串
 
 - [前缀函数](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L31)
