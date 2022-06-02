@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <set>
+#include <deque>
 
 #include <cstdint>
 
@@ -40,6 +41,24 @@ struct SP {
     int n = (int)adj.size();
     for (int k = 0; k < n; ++k) for (int i = 0; i < n; ++i) for (int j = 0; j < n; ++j) 
       adj[i][j] = std::min(adj[i][j], adj[i][k] + adj[k][j]);
+  }
+
+  static void bfs01(const graph& G, int src, std::vector<int64_t>& dist) {
+    int n = (int)G.size();
+    dist.assign(n, INF);
+    dist[src] = 0;
+    std::deque<int> q;
+    q.push_front(src);
+    while (q.size()) {
+      int u = q.front(); q.pop_front();
+      for (auto [v, w] : G[u]) {
+        if (dist[v] + w < dist[u]) {
+          dist[u] = dist[v] + w;
+          if (w == 1) q.push_back(v);
+          else q.push_front(v);
+        }
+      }
+    }
   }
     
 };

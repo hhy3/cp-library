@@ -7,23 +7,10 @@
 namespace hy {
 namespace graph {
 
-/**
- * @brief 匈牙利算法 (hungarian algorithm) 求二分图最大匹配
- *        
- *        简介: 
- *            https://www.renfei.org/blog/bipartite-matching.html
- *        
- *        模板题: 
- *            https://www.luogu.com.cn/problem/P3386
- *        
- *        Time Complexity: O(m * n)
- * 
- */
-int hungarian(const std::vector<std::vector<int>> &G, int n, std::vector<int> &match, int m) {
-  assert(int(G.size()) == n);
+int hungarian(const std::vector<std::vector<int>> &G, std::vector<int> &match, int m) {
+  int n = G.size();
   std::vector<bool> vis(m);
   match.assign(m, -1);
-
   std::function<bool(int)> dfs = [&] (int u) {
     for (auto v : G[u]) if (!vis[v]) {
       if (match[v] == -1 || dfs(match[v])) {
@@ -33,7 +20,6 @@ int hungarian(const std::vector<std::vector<int>> &G, int n, std::vector<int> &m
     }
     return false;
   };
-  
   int cnt = 0;
   for (int i = 0; i < n; ++i) {
     fill(vis.begin(), vis.end(), false);

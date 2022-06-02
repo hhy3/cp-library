@@ -89,5 +89,34 @@ std::vector<int> GospersHack(int n, int k) {
   return ans;
 }
 
+std::vector<std::vector<int>> comb(int n, int64_t mod) {
+  std::vector<std::vector<int>> C(n+1, std::vector<int>(n+1));
+  C[1][1] = 1;
+  for (int i = 2; i <= n; ++i) {
+    C[i][0] = C[i][i] = 1;
+    for (int j = 1; j < i; ++j) C[i][j] = (C[i-1][j-1] + C[i-1][j]) % mod;
+  }
+  return C;
+}
+
+std::vector<int> Catalan(int n, int64_t mod) {
+  std::vector<int> cat(n+1);
+  cat[0] = cat[1] = 1;
+  for (int i = 2; i <= n; ++i) for (int j = 0; j < i; ++j) 
+    cat[i] = (cat[i] + cat[i-j-1] * cat[j]) % mod;
+  return cat;
+}
+
+int64_t InclusionExclusion(int n) {
+  auto calc = [&] (int s) -> int64_t {
+    // TODO
+  };
+  int64_t ans = 0;
+  for (int s = 1; s < 1 << n; ++s) {
+    if (__builtin_popcount(s) % 2) ans += calc(s);
+    else ans -= calc(s);  
+  }
+}
+
 }
 }

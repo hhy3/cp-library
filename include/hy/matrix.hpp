@@ -56,13 +56,9 @@ struct matrix {
     return matrix(*this) += rhs;
   }
 
-  matrix &operator -= (const matrix &rhs) {
-    *this += -rhs;
-  }
+  matrix &operator -= (const matrix &rhs) { *this += -rhs; }
 
-  matrix operator - (const matrix &rhs) {
-    return *this + (-rhs);
-  }
+  matrix operator - (const matrix &rhs) { return *this + (-rhs); }
 
   matrix &operator *= (const matrix &rhs) {
     assert(n == rhs.m);
