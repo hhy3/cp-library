@@ -42,7 +42,7 @@
 		- [01BFS](https://github.com/hhy3/cp-library/blob/master/include/hy/shortest_path.hpp#L46-L62)
 	- 最小生成树
 		- [Kruskal](https://github.com/hhy3/cp-library/blob/master/include/hy/MST.hpp#L16-L26)
-  - [强连通分量](https://github.com/hhy3/cp-library/blob/master/include/hy/SCC.hpp#L9)
+  - [强连通分量/缩点](https://github.com/hhy3/cp-library/blob/master/include/hy/SCC.hpp#L9)
   - [二分图最大匹配](https://github.com/hhy3/cp-library/blob/master/include/hy/hungarian.hpp#L22)
 - 树
 	- [LCA](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L24)
@@ -50,3 +50,7 @@
 	- [Prufer编码](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L156)
 - 计算几何
 	- [二维凸包](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L131)
+- Misc
+	- 平板电视
+		- [平衡树](https://github.com/hhy3/cp-library/blob/master/include/hy/pdds.cc#L7)
+		- [可持久化平衡树](https://github.com/hhy3/cp-library/blob/master/include/hy/pdds.cc#L24-L25)
