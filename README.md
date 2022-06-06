@@ -30,15 +30,15 @@
 	- [子集枚举](https://github.com/hhy3/cp-library/blob/master/include/hy/math.hpp#L130)
 	- [GospersHack](https://github.com/hhy3/cp-library/blob/master/include/hy/math.hpp#L139)
 	- [高精度整数](https://github.com/hhy3/cp-library/blob/master/include/hy/bigint.hpp#L20)
-	- 多项式
-		- [快速傅里叶变换](https://github.com/hhy3/cp-library/blob/master/include/hy/fft.hpp#L11)
+	- [多项式](https://github.com/hhy3/cp-library/blob/master/include/hy/poly.hpp)
+		- [快速傅里叶变换](https://github.com/hhy3/cp-library/blob/master/include/hy/poly.hpp#L44-L75)
 	- [线性基](https://github.com/hhy3/cp-library/blob/master/include/hy/linear_bases.hpp#L20)
 	- [矩阵](https://github.com/hhy3/cp-library/blob/master/include/hy/matrix.hpp#L19)
 - 图论
 	- 最短路
 		- [Dijkstra](https://github.com/hhy3/cp-library/blob/master/include/hy/shortest_path.hpp#L18-L37)
 		- [Floyd](https://github.com/hhy3/cp-library/blob/master/include/hy/shortest_path.hpp#L39-L43)
-		- [传递闭包](https://github.com/hhy3/cp-library/blob/master/include/hy/transitive_closure.hpp#L8-L18)
+      - [传递闭包](https://github.com/hhy3/cp-library/blob/master/include/hy/transitive_closure.hpp#L8-L18)
 		- [01BFS](https://github.com/hhy3/cp-library/blob/master/include/hy/shortest_path.hpp#L46-L62)
 	- 最小生成树
 		- [Kruskal](https://github.com/hhy3/cp-library/blob/master/include/hy/MST.hpp#L16-L26)
@@ -52,5 +52,5 @@
 	- [二维凸包](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L131)
 - Misc
 	- 平板电视
-		- [平衡树](https://github.com/hhy3/cp-library/blob/master/include/hy/pdds.cc#L7)
-		- [可持久化平衡树](https://github.com/hhy3/cp-library/blob/master/include/hy/pdds.cc#L24-L25)
+		- [平衡树](https://github.com/hhy3/cp-library/blob/master/include/hy/pbds.cc#L7)
+		- [可持久化平衡树](https://github.com/hhy3/cp-library/blob/master/include/hy/pbds.cc#L24-L25)
