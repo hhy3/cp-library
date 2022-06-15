@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <string>
-#include <string_view>
+#include <algorithm>
 #include <cassert>
 
 
@@ -10,7 +10,7 @@ namespace hy {
 namespace string {
 
 
-std::vector<int> prefix_function(std::string_view s) {
+std::vector<int> prefix_function(const std::string& s) {
   int n = (int)s.size();
   std::vector<int> p(n+1);
   for (int i = 1, j = 0; i < n; ++i) {
@@ -24,7 +24,7 @@ std::vector<int> prefix_function(std::string_view s) {
 struct string_hash {
   int n;
   std::vector<uint64_t> h, power;
-  string_hash(std::string_view s, uint64_t K): n((int)s.size()), h(n+1), power(n+1) {
+  string_hash(const std::string& s, uint64_t K): n((int)s.size()), h(n+1), power(n+1) {
     power[0] = 1;
     for (int i = 1; i <= n; ++i) h[i] = h[i-1] * K + s[i-1], power[i] = power[i-1] * K;
   }
@@ -33,7 +33,7 @@ struct string_hash {
 };
 
 
-std::vector<int> Z(std::string_view s) {
+std::vector<int> Z(const std::string& s) {
   int n = (int)s.size();
   std::vector<int> z(n);
   for (int i = 1, l = 0, r = 0; i < n; ++i) {
@@ -45,7 +45,7 @@ std::vector<int> Z(std::string_view s) {
 }
 
 
-void manacher(std::string_view s, std::vector<int>& d1, std::vector<int>& d2) {
+void manacher(const std::string& s, std::vector<int>& d1, std::vector<int>& d2) {
   int n = (int)s.size();
   d1.assign(n, 0), d2.assign(n, 0);
   for (int i = 0, l = 0, r = -1; i < n; ++i) {
@@ -61,7 +61,7 @@ void manacher(std::string_view s, std::vector<int>& d1, std::vector<int>& d2) {
 }
 
 
-int minimum_rotation(std::string_view s) {
+int minimum_rotation(const std::string& s) {
   int n = (int)s.size();
   int i = 0, j = 1, k = 0;
   while (i < n && j < n && k < n) {
@@ -75,6 +75,30 @@ int minimum_rotation(std::string_view s) {
   }
   return std::min(i, j);
 }
+
+
+std::vector<int> SA(const std::string& s) {
+  int n = s.size();
+  std::vector<int> sa(n), rk(2*n);
+  for (int i = 0; i < n; ++i) sa[i] = i, rk[i] = s[i];
+  for (int w = 1; w < n; w *= 2) {
+    std::sort(sa.begin(), sa.end(), [&] (int x, int y) {
+      return rk[x] == rk[y]? rk[x+w] < rk[y+w] : rk[x] < rk[y]; }
+    );
+    auto oldrk = rk;
+    rk[sa[0]] = 1;
+    for (int p = 1, i = 1; i < n; ++i) {
+      if (oldrk[sa[i]] == oldrk[sa[i-1]] && oldrk[sa[i]+w] == oldrk[sa[i-1]+w]) rk[sa[i]] = p;
+      else rk[sa[i]] = ++p;
+    }
+  }
+  return sa;
+}
+
+
+struct SAM {
+  // TODO 
+};
 
 
 } // namespace string

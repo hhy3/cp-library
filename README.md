@@ -15,6 +15,7 @@
 	- [Z函数](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L36-L45)
 	- [Manacher](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L48-L61)
 	- [最小表示](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L64-L77)
+  - [后缀数组](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L80-L96)
 - 数学
 	- 数论
 		- [扩展GCD](https://github.com/hhy3/cp-library/blob/master/include/hy/math.hpp#L122-L130)
