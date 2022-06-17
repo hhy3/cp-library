@@ -6,10 +6,13 @@
   - [稀疏表](https://github.com/hhy3/cp-library/blob/master/include/hy/sparse_table.hpp#L6-L29)
   - [字典树](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp)
     - 01Trie
+  - [线性基](https://github.com/hhy3/cp-library/blob/master/include/hy/linear_bases.hpp#L20)
   - [并查集](https://github.com/hhy3/cp-library/blob/master/include/hy/union_find.hpp#L10-L33)
   - [区间维护](https://github.com/hhy3/cp-library/blob/master/include/hy/Ranges.hpp#L9-L27)
   - [莫队分块](https://github.com/hhy3/cp-library/blob/master/include/hy/Mo.hpp#L12-L43)
   - [笛卡尔树](https://github.com/hhy3/cp-library/blob/master/include/hy/CartesianTree.hpp#L9-L23)
+  - [单调栈](https://github.com/hhy3/cp-library/blob/master/include/hy/monotone_stack.hpp)
+  - [单调队列](https://github.com/hhy3/cp-library/blob/master/include/hy/monotone_queue.hpp)
 - 字符串
   - [前缀函数](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L13-L21)
     - 失配树
@@ -36,7 +39,6 @@
   - [高精度整数](https://github.com/hhy3/cp-library/blob/master/include/hy/bigint.hpp#L20)
   - [多项式](https://github.com/hhy3/cp-library/blob/master/include/hy/poly.hpp)
     - [快速傅里叶变换](https://github.com/hhy3/cp-library/blob/master/include/hy/poly.hpp#L44-L75)
-  - [线性基](https://github.com/hhy3/cp-library/blob/master/include/hy/linear_bases.hpp#L20)
   - [矩阵](https://github.com/hhy3/cp-library/blob/master/include/hy/matrix.hpp#L19)
 - 图论
   - 最短路

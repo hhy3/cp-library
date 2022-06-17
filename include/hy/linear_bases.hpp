@@ -4,35 +4,29 @@
 #include <cstdint>
 
 namespace hy {
-namespace math {
+namespace ds {
 
-
-template <typename T=uint64_t, int M=8*sizeof(T)>
 struct linear_bases {
-	constexpr static int num_bits = M;
-  std::vector<T> B;
-  int sz = 0;
-	linear_bases(): B(M) {}
-  bool insert(T x) {
-    for (int i = num_bits - 1; i >= 0; --i) if (x >> i & 1) {
-			if (B[i]) x ^= B[i];
-			else return B[i] = x, sz++, true;
-		}
-		return false;
+  int dim, sz = 0;
+  std::vector<uint64_t> B;
+  linear_bases(int dim_=31): dim(dim), B(dim) {}
+  bool insert(uint64_t x) {
+    for (int i = dim - 1; i >= 0; --i) if (x >> i & 1) {
+      if (B[i]) x ^= B[i];
+      else return B[i] = x, sz++, true;
+    }
+    return false;
   }
-
-	bool query(T x) {
-		for (int i = num_bits - 1; i >= 0; --i) if (x >> i & 1) x ^= B[i];
-		return x == 0;
-	}
-
-	T max() {
-		T ans = 0;
-		for (int i = num_bits - 1; i >= 0; --i) if (B[i] && (ans >> i & 1) == 0) ans ^= B[i];
-		return ans;
-	}
+  bool query(uint64_t x) {
+    for (int i = dim - 1; i >= 0; --i) if (x >> i & 1) x ^= B[i];
+    return x == 0;
+  }
+  uint64_t xor_max() {
+    uint64_t ans = 0;
+    for (int i = dim - 1; i >= 0; --i) if (B[i] && (ans >> i & 1) == 0) ans ^= B[i];
+    return ans;
+  }
 };
-
 
 } // namespace math
 } // namespace hy

@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <map>
-#include <string_view>
+#include <cstdint>
 
 namespace hy {
 namespace ds {
@@ -60,6 +60,16 @@ struct Trie01 {
       if (!tr[u][r]) tr[u][r] = (int)tr.size(), tr.push_back({0, 0});
       u = tr[u][r];
     }
+  }
+  uint64_t xor_max(uint64_t x) {
+    int u = 0;
+    uint64_t y = 0;
+    for (int i = MAXBITS; i >= 0; --i) {
+      int r = x >> i & 1;
+      if (tr[u][r^1]) y = y * 2 + 1, u = tr[u][r^1];
+      else y = y * 2, u = tr[u][r];
+    }
+    return y;
   }
   std::array<int, 2>& operator [] (int idx) { return tr[idx]; }
 };
