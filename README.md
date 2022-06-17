@@ -54,6 +54,8 @@
 	- [二维凸包](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L131)
 - Misc
   - [格雷码](https://github.com/hhy3/cp-library/blob/master/include/hy/misc.hpp#L8-L17)
+	- [离散化](https://github.com/hhy3/cp-library/blob/master/include/hy/discretizer.hpp#L11-L20)
+	- [位运算技巧](https://github.com/hhy3/cp-library/blob/master/include/hy/bit_hacks.hpp)
   - 平板电视
 		- [平衡树](https://github.com/hhy3/cp-library/blob/master/include/hy/pbds.cc#L7)
 		- [可持久化平衡树](https://github.com/hhy3/cp-library/blob/master/include/hy/pbds.cc#L24-L25)
