@@ -1,7 +1,7 @@
 # My Code Library For Competitive Programming
 - 数据结构
 	- [AC自动机](https://github.com/hhy3/cp-library/blob/master/include/hy/AC.hpp#L14-L99)
-	- [树状数组](https://github.com/hhy3/cp-library/blob/master/include/hy/fenwick_tree.hpp#L10-L50)
+	- [树状数组](https://github.com/hhy3/cp-library/blob/master/include/hy/fenwick_tree.hpp#L10-L33)
 	- [线段树](https://github.com/hhy3/cp-library/blob/master/include/hy/segtree.hpp#L10-L47)
 	- [Lazy线段树](https://github.com/hhy3/cp-library/blob/master/include/hy/segtree.hpp#L50-L131)
 	- [稀疏表](https://github.com/hhy3/cp-library/blob/master/include/hy/sparse_table.hpp#L6-L29)

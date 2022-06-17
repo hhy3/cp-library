@@ -1,52 +1,35 @@
 #pragma once
 
 #include <vector>
+#include <cstdint>
 #include <cassert>
 
 namespace hy {
 namespace ds {
 
-
-template <typename T>
-struct fenwick_tree {
+template <typename T=int64_t>
+struct FenwickTree {
   int n;
-  bool range_update;
-  std::vector<T> dat, aux; 
-  fenwick_tree(int n, bool range_update=false): n(n), range_update(range_update), dat(n + 1) {
-    if (range_update) aux.resize(n + 1);
+  std::vector<T> a, b;
+  FenwickTree(int n_): n(n_), a(n+1), b(n+1) {} 
+  void add(int l, int r, T x) {
+    add_(a, l, x), add_(a, r+1, -x), add_(b, l, x*(l-1)), add_(b, r+1, -x*r);
   }
-  template <typename U>
-  fenwick_tree(const std::vector<U> v, bool range_update=false): fenwick_tree(int(v.size()), range_update) {
-    for (int i = 1; i <= n; ++i) update(i, v[i - 1]);
+  T sum(int i) {
+    return sum_(a, i) * i - sum_(b, i); 
   }
-
-  void update(int index, T delta) {
-    assert(index >= 1 && index <= n);
-    if (range_update) update(index, index, delta);
-    else update(dat, index, delta);
+  T sum(int l, int r) {
+    return sum(r) - sum(l-1);
   }
-
-  void update(int L, int R, T delta) {
-    assert(L >= 1 && L <= n && R >= L && R <= n && range_update); 
-    update(dat, L, delta), update(dat, R + 1, -delta), update(aux, L, L * delta), update(aux, R + 1, -(R + 1) * delta);
+ private:
+  void add_(std::vector<T>& v, int i, T x) {
+    for (; i <= n; i += i & -i) v[i] += x;
   }
-
-  T query(int L, int R) const {
-    assert(L >= 1 && L <= n && R >= L && R <= n);
-    if (range_update) return (R + 1) * query(dat, R) - query(aux, R) - (L * query(dat, L - 1) - query(aux, L - 1)); 
-    else return query(dat, R) - query(dat, L - 1);
+  T sum_(std::vector<T>& v, int i) {
+    T s = 0;
+    for (; i; i -= i & -i) s += v[i];
+    return s;
   }
-
-  void update(std::vector<T> &v, int index, T delta) {
-    for (int i = index; i <= n; i += i & -i) v[i] += delta;
-  }
-
-  T query(const std::vector<T> &v, int index) const {
-    T ans = 0;
-    for (int i = index; i > 0; i -= i & -i) ans += v[i];
-    return ans;
-  }
-
 };
 
 
