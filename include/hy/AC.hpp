@@ -9,7 +9,7 @@
 #include <cassert>
 
 namespace hy {
-namespace ds {
+namespace string {
 
 template <typename T=char, int N=1024*1024>
 struct AC {

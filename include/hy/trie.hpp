@@ -7,110 +7,61 @@
 namespace hy {
 namespace ds {
 
-
-template <typename T=char, int N=1024*1024>
-struct trie {
+template <typename T=char>
+struct Trie {
   struct node {
-    int word_count = 0;
-    int prefix_count = 0;
+    int cnt = 0, pcnt = 0;
     std::map<T, int> nxt;
-    node() {}
+    int& operator [] (T x) { return nxt[x]; } 
   };
-  std::vector<node> nodes = {node()};
-  trie() {
-    nodes.reserve(N);
-  }
-
-  int get(int u, const T& x) {
-    if (nodes[u].nxt.count(x)) return nodes[u].nxt[x];
-    else return 0;
-  }
-
-  int set(int u, const T& x) {
-    if (nodes[u].nxt.count(x)) return 0;
-    nodes[u].nxt[x] = nodes.size();
-    nodes.push_back(node());
-    return nodes[u].nxt[x];
-  }
+  std::vector<node> tr = {node()};
+  node& operator [] (int idx) { return tr[idx]; }
 
   template <typename Iter>
   void insert(Iter first, Iter last) {
     int u = 0;
     for (; first != last; first++) {
-      if (!get(u, *first)) set(u, *first);
-      u = get(u, *first);
-      nodes[u].prefix_count++;
+      if (!tr[u][*first]) tr[u][*first] = (int)tr.size(), tr.push_back(node());
+      tr[u = tr[u][*first]].pcnt++;
     }
-    nodes[u].word_count++;
-  }
-
-  void insert(std::string_view s) {
-    insert(s.begin(), s.end());
+    tr[u].cnt++;
   }
 
   template <typename Iter> 
   bool erase(Iter first, Iter last) {
+    if (!advance(first, last)) return false;
     int u = 0;
     for (; first != last; first++) {
-      if (!get(u, *first)) return false;
-      u = get(u, *first);
-      if (nodes[u].prefix_count > 0) nodes[u].prefix_count--;
+      if (--tr[u][*first].pcnt == 0) {
+        tr[u].erase(*first);
+        return true;
+      }
+      u = tr[u][*first];
     }
-    if (nodes[u].word_count > 0) {
-      nodes[u].word_count--;
-      return true;
-    }
-    return false;
-  }
-
-  bool erase(std::string_view s) {
-    return erase(s.begin(), s.end());
-  }
-
-  template <typename Iter> 
-  int count(Iter first, Iter last) {
-    int u = 0;
-    if (!advance(u, first, last)) return 0;
-    return nodes[u].word_count;
-  }
-
-  int count(std::string_view s) {
-    return count(s.begin(), s.end());
-  }
-
-  template <typename Iter> 
-  bool startswith(Iter first, Iter last) {
-    int u = 0;
-    return advance(u, first, last);
-  }
-
-  bool startswith(std::string_view s) {
-    return startswith(s.begin(), s.end());
-  }
-
-  template <typename Iter>
-  int count_startswith(Iter first, Iter last) {
-    int u = 0;
-    if (!advance(u, first, last)) return 0;
-    return nodes[u].prefix_count;
-  }
-
-  int count_startswith(std::string_view s) {
-    return count_startswith(s.begin(), s.end());
-  }
-
-  template <typename Iter> 
-  bool advance(int& u, Iter first, Iter last) {
-    for (; first != last; first++) {
-      if (u = get(u, *first); u == 0) return false;
-    }
+    tr[u].cnt--;
     return true;
   }
 
-  void clear() {
-    nodes.resize(1);
+  template <typename Iter> 
+  int advance(Iter first, Iter last) {
+    int u = 0;
+    for (; first != last; first++) if ((u = tr[u][*first]) == 0) return u;
+    return u;
   }
+};
 
+struct Trie01 {
+  static const int MAXBITS = 30;
+  std::vector<std::array<int, 2>> tr = {{0, 0}};
+  void insert(uint64_t x) {
+    int u = 0;
+    for (int i = MAXBITS; i >= 0; --i) {
+      int r = x >> i & 1;
+      if (!tr[u][r]) tr[u][r] = (int)tr.size(), tr.push_back({0, 0});
+      u = tr[u][r];
+    }
+  }
+  std::array<int, 2>& operator [] (int idx) { return tr[idx]; }
 };
 
 } // namespace ds
