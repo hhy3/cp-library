@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
 #include <complex>
 
 namespace hy {
@@ -26,6 +27,8 @@ P<T> min(const P<T>& p1, const P<T>& p2) { return lt(p1, p2)? p1 : p2; }
 // 二维叉积
 template <typename T=int64_t>
 T crossp(const P<T>& x, const P<T>& y) { return (conj(x) * y).Y; }
+template <typename T>
+int quadrant(const P<T>& p) { return (p.Y < 0) << 1 | (p.X < 0) ^ (p.Y < 0); }
 
 template <typename T=int64_t>
 struct segment {
@@ -115,6 +118,13 @@ polygon<T> convex_hull(std::vector<P<T>> points) {
     if (idx != 0) pg.push_back(points[idx]);
   }
   return pg;
+}
+
+template <typename T>
+void polar_sort(std::vector<P<T>>& points, P<T> c=P<T>(0, 0)) {
+  std::sort(points.begin(), points.end(), [&] (auto& p1, auto& p2) {
+    return quadrant(p1-c) < quadrant(p2-c) || quadrant(p1-c) == quadrant(p2-c) && crossp(p1-c, p2-c) > 0; 
+  });
 }
 
 } // namespace geo

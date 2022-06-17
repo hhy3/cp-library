@@ -55,7 +55,8 @@
   - [轻重链剖分](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L91)
   - [Prufer编码](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L156)
 - 计算几何
-  - [二维凸包](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L131)
+  - [二维凸包](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L110-L121)
+  - [极角排序](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L123-L128)
 - Misc
   - [格雷码](https://github.com/hhy3/cp-library/blob/master/include/hy/misc.hpp#L8-L17)
   - [离散化](https://github.com/hhy3/cp-library/blob/master/include/hy/discretizer.hpp#L11-L20) 
