@@ -9,7 +9,7 @@
 	- [并查集](https://github.com/hhy3/cp-library/blob/master/include/hy/union_find.hpp#L10-L33)
 	- [Ranges](https://github.com/hhy3/cp-library/blob/master/include/hy/Ranges.hpp#L9-L27)
   - [莫队分块](https://github.com/hhy3/cp-library/blob/master/include/hy/Mo.hpp#L12-L43)
-  - [笛卡尔树](https://github.com/hhy3/cp-library/blob/master/include/hy/CartesianTree.hpp#L8-L21)
+  - [笛卡尔树](https://github.com/hhy3/cp-library/blob/master/include/hy/CartesianTree.hpp#L9-L23)
 - 字符串
 	- [前缀函数](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L13-L31)
 	- [字符串哈希](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L24-L33)
@@ -54,7 +54,7 @@
 	- [二维凸包](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L131)
 - Misc
   - [格雷码](https://github.com/hhy3/cp-library/blob/master/include/hy/misc.hpp#L8-L17)
-	- 平板电视
+  - 平板电视
 		- [平衡树](https://github.com/hhy3/cp-library/blob/master/include/hy/pbds.cc#L7)
 		- [可持久化平衡树](https://github.com/hhy3/cp-library/blob/master/include/hy/pbds.cc#L24-L25)
   - [玄学优化](https://github.com/hhy3/cp-library/blob/master/include/hy/prep.hpp)
