@@ -2,7 +2,7 @@
 - 数据结构
   - [树状数组](https://github.com/hhy3/cp-library/blob/master/include/hy/fenwick_tree.hpp#L10-L33)
   - [线段树](https://github.com/hhy3/cp-library/blob/master/include/hy/segtree.hpp#L10-L47)
-  - [Lazy线段树](https://github.com/hhy3/cp-library/blob/master/include/hy/segtree.hpp#L50-L131)
+    - [Lazy线段树](https://github.com/hhy3/cp-library/blob/master/include/hy/segtree.hpp#L50-L131)
   - [稀疏表](https://github.com/hhy3/cp-library/blob/master/include/hy/sparse_table.hpp#L6-L26)
   - [字典树](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp)
     - [AC自动机](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp#L30-L40)
@@ -12,8 +12,9 @@
   - [区间集合](https://github.com/hhy3/cp-library/blob/master/include/hy/ranges.hpp#L9-L27)
   - [莫队分块](https://github.com/hhy3/cp-library/blob/master/include/hy/Mo.hpp#L12-L43)
   - [笛卡尔树](https://github.com/hhy3/cp-library/blob/master/include/hy/cartesian_tree.hpp#L9-L23)
-  - [单调栈](https://github.com/hhy3/cp-library/blob/master/include/hy/monotone_stack.hpp)
-  - [单调队列](https://github.com/hhy3/cp-library/blob/master/include/hy/monotone_queue.hpp)
+  - 单调性数据结构
+    - [单调栈](https://github.com/hhy3/cp-library/blob/master/include/hy/monotone_stack.hpp)
+    - [单调队列](https://github.com/hhy3/cp-library/blob/master/include/hy/monotone_queue.hpp)
 - 字符串
   - [前缀函数](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L13-L21)
     - 失配树
@@ -25,7 +26,7 @@
 - 数学
   - 数论
     - [扩展GCD](https://github.com/hhy3/cp-library/blob/master/include/hy/math.hpp#L122-L130)
-    - [素数筛](https://github.com/hhy3/cp-library/blob/master/include/hy/math.hpp#L20)
+    - [线性筛](https://github.com/hhy3/cp-library/blob/master/include/hy/math.hpp#L20)
     - [乘法逆元](https://github.com/hhy3/cp-library/blob/master/include/hy/math.hpp#L46)
     - [中国剩余定理](https://github.com/hhy3/cp-library/blob/master/include/hy/math.hpp#L102)
     - [模M剩余类](https://github.com/hhy3/cp-library/blob/master/include/hy/modint.hpp#L15)
@@ -40,6 +41,7 @@
   - [多项式](https://github.com/hhy3/cp-library/blob/master/include/hy/poly.hpp)
     - [快速傅里叶变换](https://github.com/hhy3/cp-library/blob/master/include/hy/poly.hpp#L44-L75)
   - [矩阵](https://github.com/hhy3/cp-library/blob/master/include/hy/matrix.hpp#L19)
+    - 矩阵快速幂
 - 图论
   - 最短路
     - [Dijkstra](https://github.com/hhy3/cp-library/blob/master/include/hy/shortest_path.hpp#L18-L37)
