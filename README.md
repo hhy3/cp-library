@@ -50,6 +50,8 @@
     - [Kruskal](https://github.com/hhy3/cp-library/blob/master/include/hy/MST.hpp#L16-L26)
   - [强连通分量/缩点](https://github.com/hhy3/cp-library/blob/master/include/hy/SCC.hpp#L9)
   - [二分图最大匹配](https://github.com/hhy3/cp-library/blob/master/include/hy/hungarian.hpp#L22)
+  - 网络流
+    - [最大流](https://github.com/hhy3/cp-library/blob/master/include/hy/maxflow.hpp)
 - 树
   - [LCA](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L12-L33)
   - [轻重链剖分](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L35-L68)
