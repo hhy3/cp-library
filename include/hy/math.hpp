@@ -21,13 +21,11 @@ std::vector<int> prime_sieve(int n, std::vector<int> &sieve) {
   return primes;
 }
 
-
 std::vector<int> multinv(int n, int p) {
   std::vector<int> inv(n + 1, 1);
   for (int i = 2; i <= n; ++i) inv[i] = long(p - p / i) * inv[p % i] % p;
   return inv;
 }
-
 
 int64_t lucas(int64_t m, int64_t n, int64_t p) {
   std::vector<int64_t> fac(p), ifac(p), inv(p);
@@ -46,14 +44,10 @@ int64_t lucas(int64_t m, int64_t n, int64_t p) {
   return lucas_(m, n, p); 
 }
 
-
 template<typename T>
 T CRT(const std::vector<T> &bs, const std::vector<T> &ns) {
   std::function<T(T, T, T, T)> extgcd = [&] (T a, T b, T& x, T& y) {
-    if (b == 0) {
-      x = 1, y = 0;
-      return a;
-    }
+    if (b == 0) return x = 1, y = 0, a;
     T d = extgcd(b, a % b, y, x);
     y -= a / b * x;
     return d;
@@ -71,14 +65,12 @@ T CRT(const std::vector<T> &bs, const std::vector<T> &ns) {
   return ans;
 }
 
-
 std::vector<int> iterate_subsets(int state) {
   std::vector<int> ans;
   for (int s = state; s; s = (s - 1) & state) ans.push_back(s);
   ans.push_back(0);
   return ans;
 }
-
 
 std::vector<int> GospersHack(int n, int k) {
   std::vector<int> ans;
@@ -120,10 +112,7 @@ int64_t InclusionExclusion(int n) {
 }
 
 int64_t extgcd(int64_t a, int64_t b, int64_t& x, int64_t& y) {
-  if (!b) {
-    x = 1, y = 0;
-    return a;
-  }
+  if (!b) return x = 1, y = 0, a;
   int64_t d = extgcd(b, a % b, y, x);
   y -= a / b * x;
   return d;

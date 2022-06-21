@@ -1,17 +1,17 @@
 #pragma once
 
 #include <vector>
+#include <map>
 #include <numeric>
-#include <cassert>
 
 namespace hy {
 namespace ds {
 
-struct union_find {
+struct UF {
   struct node { int p, sz; };
   int n, num_component;
   std::vector<node> nodes;
-  explicit union_find(int n): n(n), num_component(n), nodes(n) {
+  explicit UF(int n_): n(n_), num_component(n), nodes(n) {
     for (int i = 0; i < n; ++i) nodes[i].p = i, nodes[i].sz = 1;
   } 
   node& operator [] (int i) { return nodes[i]; }
@@ -29,6 +29,11 @@ struct union_find {
     std::vector<int> ans;
     for (int i = 0; i < n; ++i) if (find(i) == i) ans.push_back(i);
     return ans;
+  }
+  std::map<int, std::vector<int>> components() {
+    std::map<int, std::vector<int>> mp;
+    for (int i = 0; i < n; ++i) mp[find(i)].push_back(i);
+    return mp;
   }
 };
 
