@@ -34,15 +34,11 @@ template <typename T=int64_t>
 struct segment {
   P<T> s, e;
   segment(P<T> s_, P<T> e_): s(s_), e(e_) {}
-
   int side(const P<T>& p) { /* <0: left, =0: touch, >0: right */ return crossp(e-s, e-p); }
-
   segment sort() { if (s.X > e.X || s.X == e.X && s.Y > e.Y) swap(s, e); return *this; }
-
   bool intersect(const P<T>& p) {
     return crossp(e - s, p - s) == 0 && (min(s.X, e.X) <= p.X && max(s.X, e.X) >= p.X) && (min(s.Y, e.Y) <= p.Y && max(s.Y, e.Y) >= p.Y);
   }
-
   int intersect(const segment& rhs) { // 0: none, 1: unique, 2: infinite
     auto [s1, e1] = *this;
     auto [s2, e2] = rhs;
@@ -64,12 +60,10 @@ struct segment {
   }
 };
 
-
 template <typename T>
 struct polygon {
   std::vector<P<T>> points;
   polygon() = default;
-
   P<T> operator [] (int idx) { return points[idx]; }
   int size() { return (int)points.size(); }
   void push_back(const P<T>& p) { points.push_back(p); }
@@ -78,21 +72,16 @@ struct polygon {
     points.pop_back();
     return p;
   }
-
   T area() { // return 2a where a = area of this polygon
     T ans = 0;
     for (int i = 0; i < size(); ++i) ans += crossp(points[i], points[(i+1)%size()]);
     return abs(ans);
   }
-
   T perimeter() {
     T ans = 0;
-    for (int i = 0; i < size(); ++i) {
-      ans += abs(points[i] - points[(i+1)%size()]);
-    }
+    for (int i = 0; i < size(); ++i) ans += abs(points[i] - points[(i+1)%size()]);
     return ans;
   }
-
   int where(const P<T>& p) { // 0: outside, 1: inside, 2: boundary
     int cnt = 0;
     for (int i = 0; i < size(); ++i) {
@@ -103,7 +92,6 @@ struct polygon {
     }
     return cnt;
   }
-
 };
 
 template <typename T>

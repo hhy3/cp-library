@@ -8,10 +8,10 @@
     - [AC自动机](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp#L30-L40)
     - [01Trie](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp#L43-L65)
   - [线性基](https://github.com/hhy3/cp-library/blob/master/include/hy/linear_bases.hpp#L9-L29)
-  - [并查集](https://github.com/hhy3/cp-library/blob/master/include/hy/union_find.hpp#L10-L33)
+  - [并查集](https://github.com/hhy3/cp-library/blob/master/include/hy/UF.hpp#L10-L33)
   - [区间集合](https://github.com/hhy3/cp-library/blob/master/include/hy/ranges.hpp#L9-L27)
   - [莫队分块](https://github.com/hhy3/cp-library/blob/master/include/hy/Mo.hpp#L12-L43)
-  - [笛卡尔树](https://github.com/hhy3/cp-library/blob/master/include/hy/CartesianTree.hpp#L9-L23)
+  - [笛卡尔树](https://github.com/hhy3/cp-library/blob/master/include/hy/cartesian_tree.hpp#L9-L23)
   - [单调栈](https://github.com/hhy3/cp-library/blob/master/include/hy/monotone_stack.hpp)
   - [单调队列](https://github.com/hhy3/cp-library/blob/master/include/hy/monotone_queue.hpp)
 - 字符串
@@ -57,8 +57,11 @@
   - [轻重链剖分](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L35-L68)
   - [Prufer编码](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L70-L112)
 - 计算几何
-  - [二维凸包](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L110-L121)
-  - [极角排序](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L123-L128)
+  - [点](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L15-L31)
+  - [线段](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L33-L61)
+  - [多边形](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L63-L95)
+  - [二维凸包](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L97-L109)
+  - [极角排序](https://github.com/hhy3/cp-library/blob/master/include/hy/geometry.hpp#L111-L116)
 - Misc
   - [格雷码](https://github.com/hhy3/cp-library/blob/master/include/hy/misc.hpp#L8-L17)
   - [离散化](https://github.com/hhy3/cp-library/blob/master/include/hy/discretizer.hpp#L11-L20) 

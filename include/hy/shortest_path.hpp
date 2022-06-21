@@ -16,9 +16,9 @@ struct SP {
   using graph = std::vector<std::vector<std::pair<int, int64_t>>>;
   using adjMatrix = std::vector<std::vector<int64_t>>;
 
-  static void dijkstra(const graph &G, int src, std::vector<int64_t> &dist) {
+  static std::vector<int64_t> dijkstra(const graph &G, int src) {
     int n = G.size();
-    dist.assign(n, INF);
+    std::vector<int64_t> dist(n, INF);
     dist[src] = 0;
     std::set<std::pair<int64_t, int>> st;
     for (int i = 0; i < n; ++i) {
@@ -37,15 +37,15 @@ struct SP {
     }
   }
 
-  static void floyd(std::vector<std::vector<int64_t>>& adj) {
+  static void floyd(adjMatrix& adj) {
     int n = (int)adj.size();
     for (int k = 0; k < n; ++k) for (int i = 0; i < n; ++i) for (int j = 0; j < n; ++j) 
       adj[i][j] = std::min(adj[i][j], adj[i][k] + adj[k][j]);
   }
 
-  static void bfs01(const graph& G, int src, std::vector<int64_t>& dist) {
+  static std::vector<int64_t>& bfs01(const graph& G, int src) {
     int n = (int)G.size();
-    dist.assign(n, INF);
+    std::vector<int64_t> dist(n, INF);
     dist[src] = 0;
     std::deque<int> q;
     q.push_front(src);

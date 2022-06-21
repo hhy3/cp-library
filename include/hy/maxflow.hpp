@@ -8,13 +8,13 @@
 namespace hy {
 namespace graph {
 
-struct FlowEdge {
-  int to, rev;
-  int64_t cap;
-};
-using FlowGraph = std::vector<std::vector<FlowEdge>>;
-
+template <typename T=int64_t>
 struct MaxFlow {
+  struct FlowEdge {
+    int to, rev;
+    T cap;
+  };
+  using FlowGraph = std::vector<std::vector<FlowEdge>>;
   int n;
   FlowGraph G;
   explicit MaxFlow(int n_): n(n_), G(n) {}
@@ -22,7 +22,7 @@ struct MaxFlow {
     G[u].push_back({v, (int)G[v].size(), w});
     G[v].push_back({u, (int)G[u].size()-1, 0});
   }
-  int64_t flow(int s, int t) {
+  T flow(int s, int t) {
     std::vector<int> level(n), iter(n);
     auto bfs = [&] () -> bool {
       std::fill(level.begin(), level.end(), -1);
@@ -37,21 +37,21 @@ struct MaxFlow {
       }
       return level[t] >= 0;
     };
-    std::function<int64_t(int, int64_t)> dfs = [&] (int u, int64_t lim) {
+    std::function<T(int, T)> dfs = [&] (int u, T lim) {
       if (u == t || !lim) return lim;
-      int64_t res = 0;
+      T res = 0;
       for (int& i = iter[u]; i < (int)G[u].size(); ++i) {
         auto& [to, rev, cap] = G[u][i];
-        if (int64_t d; level[to] == level[u] + 1 && (d = dfs(to, std::min(lim, cap)))) {
+        if (T d; level[to] == level[u] + 1 && (d = dfs(to, std::min(lim, cap)))) {
           cap -= d, G[to][rev].cap += d, res += d, lim -= d;
         }
       }
       return res;
     };
-    int64_t f = 0;
+    T f = 0;
     while (bfs()) {
       std::fill(iter.begin(), iter.end(), 0);
-      f += dfs(s, INT64_MAX);
+      f += dfs(s, std::numeric_limits<T>::max());
     }
     return f;
   }
