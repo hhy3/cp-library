@@ -1,52 +1,42 @@
 #pragma once
 
 #include <vector>
-#include <map>
+#include <array>
+#include <queue>
+#include <string_view>
 #include <cstdint>
 
 namespace hy {
 namespace ds {
 
-template <typename T=char>
 struct Trie {
+  static constexpr int K = 26;
+  static int ord(char c) { return c - 'a'; }
   struct node {
-    int cnt = 0, pcnt = 0;
-    std::map<T, int> nxt;
-    int& operator [] (T x) { return nxt[x]; } 
+    int cnt = 0, fail = 0, nxt[K] {};
+    int& operator [] (int idx) { return nxt[idx]; }
   };
   std::vector<node> tr = {node()};
   node& operator [] (int idx) { return tr[idx]; }
-
-  template <typename Iter>
-  void insert(Iter first, Iter last) {
+  void insert(std::string_view s) {
     int u = 0;
-    for (; first != last; first++) {
-      if (!tr[u][*first]) tr[u][*first] = (int)tr.size(), tr.push_back(node());
-      tr[u = tr[u][*first]].pcnt++;
+    for (auto c : s) {
+      int x = ord(c);
+      if (!tr[u][x]) tr[u][x] = (int)tr.size(), tr.push_back(node());
+      u = tr[u][x];
     }
     tr[u].cnt++;
   }
-
-  template <typename Iter> 
-  bool erase(Iter first, Iter last) {
-    if (!advance(first, last)) return false;
-    int u = 0;
-    for (; first != last; first++) {
-      if (--tr[u][*first].pcnt == 0) {
-        tr[u].erase(*first);
-        return true;
-      }
-      u = tr[u][*first];
+  void buildAC() {
+    std::queue<int> q;
+    for (int j = 0; j < K; ++j) if (tr[0][j]) q.push(tr[0][j]);
+    while (q.size()) {
+      int u = q.front(); q.pop();
+      for (int j = 0; j < K; ++j) {
+        if (tr[u][j]) tr[tr[u][j]].fail = tr[tr[u].fail][j], q.push(tr[u][j]);
+        else tr[u][j] = tr[tr[u].fail][j];
+      } 
     }
-    tr[u].cnt--;
-    return true;
-  }
-
-  template <typename Iter> 
-  int advance(Iter first, Iter last) {
-    int u = 0;
-    for (; first != last; first++) if ((u = tr[u][*first]) == 0) return u;
-    return u;
   }
 };
 

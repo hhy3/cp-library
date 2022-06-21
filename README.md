@@ -4,8 +4,9 @@
   - [线段树](https://github.com/hhy3/cp-library/blob/master/include/hy/segtree.hpp#L10-L47)
   - [Lazy线段树](https://github.com/hhy3/cp-library/blob/master/include/hy/segtree.hpp#L50-L131)
   - [稀疏表](https://github.com/hhy3/cp-library/blob/master/include/hy/sparse_table.hpp#L6-L26)
-  - [字典树](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp#L10-L51)
-    - [01Trie](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp#L53-L75)
+  - [字典树](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp)
+    - [AC自动机](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp#L30-L40)
+    - [01Trie](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp#L43-L65)
   - [线性基](https://github.com/hhy3/cp-library/blob/master/include/hy/linear_bases.hpp#L9-L29)
   - [并查集](https://github.com/hhy3/cp-library/blob/master/include/hy/union_find.hpp#L10-L33)
   - [区间集合](https://github.com/hhy3/cp-library/blob/master/include/hy/ranges.hpp#L9-L27)
@@ -21,7 +22,6 @@
   - [Manacher](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L48-L61)
   - [最小表示](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L64-L77)
   - [后缀数组](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L80-L96)
-  - [AC自动机](https://github.com/hhy3/cp-library/blob/master/include/hy/AC.hpp#L14-L99)
 - 数学
   - 数论
     - [扩展GCD](https://github.com/hhy3/cp-library/blob/master/include/hy/math.hpp#L122-L130)
