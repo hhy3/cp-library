@@ -18,8 +18,8 @@ struct matrix {
   int m, n;
   std::vector<std::vector<T>> dat;
   matrix() : matrix(0) {}
-  matrix(int m, int n) : m(m), n(n), dat(m, std::vector<T>(n)) {}
-  explicit matrix(int m) : matrix(m, m) {}
+  matrix(int m_, int n_) : m(m_), n(n_), dat(m, std::vector<T>(n)) {}
+  explicit matrix(int m_) : matrix(m_, m_) {}
   explicit matrix(const std::vector<std::vector<T>> &vec) : m(vec.size()), n(vec[0].size()), dat(vec) {}
   matrix(const matrix &rhs) : m(rhs.m), n(rhs.n), dat(rhs.dat) {}
   matrix(matrix &&rhs) { swap(*this, rhs); }
@@ -63,7 +63,8 @@ struct matrix {
   }
   matrix pow(int64_t p) {
     assert(m == n && p >= 0);
-    matrix ans = eye(m), tmp = *this;
+    matrix ans(n), tmp = *this;
+    for (int i = 0; i < n; ++i) ans[i][i] = 1;
     for (; p; p >>= 1) {
       if (p & 1) ans *= tmp;
       tmp *= tmp;
