@@ -3,7 +3,7 @@
   - [树状数组](https://github.com/hhy3/cp-library/blob/master/include/hy/fenwick_tree.hpp#L10-L33)
   - [线段树](https://github.com/hhy3/cp-library/blob/master/include/hy/segtree.hpp#L10-L47)
     - [Lazy线段树](https://github.com/hhy3/cp-library/blob/master/include/hy/segtree.hpp#L50-L131)
-  - [稀疏表](https://github.com/hhy3/cp-library/blob/master/include/hy/sparse_table.hpp#L6-L26)
+  - [稀疏表](https://github.com/hhy3/cp-library/blob/master/include/hy/SparseTable.hpp)
   - [字典树](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp)
     - [AC自动机](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp#L30-L40)
     - [01Trie](https://github.com/hhy3/cp-library/blob/master/include/hy/trie.hpp#L43-L65)

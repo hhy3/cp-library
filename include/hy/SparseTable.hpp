@@ -3,14 +3,17 @@
 #include <vector>
 #include <functional>
 
+namespace hy {
+namespace ds {
+
 template <typename T=int>
-struct sparse_table {
+struct SparseTable {
   using idem_op = std::function<T(T, T)>;
   int n;
   std::vector<int> log; 
   std::vector<std::vector<T>> f;
   idem_op op;
-  sparse_table(const std::vector<T>& v, idem_op op=[](T x, T y) { return min(x, y); })
+  SparseTable(const std::vector<T>& v, idem_op op=[](T x, T y) { return min(x, y); })
     : n((int)v.size()), log(n+1), op(op) {
     for (int i = 2; i <= n; ++i) log[i] = log[i>>1] + 1;
     f.assign(log[n]+1, std::vector<T>(n));
@@ -24,3 +27,7 @@ struct sparse_table {
     return op(f[j][L], f[j][R-(1<<j)+1]);
   }
 };
+
+}  // namespace ds
+}  // namespace hy
+
