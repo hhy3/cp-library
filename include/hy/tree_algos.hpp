@@ -133,5 +133,25 @@ struct Centroids {
   }
 };
 
+struct Diameter {
+  int diameter;
+  int c = -1;
+  std::vector<int> dist;
+  Diameter(const std::vector<std::vector<int>>& G, int n) {
+    dist.resize(n);
+    std::function<void(int, int)> dfs = [&] (int u, int p) {
+      for (auto v : G[u]) if (v != p) {
+        dist[v] = dist[u] + 1;
+        if (c == -1 || dist[v] > dist[c]) c = v;
+        dfs(v, u);
+      }
+    };
+    dfs(0, -1);
+    dist[c] = 0;
+    dfs(c, -1);
+    diameter = dist[c];
+  }
+};
+
 }
 }

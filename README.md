@@ -55,6 +55,7 @@
   - 网络流
     - [最大流](https://github.com/hhy3/cp-library/blob/master/include/hy/maxflow.hpp)
 - 树
+  - [直径](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L136-L154)
   - [重心](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L114-L134)
   - [LCA](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L12-L33)
   - [轻重链剖分](https://github.com/hhy3/cp-library/blob/master/include/hy/tree_algos.hpp#L35-L68)
