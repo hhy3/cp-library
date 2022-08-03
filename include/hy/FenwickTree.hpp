@@ -7,6 +7,7 @@
 namespace hy {
 namespace ds {
 
+// 1-indexed implementation.
 template <typename T=int64_t>
 struct FenwickTree {
   int n;
@@ -26,7 +27,7 @@ struct FenwickTree {
     for (; i <= n; i += i & -i) v[i] += x;
   }
   T sum_(std::vector<T>& v, int i) {
-    T s = 0;
+    T s {};
     for (; i; i -= i & -i) s += v[i];
     return s;
   }

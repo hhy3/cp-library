@@ -1,6 +1,6 @@
 # My Code Library For Competitive Programming
 - 数据结构
-  - [树状数组](https://github.com/hhy3/cp-library/blob/master/include/hy/fenwick_tree.hpp#L10-L33)
+  - [树状数组](https://github.com/hhy3/cp-library/blob/master/include/hy/FenwickTree.hpp#L10-L33)
   - [线段树](https://github.com/hhy3/cp-library/blob/master/include/hy/segtree.hpp#L10-L47)
     - [Lazy线段树](https://github.com/hhy3/cp-library/blob/master/include/hy/segtree.hpp#L50-L131)
   - [稀疏表](https://github.com/hhy3/cp-library/blob/master/include/hy/SparseTable.hpp)
