@@ -15,6 +15,7 @@
   - 单调性数据结构
     - [单调栈](https://github.com/hhy3/cp-library/blob/master/include/hy/monotone_stack.hpp)
     - [单调队列](https://github.com/hhy3/cp-library/blob/master/include/hy/monotone_queue.hpp)
+  - [静态队列](https://github.com/hhy3/cp-library/blob/master/include/hy/StaticQueue.hpp)
 - 字符串
   - [前缀函数](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L13-L21)
     - 失配树
@@ -43,6 +44,7 @@
   - [矩阵](https://github.com/hhy3/cp-library/blob/master/include/hy/matrix.hpp#L19)
     - 矩阵快速幂
 - 图论
+  - [拓扑排序](https://github.com/hhy3/cp-library/blob/master/include/hy/GraphAlgos.hpp)
   - 最短路
     - [Dijkstra](https://github.com/hhy3/cp-library/blob/master/include/hy/shortest_path.hpp#L18-L37)
     - [Floyd](https://github.com/hhy3/cp-library/blob/master/include/hy/shortest_path.hpp#L39-L43)
