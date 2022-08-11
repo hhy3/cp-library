@@ -76,3 +76,13 @@
     - [平衡树](https://github.com/hhy3/cp-library/blob/master/include/hy/pbds.cc#L7)
     - [可持久化平衡树](https://github.com/hhy3/cp-library/blob/master/include/hy/pbds.cc#L24-L25)
   - [玄学优化](https://github.com/hhy3/cp-library/blob/master/include/hy/prep.hpp)
+
+- TODO
+  - 后缀自动机
+  - 快速数论变换
+  - 珂朵莉树
+  - 动态开点线段树
+  - 可持久化线段树
+  - 割点和桥
+  - 双连通分量
+  - 费用流
