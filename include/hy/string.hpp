@@ -45,20 +45,32 @@ std::vector<int> Z(const std::string& s) {
 }
 
 
-void manacher(const std::string& s, std::vector<int>& d1, std::vector<int>& d2) {
-  int n = (int)s.size();
-  d1.assign(n, 0), d2.assign(n, 0);
-  for (int i = 0, l = 0, r = -1; i < n; ++i) {
-    if (i <= r) d1[i] = std::min(d1[l + r - i], r - i);
-    while (i - d1[i] - 1 >= 0 && i + d1[i] + 1 < n && s[i - d1[i] - 1] == s[i + d1[i] + 1]) d1[i]++;
-    if (i + d1[i] > r) l = i - d1[i], r = i + d1[i];
+struct Manacher {
+  // d1[i] = max_j s.t. s[i-j:i+j] is palindromic.
+  // d2[i] = max_j s.t. s[i-j+1:i+j] is palindromic.
+  std::vector<int> d1, d2;
+  Manacher(std::string_view s) {
+    int n = (int)s.size();
+    d1.assign(n, 0), d2.assign(n, 0);
+    for (int i = 0, l = 0, r = -1; i < n; ++i) {
+      if (i <= r) d1[i] = std::min(d1[l + r - i], r - i);
+      while (i - d1[i] - 1 >= 0 && i + d1[i] + 1 < n && s[i - d1[i] - 1] == s[i + d1[i] + 1]) d1[i]++;
+      if (i + d1[i] > r) l = i - d1[i], r = i + d1[i];
+    }
+    for (int i = 0, l = 0, r = -1; i < n; ++i) {
+      if (i < r) d2[i] = std::min(d2[l + r - i - 1], r - i);
+      while (i - d2[i] >= 0 && i + d2[i] + 1 < n && s[i - d2[i]] == s[i + d2[i] + 1]) d2[i]++;
+      if (i + d2[i] > r) l = i - d2[i] + 1, r = i + d2[i];
+    }
   }
-  for (int i = 0, l = 0, r = -1; i < n; ++i) {
-    if (i < r) d2[i] = std::min(d2[l + r - i - 1], r - i);
-    while (i - d2[i] >= 0 && i + d2[i] + 1 < n && s[i - d2[i]] == s[i + d2[i] + 1]) d2[i]++;
-    if (i + d2[i] > r) l = i - d2[i] + 1, r = i + d2[i];
+  int len_odd(int i) { return d1[i] * 2 + 1; }
+  int len_even(int i) { return d2[i] * 2; }
+  bool is_palindromic(int L, int R) {
+    int len = R - L + 1;
+    if (len % 2) return 2 * d1[(R + L) / 2] + 1 == len;
+    else return 2 * d2[(R + L) / 2] == len;
   }
-}
+};
 
 
 int minimum_rotation(const std::string& s) {
