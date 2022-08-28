@@ -16,6 +16,7 @@
     - [单调栈](https://github.com/hhy3/cp-library/blob/master/include/hy/monotone_stack.hpp)
     - [单调队列](https://github.com/hhy3/cp-library/blob/master/include/hy/monotone_queue.hpp)
   - [静态队列](https://github.com/hhy3/cp-library/blob/master/include/hy/StaticQueue.hpp)
+  - [在线求均值方差](https://github.com/hhy3/cp-library/blob/master/include/hy/OnlineEV.hpp)
 - 字符串
   - [前缀函数](https://github.com/hhy3/cp-library/blob/master/include/hy/string.hpp#L13-L21)
     - 失配树
