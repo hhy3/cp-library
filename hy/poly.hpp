@@ -72,6 +72,11 @@ struct Poly {
       return ans;
     }
   };
+
+  static Poly interpolate(std::vector<std::pair<F, F>> points) {
+    // TODO 
+  }
+
 };
 
 } // namespace math
