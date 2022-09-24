@@ -45,7 +45,7 @@
   - [矩阵](https://github.com/hhy3/cp-library/blob/master/hy/matrix.hpp#L19)
     - 矩阵快速幂
 - 图论
-  - [静态图结构](https://github.com/hhy3/cp-library/blob/master/hy/StaticGraph.hpp)
+  - [静态图结构(链式前向星)](https://github.com/hhy3/cp-library/blob/master/hy/StaticGraph.hpp)
   - [拓扑排序](https://github.com/hhy3/cp-library/blob/master/hy/GraphAlgos.hpp)
   - 最短路
     - [Dijkstra](https://github.com/hhy3/cp-library/blob/master/hy/shortest_path.hpp#L18-L37)
