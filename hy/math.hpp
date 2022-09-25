@@ -3,6 +3,8 @@
 #include <vector>
 #include <functional>
 #include <cstdint>
+#include <map>
+#include <cmath>
 
 namespace hy {
 namespace math {
@@ -116,6 +118,24 @@ int64_t extgcd(int64_t a, int64_t b, int64_t& x, int64_t& y) {
   int64_t d = extgcd(b, a % b, y, x);
   y -= a / b * x;
   return d;
+}
+
+// Baby-step giant-step algorithm.
+// It is used to solve discrete logarithm problem.
+// i.e. find x s.t. a^x = b (mod p)
+int64_t BSGS(int64_t a, int64_t b, int64_t mod) {
+  std::map<int64_t, int64_t> mp;
+  int64_t cur = 1, t = std::sqrt(mod) + 1;
+  for (int B = 1; B <= t; ++B) {
+    cur = cur * a % mod;
+    mp[b * cur % mod] = B;
+  }
+  int64_t now = cur;
+  for (int A = 1; A <= t; ++A) {
+    if (mp.count(now)) return A * t - mp[now];
+    now = now * cur % mod;
+  }
+  return -1;
 }
 
 }
