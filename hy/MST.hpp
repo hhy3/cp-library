@@ -1,30 +1,39 @@
 #pragma once
 
-#include <vector>
 #include <algorithm>
-#include <numeric>
-#include <functional>
 #include <cstdint>
+#include <functional>
+#include <numeric>
+#include <vector>
+
+#include "UF.hpp"
 
 namespace hy {
 namespace graph {
 
-struct MST {
-  
-  using graph = std::vector<std::vector<std::pair<int, int64_t>>>;
+using ds::UF;
 
-  static std::vector<std::array<int, 2>> Kruskal(int n, std::vector<std::array<int, 3>>& edges) {
-    std::sort(edges.begin(), edges.end(), [] (auto& e1, auto& e2) { return e1[2] < e2[2]; });
-    std::vector<int> p(n);
-    std::iota(p.begin(), p.end(), 0);
-    std::function<int(int)> find = [&] (int u) { return u == p[u]? u : p[u] = find(p[u]); };
-    std::vector<std::array<int, 2>> ans;
+struct MST {
+  int n;
+  std::vector<std::array<int64_t, 3>> edges;
+  std::vector<std::array<int64_t, 2>> tree;
+  UF uf;
+  int64_t cost = 0;
+  bool connected = false;
+  MST(int n, int m) : n(n), uf(n) { edges.reserve(m); }
+  void add_edge(int u, int v, int64_t w) { edges.push_back({u, v, w}); }
+  void Kruskal() {
+    std::sort(edges.begin(), edges.end(),
+              [](auto& lhs, auto& rhs) { return lhs[2] < rhs[2]; });
     for (auto [u, v, w] : edges) {
-      if (int pu = find(u), pv = find(v); pu != pv) p[pu] = pv, ans.push_back({u, v});
-    } 
-    return ans;
+      if (uf.merge(u, v)) {
+        cost += w;
+        tree.push_back({u, v});
+      }
+    }
+    if (uf.num_component == 1) connected = true;
   }
 };
 
-}
-}
+}  // namespace graph
+}  // namespace hy
