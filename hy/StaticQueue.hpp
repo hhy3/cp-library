@@ -3,7 +3,6 @@
 #include <vector>
 
 namespace hy {
-namespace ds {
 
 namespace StaticQueue {
 // modify these two lines if needed.
@@ -20,5 +19,4 @@ void clear() { head = tail = 0; }
 
 }  // namespace StaticQueue
 
-}  // namespace ds
 }  // namespace hy

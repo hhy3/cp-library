@@ -4,7 +4,6 @@
 #include <queue>
 
 namespace hy {
-namespace graph {
 
 struct SCC {
   using graph = std::vector<std::vector<int>>;
@@ -52,6 +51,4 @@ struct SCC {
   }
 };
   
-
-} /* graph */
 } /* hy  */ 

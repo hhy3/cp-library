@@ -3,7 +3,6 @@
 #include <cstdint>
 
 namespace hy {
-namespace ds {
 
 template <typename T = double>
 struct OnlineEV {
@@ -20,5 +19,4 @@ struct OnlineEV {
   }
 };
 
-}  // namespace ds
 }  // namespace hy

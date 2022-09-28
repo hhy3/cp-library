@@ -4,12 +4,11 @@
 #include <cstdint>
 
 namespace hy {
-namespace ds {
 
-struct linear_bases {
+struct LinearBases {
   int dim, sz = 0;
   std::vector<uint64_t> B;
-  linear_bases(int dim_=31): dim(dim), B(dim) {}
+  LinearBases(int dim_=31): dim(dim), B(dim) {}
   bool insert(uint64_t x) {
     for (int i = dim - 1; i >= 0; --i) if (x >> i & 1) {
       if (B[i]) x ^= B[i];
@@ -28,5 +27,4 @@ struct linear_bases {
   }
 };
 
-} // namespace math
 } // namespace hy

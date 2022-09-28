@@ -9,7 +9,6 @@
 #include "UF.hpp"
 
 namespace hy {
-namespace graph {
 
 using ds::UF;
 
@@ -35,5 +34,4 @@ struct MST {
   }
 };
 
-}  // namespace graph
 }  // namespace hy

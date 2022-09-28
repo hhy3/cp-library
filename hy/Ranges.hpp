@@ -4,7 +4,6 @@
 #include <set>
 
 namespace hy {
-namespace ds {
 
 /**
  * Maintain a set of ranges of form \{[l_1, r_1], [l_2, r_2], ..., [l_k,
@@ -34,5 +33,4 @@ struct Ranges {
   std::pair<T, T> prev(T pos) { return *(--st.lower_bound({pos, mx})); }
 };
 
-}  // namespace ds
 }  // namespace hy

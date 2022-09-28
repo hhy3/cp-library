@@ -1,5 +1,7 @@
 #pragma once
 
+namespace hy {
+
 // compute the sign of an int
 #define SIGN(x) (1 | ((x) >> (sizeof(x)-1)))
 
@@ -24,3 +26,5 @@ unsigned nextp(unsigned x) {
   unsigned t = x | (x - 1);
   return (t + 1) | (((~t & -(~t)) - 1) >> (__builtin_ctz(x) + 1));
 }
+
+}  // namespace hy

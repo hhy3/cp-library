@@ -4,11 +4,9 @@
 #include <array>
 #include <functional>
 #include <string>
-
 #include <cmath>
 
 namespace hy {
-namespace tree {
 
 struct LCA {
   using tree_t = std::vector<std::vector<int>>;
@@ -170,5 +168,4 @@ std::string tree_minimum_repr(const std::vector<std::vector<int>>& tree, int s) 
   return dfs(s, -1);
 }
 
-}
 }

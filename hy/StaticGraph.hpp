@@ -5,7 +5,6 @@
 #include <vector>
 
 namespace hy {
-namespace graph {
 
 namespace StaticGraph {
 // Modify these two lines if needed;
@@ -26,5 +25,4 @@ void add(int u, int v) {
 
 }  // namespace StaticGraph
 
-}  // namespace graph
 }  // namespace hy

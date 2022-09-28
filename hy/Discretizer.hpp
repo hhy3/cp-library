@@ -6,7 +6,6 @@
 #include <numeric>
 
 namespace hy {
-namespace misc {
 
 template <typename T=int64_t>
 struct Discretizer {
@@ -19,5 +18,4 @@ struct Discretizer {
   int operator [] (T x) { return mp[x]; }
 };
 
-}
 }

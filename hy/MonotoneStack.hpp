@@ -4,7 +4,6 @@
 #include <functional>
 
 namespace hy {
-namespace ds {
 
 template <typename T=int>
 struct MonotoneStack {
@@ -21,5 +20,4 @@ struct MonotoneStack {
   }
 };
 
-}
 }

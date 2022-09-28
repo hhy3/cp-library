@@ -4,8 +4,8 @@
 #include <complex>
 #include <iostream>
 #include <cassert>
+
 namespace hy {
-namespace math {
 
 template <typename F>
 struct Poly {
@@ -79,5 +79,4 @@ struct Poly {
 
 };
 
-} // namespace math
 } //namespace hy

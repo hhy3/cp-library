@@ -5,7 +5,6 @@
 #include <numeric>
 
 namespace hy {
-namespace ds {
 
 struct UF {
   struct node { int p, sz; };
@@ -37,7 +36,6 @@ struct UF {
   }
 };
 
-} // namespace ds
 } // namespace hy
 
 

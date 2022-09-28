@@ -10,8 +10,6 @@
 #include <cstdint>
 
 namespace hy {
-namespace math {
-
 
 template <typename T=int64_t>
 struct matrix {
@@ -74,6 +72,4 @@ struct matrix {
   std::vector<T> &operator [] (int i) { return dat[i]; }
 };
 
-
-} // namespace math
 } // namespace hy

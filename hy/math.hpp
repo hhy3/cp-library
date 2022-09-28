@@ -7,7 +7,6 @@
 #include <cmath>
 
 namespace hy {
-namespace math {
 
 std::vector<int> prime_sieve(int n, std::vector<int> &sieve) {
   sieve.resize(n+1);
@@ -138,5 +137,4 @@ int64_t BSGS(int64_t a, int64_t b, int64_t mod) {
   return -1;
 }
 
-}
 }

@@ -6,7 +6,6 @@
 #include <cstdint>
 
 namespace hy {
-namespace graph {
 
 template <typename T=int64_t>
 struct MaxFlow {
@@ -71,5 +70,4 @@ struct MaxFlow {
   }
 };
 
-}
 }

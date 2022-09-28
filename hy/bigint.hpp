@@ -10,12 +10,7 @@
 
 
 namespace hy {
-namespace math {
 
-/**
- * @brief TODO 
- * 
- */
 template <int base=10>
 struct bigint {
 
@@ -215,5 +210,4 @@ struct bigint {
 
 };
 
-} // namespace math
 } // namespace hy

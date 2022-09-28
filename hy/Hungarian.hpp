@@ -5,9 +5,8 @@
 #include <functional>
 
 namespace hy {
-namespace graph {
 
-int hungarian(const std::vector<std::vector<int>> &G, std::vector<int> &match, int m) {
+int Hungarian(const std::vector<std::vector<int>> &G, std::vector<int> &match, int m) {
   int n = G.size();
   std::vector<bool> vis(m);
   match.assign(m, -1);
@@ -28,5 +27,4 @@ int hungarian(const std::vector<std::vector<int>> &G, std::vector<int> &match, i
   return cnt;
 }
 
-} // namespace graph
 } // namespace hy

@@ -5,7 +5,6 @@
 #include <cassert>
 
 namespace hy {
-namespace math {
 
 template <uint64_t M>
 struct modint {
@@ -63,5 +62,4 @@ struct modint {
   }
 };
 
-} // namespace math
 } // namespace hy

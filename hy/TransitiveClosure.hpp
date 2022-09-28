@@ -3,7 +3,6 @@
 #include <vector>
 
 namespace hy {
-namespace graph {
 
 struct TransitiveClosure {
   int n;
@@ -17,5 +16,4 @@ struct TransitiveClosure {
   bool is_connect(int u, int v) { return adj[u][v]; }
 };
 
-}
 }

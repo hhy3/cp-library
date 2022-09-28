@@ -4,7 +4,6 @@
 #include <functional>
 
 namespace hy {
-namespace ds {
 
 template <typename T=int>
 struct SparseTable {
@@ -28,6 +27,5 @@ struct SparseTable {
   }
 };
 
-}  // namespace ds
 }  // namespace hy
 

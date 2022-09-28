@@ -4,7 +4,6 @@
 #include <deque>
 
 namespace hy {
-namespace ds {
 
 template <typename T>
 struct MonotoneQueue {
@@ -23,5 +22,4 @@ struct MonotoneQueue {
   }
 };
 
-}
 }

@@ -7,8 +7,6 @@
 
 
 namespace hy {
-namespace string {
-
 
 std::vector<int> prefix_function(const std::string& s) {
   int n = (int)s.size();
@@ -113,5 +111,4 @@ struct SAM {
 };
 
 
-} // namespace string
 } // namespace hy

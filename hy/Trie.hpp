@@ -7,7 +7,6 @@
 #include <cstdint>
 
 namespace hy {
-namespace ds {
 
 struct Trie {
   static constexpr int K = 26;
@@ -64,5 +63,4 @@ struct Trie01 {
   std::array<int, 2>& operator [] (int idx) { return tr[idx]; }
 };
 
-} // namespace ds
 } // namespace hy

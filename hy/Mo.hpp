@@ -7,7 +7,6 @@
 #include <cmath>
 
 namespace hy {
-namespace ds {
 
 struct Mo {
   int n;
@@ -42,5 +41,4 @@ struct Mo {
   }
 };
 
-}
 }

@@ -3,7 +3,6 @@
 #include <cstdint>
 
 namespace hy {
-namespace misc {
 
 struct GrayCode {
   static int64_t g(int64_t n) {
@@ -16,5 +15,4 @@ struct GrayCode {
   }
 };
 
-}
 }

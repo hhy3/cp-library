@@ -7,9 +7,8 @@
 #include <cstdint>
 
 namespace hy {
-namespace graph {
 
-struct SP { 
+namespace ShortestPath { 
 
   static constexpr int64_t INF = static_cast<int64_t>(1e18);
 
@@ -61,7 +60,6 @@ struct SP {
     }
   }
     
-};
+}
 
-} // namespace shortest_path
 } // namespace graph

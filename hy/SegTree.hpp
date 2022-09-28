@@ -5,7 +5,6 @@
 #include <stdint.h>
 
 namespace hy {
-namespace ds {
 
 template <typename T=int64_t>
 struct SegTree {
@@ -130,5 +129,4 @@ struct LazySegTree {
 
 };
 
-} // namespace ds
 } // namespace hy
