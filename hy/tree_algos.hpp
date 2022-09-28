@@ -3,6 +3,7 @@
 #include <vector>
 #include <array>
 #include <functional>
+#include <string>
 
 #include <cmath>
 
@@ -152,6 +153,22 @@ struct Diameter {
     diameter = dist[c];
   }
 };
+
+std::string tree_minimum_repr(const std::vector<std::vector<int>>& tree, int s) {
+  std::string ans;
+  std::function<std::string(int, int)> dfs = [&](int u, int p) {
+    std::vector<std::string> b;
+    for (auto v : tree[u]) if (v != p) {
+      b.push_back(dfs(v, u));
+    }
+    std::sort(b.begin(), b.end());
+    std::string s = "("; 
+    for (auto& x : b) s += x;
+    s += ")";
+    return s;
+  };
+  return dfs(s, -1);
+}
 
 }
 }
