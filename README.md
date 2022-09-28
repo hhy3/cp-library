@@ -65,7 +65,7 @@
   - [LCA](https://github.com/hhy3/cp-library/blob/master/hy/tree_algos.hpp)
   - [轻重链剖分](https://github.com/hhy3/cp-library/blob/master/hy/tree_algos.hpp)
   - [Prufer编码](https://github.com/hhy3/cp-library/blob/master/hy/tree_algos.hpp)
-  - [有根树最小表示](https://github.com/hhy3/cp-library/blob/master/hy/tree_algos.hpp)
+  - [AHU(有根树最小表示)](https://github.com/hhy3/cp-library/blob/master/hy/tree_algos.hpp)
 - 计算几何
   - [点](https://github.com/hhy3/cp-library/blob/master/hy/geometry.hpp#L15-L31)
   - [线段](https://github.com/hhy3/cp-library/blob/master/hy/geometry.hpp#L33-L61)

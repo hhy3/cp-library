@@ -151,7 +151,8 @@ struct Diameter {
   }
 };
 
-std::string tree_minimum_repr(const std::vector<std::vector<int>>& tree, int s) {
+// Worst case: O(n^2)
+std::string AHU(const std::vector<std::vector<int>>& tree, int s) {
   std::string ans;
   std::function<std::string(int, int)> dfs = [&](int u, int p) {
     std::vector<std::string> b;
