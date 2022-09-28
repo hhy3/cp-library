@@ -112,24 +112,23 @@ struct Prufer {
 
 struct Centroids {
   std::vector<int> sz, weight;
-  std::array<int, 2> centroids;
-  Centroids(const std::vector<std::vector<int>>& G, int n) {
-    sz.resize(n), weight.resize(n);
-    centroids[0] = centroids[1] = -1;
+  std::vector<int> centroids;
+  Centroids(const std::vector<std::vector<int>>& G, int n) : sz(n, 1), weight(n) {
     std::function<void(int, int)> dfs = [&] (int u, int p) {
-      sz[u] = 1, weight[u] = 0;
       for (auto v : G[u]) if (v != p) {
         dfs(v, u);
         sz[u] += sz[v];
         weight[u] = std::max(weight[u], sz[v]);
       }
-      weight[u] = std::max(weight[u], n - weight[u]);
+      weight[u] = std::max(weight[u], n - sz[u]);
       if (weight[u] <= n / 2) {
-        centroids[centroids[0] != -1] = u;
+        centroids.push_back(u);
       }
     };
     dfs(0, -1);
   }
+  int size() { return centroids.size(); }
+  int operator[](int idx) { return centroids[idx]; }
 };
 
 struct Diameter {
