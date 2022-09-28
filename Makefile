@@ -28,7 +28,5 @@ CXXFLAGS += -fsanitize=address \
 					  -fstack-protector-all
 					  -D_FORTIFY_SOURCE=2 \
 
-LDFLAGS = -lfmt
-
 clean:
 	-rm -rf [A-Za-z]
