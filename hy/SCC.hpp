@@ -6,21 +6,21 @@
 namespace hy {
 
 struct SCC {
-  using graph = std::vector<std::vector<int>>;
+  using Graph = std::vector<std::vector<int>>;
   int n, scc_num = 0;
-  graph& G;
-  graph S;
+  const Graph& G;
+  Graph S;
   std::vector<int> id, topo;
   std::vector<std::vector<int>> components;
-  SCC(graph& G): n((int)G.size()), G(G), id(n, -1) {
+  SCC(const Graph& G): n((int)G.size()), G(G), id(n, -1) {
     std::vector<bool> vis(n);
     std::vector<int> post;
-    for (int i = 0; i < n; ++i) if (!vis[i]) dfs1(i, G, vis, post);
-    graph rG(n);
+    for (int i = 0; i < n; ++i) if (!vis[i]) dfs1(G, i, vis, post);
+    Graph rG(n);
     for (int i = 0; i < n; ++i) for (auto v : G[i]) rG[v].push_back(i);
     for (int i = n-1; i >= 0; --i) if (id[post[i]] == -1) {
       components.push_back({});
-      dfs2(post[i], rG, scc_num);
+      dfs2(rG, post[i], scc_num);
       scc_num++;
     }
     S.resize(scc_num);
@@ -38,17 +38,17 @@ struct SCC {
     }
   }
 
-  void dfs1(int u, graph& G, std::vector<bool>& vis, std::vector<int>& post) {
+  void dfs1(const Graph& G, int u, std::vector<bool>& vis, std::vector<int>& post) {
     vis[u] = true;
-    for (auto v : G[u]) if (!vis[v]) dfs1(v, G, vis, post);
+    for (auto v : G[u]) if (!vis[v]) dfs1(G, v, vis, post);
     post.push_back(u);
   }
 
-  void dfs2(int u, graph& rG, int idx) {
+  void dfs2(const Graph& rG, int u, int idx) {
     id[u] = idx;
     components[idx].push_back(u);
-    for (auto v : rG[u]) if (id[v] == -1) dfs2(v, rG, idx);
+    for (auto v : rG[u]) if (id[v] == -1) dfs2(rG, v, idx);
   }
 };
   
-} /* hy  */ 
+}  // namespace hy
