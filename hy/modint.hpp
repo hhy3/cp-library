@@ -35,12 +35,12 @@ struct modint {
   modint& operator -= (const modint& rhs) { return x = (x - rhs.x + M) % M, *this; }
   modint& operator *= (const modint& rhs) { return x = x * rhs.x % M, *this; }
   modint& operator /= (const modint& rhs) { return *this *= rhs.inv(); } 
-  modint inv() {
+  modint inv() const {
     int64_t u, v, d = extgcd(int64_t(x), int64_t(M), u, v);
     assert(d == 1);
     return modint(u);
   }
-  modint pow(uint64_t b) {
+  modint pow(uint64_t b) const {
     modint ret = 1, tmp = *this;
     for (; b; b >>= 1, tmp *= tmp) if (b & 1) ret *= tmp;
     return ret;
