@@ -12,6 +12,7 @@
   - [区间集合](https://github.com/hhy3/cp-library/blob/master/hy/ranges.hpp#L9-L27)
   - [莫队分块](https://github.com/hhy3/cp-library/blob/master/hy/Mo.hpp#L12-L43)
   - [笛卡尔树](https://github.com/hhy3/cp-library/blob/master/hy/cartesian_tree.hpp#L9-L23)
+  - [LRMTree](https://github.com/hhy3/cp-library/blob/master/hy/LRMTree.hpp)
   - 单调性数据结构
     - [单调栈](https://github.com/hhy3/cp-library/blob/master/hy/monotone_stack.hpp)
     - [单调队列](https://github.com/hhy3/cp-library/blob/master/hy/monotone_queue.hpp)
