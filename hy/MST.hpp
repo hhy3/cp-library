@@ -10,8 +10,6 @@
 
 namespace hy {
 
-using ds::UF;
-
 struct MST {
   int n;
   std::vector<std::array<int64_t, 3>> edges;
