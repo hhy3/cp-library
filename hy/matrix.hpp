@@ -70,6 +70,30 @@ struct matrix {
     return ans;
   }
   std::vector<T> &operator [] (int i) { return dat[i]; }
+
+  T determinant() {
+    matrix tmp(*this);
+    T det = 1;
+    for (int i = 0; i < n; ++i) {
+      int idx = -1;
+      for (int j = i; j < n; ++j) {
+        if (tmp[j][i] != 0) idx = j;
+      }
+      if (idx == -1) return {};
+      if (i != idx) {
+        det *= -1;
+        swap(tmp[i], tmp[idx]);
+      }
+      det *= tmp[i][i];
+      T vv = tmp[i][i];
+      for (int j = 0; j < n; ++j) tmp[i][j] /= vv;
+      for (int j = i + 1; j < n; ++j) {
+        T a = tmp[j][i];
+        for (int k = 0; k < n; ++k) tmp[j][k] -= tmp[i][k] * a;
+      }
+    }
+    return det;
+  }
 };
 
 } // namespace hy
