@@ -8,6 +8,22 @@
 
 namespace hy {
 
+int64_t fast_gcd(int64_t x, int64_t y) {
+  if (x == 0) return y;
+  if (y == 0) return x;
+  int X = __builtin_ctz(x), Y = __builtin_ctz(y);
+  int shift = std::min(X, Y);
+  y >> Y;
+  for (; x; ) {
+    x >>= X;
+    int d = y - x;
+    X = __builtin_ctz(d);
+    y = std::min(x, y);
+    x = std::abs(d);
+  }
+  return y << shift;
+}
+
 std::vector<int> prime_sieve(int n, std::vector<int> &sieve) {
   sieve.resize(n+1);
   std::vector<int> primes;

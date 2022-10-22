@@ -29,6 +29,7 @@
   - [后缀数组](https://github.com/hhy3/cp-library/blob/master/hy/StringAlgo.hpp)
 - 数学
   - 数论
+    - [(比std更快的)GCD](https://github.com/hhy3/cp-library/blob/master/hy/math.hpp)
     - [扩展GCD](https://github.com/hhy3/cp-library/blob/master/hy/math.hpp)
     - [线性筛](https://github.com/hhy3/cp-library/blob/master/hy/math.hpp)
     - [乘法逆元](https://github.com/hhy3/cp-library/blob/master/hy/math.hpp)
