@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <limits>
+#include <cstdlib>
 
 namespace hy {
 
@@ -35,7 +36,7 @@ struct SkipList {
     Node* r = lower_bound(x);
     Node* l = r->prv[0];
     Node* it = new Node(x); 
-    for (int h = 0; h == 0 || rand() % 2; h++) {
+    for (int h = 0; h == 0 || std::rand() % 2; h++) {
       if (h >= L->nxt.size()) {
         L->nxt.push_back(nullptr);
         L->prv.push_back(nullptr);
