@@ -1,5 +1,5 @@
 # My Code Library For Competitive Programming
-- 数据结构
+- **数据结构**
   - [树状数组](https://github.com/hhy3/cp-library/blob/master/hy/FenwickTree.hpp#L10-L33)
   - [线段树](https://github.com/hhy3/cp-library/blob/master/hy/SegTree.hpp)
   - [区间更新线段树](https://github.com/hhy3/cp-library/blob/master/LazySegTree.hpp)
@@ -19,9 +19,9 @@
   - [静态队列](https://github.com/hhy3/cp-library/blob/master/hy/StaticQueue.hpp)
   - [在线求均值方差](https://github.com/hhy3/cp-library/blob/master/hy/OnlineEV.hpp)
   - [跳表](https://github.com/hhy3/cp-library/blob/master/hy/SkipList.hpp)
-  - [可持久化数据结构]
+  - 可持久化数据结构
     - [可持久化栈](https://github.com/hhy3/cp-library/blob/master/hy/persistent_stack.hpp)
-- 字符串
+- **字符串**
   - [前缀函数](https://github.com/hhy3/cp-library/blob/master/hy/StringAlgo.hpp)
     - 失配树
   - [字符串哈希](https://github.com/hhy3/cp-library/blob/master/hy/StringAlgo.hpp)
@@ -29,7 +29,7 @@
   - [Manacher](https://github.com/hhy3/cp-library/blob/master/hy/StringAlgo.hpp)
   - [最小表示](https://github.com/hhy3/cp-library/blob/master/hy/StringAlgo.hpp)
   - [后缀数组](https://github.com/hhy3/cp-library/blob/master/hy/StringAlgo.hpp)
-- 数学
+- **数学**
   - 数论
     - [(比std更快的)GCD](https://github.com/hhy3/cp-library/blob/master/hy/math.hpp)
     - [扩展GCD](https://github.com/hhy3/cp-library/blob/master/hy/math.hpp)
@@ -51,7 +51,7 @@
   - [矩阵](https://github.com/hhy3/cp-library/blob/master/hy/matrix.hpp)
     - 矩阵快速幂
     - 行列式
-- 图论
+- **图论**
   - [静态图结构(链式前向星)](https://github.com/hhy3/cp-library/blob/master/hy/StaticGraph.hpp)
   - [拓扑排序](https://github.com/hhy3/cp-library/blob/master/hy/GraphAlgos.hpp)
   - 最短路
@@ -65,20 +65,20 @@
   - [二分图最大匹配](https://github.com/hhy3/cp-library/blob/master/hy/Hungarian.hpp)
   - 网络流
     - [最大流](https://github.com/hhy3/cp-library/blob/master/hy/maxflow.hpp)
-- 树
+- **树**
   - [直径](https://github.com/hhy3/cp-library/blob/master/hy/TreeAlgos.hpp)
   - [重心](https://github.com/hhy3/cp-library/blob/master/hy/TreeAlgos.hpp)
   - [LCA](https://github.com/hhy3/cp-library/blob/master/hy/TreeAlgos.hpp)
   - [轻重链剖分](https://github.com/hhy3/cp-library/blob/master/hy/TreeAlgos.hpp)
   - [Prufer编码](https://github.com/hhy3/cp-library/blob/master/hy/TreeAlgos.hpp)
   - [AHU(有根树最小表示)](https://github.com/hhy3/cp-library/blob/master/hy/TreeAlgos.hpp)
-- 计算几何
+- **计算几何**
   - [点](https://github.com/hhy3/cp-library/blob/master/hy/Geometry.hpp#L15-L31)
   - [线段](https://github.com/hhy3/cp-library/blob/master/hy/Geometry.hpp#L33-L61)
   - [多边形](https://github.com/hhy3/cp-library/blob/master/hy/Geometry.hpp#L63-L95)
   - [二维凸包](https://github.com/hhy3/cp-library/blob/master/hy/Geometry.hpp#L97-L109)
   - [极角排序](https://github.com/hhy3/cp-library/blob/master/hy/Geometry.hpp#L111-L116)
-- Misc
+- **Misc**
   - [格雷码](https://github.com/hhy3/cp-library/blob/master/hy/misc.hpp#L8-L17)
   - [离散化](https://github.com/hhy3/cp-library/blob/master/hy/Discretizer.hpp#L11-L20) 
   - [位运算技巧](https://github.com/hhy3/cp-library/blob/master/hy/bit_hacks.hpp)
@@ -87,7 +87,7 @@
     - [可持久化平衡树](https://github.com/hhy3/cp-library/blob/master/hy/pbds.cc#L24-L25)
   - [玄学优化](https://github.com/hhy3/cp-library/blob/master/hy/prep.hpp)
 
-- TODO
+- **TODO**
   - 后缀自动机
   - 快速数论变换
   - 珂朵莉树
