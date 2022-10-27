@@ -1,28 +1,48 @@
 #pragma once
 
 #include <map>
+#include <memory>
 #include <vector>
 
 namespace hy {
 
-template <typename T = int> struct PersistentStack {
-  std::vector<std::vector<int>> G;
-  std::vector<int> p;
-  std::vector<T> a;
-  std::map<int, int> mp;
-  int cur = 0;
-  PersistentStack() : G(1), p(1), a(1, -1) {}
-  void push(const T &x) {
-    p.push_back(cur);
-    G.emplace_back();
-    G[cur].push_back(p.size() - 1);
-    a.push_back(x);
-    cur = p.size() - 1;
+template <typename T = int> class PersistentStack {
+public:
+  PersistentStack() : root_(std::make_unique<Node>()), cur_(root_.get()) {
+    root_->parent = root_.get();
   }
-  void pop() { cur = p[cur]; }
-  T &back() { return a[cur]; }
-  void save(int version) { mp[version] = cur; }
-  void load(int version) { cur = mp[version]; }
+
+  void push(const T &x) {
+    cur_->children.push_back(std::make_unique<Node>(x, cur_));
+    cur_ = cur_->children.back().get();
+  }
+
+  void pop() { cur_ = cur_->parent; }
+
+  void save(int version) { mp_[version] = cur_; }
+
+  void load(int version) {
+    if (!mp_.count(version)) {
+      cur_ = root_.get();
+    } else {
+      cur_ = mp_[version];
+    }
+  }
+
+  T &back() { return cur_->val; }
+
+private:
+  struct Node {
+    T val;
+    Node *parent;
+    std::vector<std::unique_ptr<Node>> children;
+    Node() = default;
+    explicit Node(const T &x, Node *p = nullptr) : val(x), parent(p) {}
+  };
+
+  std::unique_ptr<Node> root_;
+  Node *cur_;
+  std::map<int, Node *> mp_;
 };
 
 } // namespace hy
