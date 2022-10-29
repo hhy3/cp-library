@@ -1,7 +1,7 @@
 # My Code Library For Competitive Programming
 - **数据结构**
   - [树状数组](https://github.com/hhy3/cp-library/blob/master/hy/FenwickTree.hpp#L10-L33)
-  - [线段树](https://github.com/hhy3/cp-library/blob/master/hy/SegTree.hpp)
+  - [线段树](https://github.com/hhy3/cp-library/blob/master/hy/seg_tree.hpp)
   - [区间更新线段树](https://github.com/hhy3/cp-library/blob/master/LazySegTree.hpp)
   - [稀疏表](https://github.com/hhy3/cp-library/blob/master/hy/sparse_table.hpp)
   - [字典树](https://github.com/hhy3/cp-library/blob/master/hy/Trie.hpp)

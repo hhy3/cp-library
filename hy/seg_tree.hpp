@@ -4,11 +4,14 @@
 #include <vector>
 
 namespace hy {
-template <typename Monoid, Monoid (*op)(const Monoid &, const Monoid &),
-          Monoid id>
+template <typename Monoid,
+          typename BinaryOp =
+              decltype([](const Monoid &x, const Monoid &y) { return x + y; }),
+          Monoid id = Monoid()>
 struct SegTree {
   int n, size = 1;
   std::vector<Monoid> data;
+  BinaryOp op;
 
   SegTree() {}
 
