@@ -14,8 +14,8 @@
   - [笛卡尔树](https://github.com/hhy3/cp-library/blob/master/hy/CartesianTree.hpp)
   - [LRMTree](https://github.com/hhy3/cp-library/blob/master/hy/LRMTree.hpp)
   - 单调性数据结构
-    - [单调栈](https://github.com/hhy3/cp-library/blob/master/hy/MonotoneStack.hpp)
-    - [单调队列](https://github.com/hhy3/cp-library/blob/master/hy/MonotoneQueue.hpp)
+    - [单调栈](https://github.com/hhy3/cp-library/blob/master/hy/monotone_stack.hpp)
+    - [单调队列](https://github.com/hhy3/cp-library/blob/master/hy/monotone_queue.hpp)
   - [静态队列](https://github.com/hhy3/cp-library/blob/master/hy/StaticQueue.hpp)
   - [在线求均值方差](https://github.com/hhy3/cp-library/blob/master/hy/OnlineEV.hpp)
   - [跳表](https://github.com/hhy3/cp-library/blob/master/hy/SkipList.hpp)
