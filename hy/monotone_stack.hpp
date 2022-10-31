@@ -7,13 +7,17 @@
 
 namespace hy {
 
-template <typename T = std::int32_t,
-          typename BinaryOp =
-              decltype([](const T &x, const T &y) { return x < y; })>
+template <typename T> struct MonotoneStackPred {
+  bool operator()(const T &x, const T &y) {
+    // Nearest greater: return x > y;
+    // Nearest smaller: return x < y;
+    return x < y;
+  }
+};
+
+template <typename T = std::int32_t, typename Pred = MonotoneStackPred<T>>
 struct MonotoneStack {
-  BinaryOp pred;
-  // Nearest greater: auto pred = [] (T x, T y) { return x > y; }
-  // Nearest smaller: auto pred = [] (T x, T y) { return x < y; }
+  Pred pred;
   int id; // default index
   MonotoneStack(int id_ = -1) : id(id_) {}
   std::vector<std::pair<int, T>> stk;

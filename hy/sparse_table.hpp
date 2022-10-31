@@ -6,13 +6,15 @@
 
 namespace hy {
 
-template <typename T> using IdemOp = T(const T &, const T &);
+template <typename T>
+struct SparseTableOp {
+  T operator()(const T &x, const T &y) {
+    return std::min(x, y);
+  }
+};
 
-template <typename T> T idem_op(const T &x, const T &y) {
-  return std::max(x, y);
-}
-
-template <typename T = int, IdemOp<T> op = idem_op> struct SparseTable {
+template <typename T = int, typename IdemOp = SparseTableOp<T>> struct SparseTable {
+  IdemOp op;
   int n;
   std::vector<int> log;
   std::vector<std::vector<T>> f;

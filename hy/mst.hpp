@@ -6,7 +6,7 @@
 #include <numeric>
 #include <vector>
 
-#include "UF.hpp"
+#include "uf.hpp"
 
 namespace hy {
 
@@ -21,15 +21,17 @@ struct MST {
   void add_edge(int u, int v, int64_t w) { edges.push_back({u, v, w}); }
   void Kruskal() {
     std::sort(edges.begin(), edges.end(),
-              [](auto& lhs, auto& rhs) { return lhs[2] < rhs[2]; });
+              [](auto &lhs, auto &rhs) { return lhs[2] < rhs[2]; });
     for (auto [u, v, w] : edges) {
       if (uf.merge(u, v)) {
         cost += w;
         tree.push_back({u, v});
       }
     }
-    if (uf.num_component == 1) connected = true;
+    if (uf.num_component == 1) {
+      connected = true;
+    }
   }
 };
 
-}  // namespace hy
+} // namespace hy

@@ -19,7 +19,7 @@ struct bigint {
   explicit bigint() = default;
 
   template <typename T, 
-    typename std::enable_if<std::is_integral_v<T>, T>::type* = nullptr>
+    typename std::enable_if<std::is_integral<T>::type, T>::type* = nullptr>
   bigint(T x) {
     for (; x; x /= 10) {
       dat.push_back(x % 10);

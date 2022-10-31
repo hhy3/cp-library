@@ -7,19 +7,23 @@
 
 namespace hy {
 
-template <typename T = std::int32_t,
-          typename BinaryOp =
-              decltype([](const T &x, const T &y) { return x < y; })>
+template <typename T> struct MonotoneQueuePred {
+  bool operator()(const T &x, const T &y) {
+    // Sliding window maximum: return x > y;
+    // Sliding window mimimum: return x < y;
+    return x < y;
+  }
+};
+
+template <typename T = std::int32_t, typename Pred = MonotoneQueuePred<T>>
 struct MonotoneQueue {
-  BinaryOp pred;
-  // Sliding window maximum: auto pred = [] (T x, T y) { return x > y; }
-  // Sliding window mimimum: auto pred = [] (T x, T y) { return x < y; }
+  Pred pred;
   std::deque<std::pair<int, T>> q;
   int window;
   int cnt = 0;
   explicit MonotoneQueue(int window_) : window(window_) {}
   // Loop invariant: pred(q[i].second, q[i+1].second) = true
-  int insert(const T &x) {
+  T insert(const T &x) {
     cnt++;
     while (q.size() && q.front().first <= cnt - window) {
       q.pop_front();
@@ -28,7 +32,7 @@ struct MonotoneQueue {
       q.pop_back();
     }
     q.emplace_back(cnt, x);
-    return q.front().first;
+    return q.front().second;
   }
 };
 

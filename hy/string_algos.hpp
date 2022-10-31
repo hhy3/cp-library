@@ -47,7 +47,7 @@ struct Manacher {
   // d1[i] = max_j s.t. s[i-j:i+j] is palindromic.
   // d2[i] = max_j s.t. s[i-j+1:i+j] is palindromic.
   std::vector<int> d1, d2;
-  Manacher(std::string_view s) {
+  Manacher(const std::string& s) {
     int n = (int)s.size();
     d1.assign(n, 0), d2.assign(n, 0);
     for (int i = 0, l = 0, r = -1; i < n; ++i) {

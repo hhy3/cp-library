@@ -119,11 +119,16 @@ std::vector<int64_t> Catalan(int n, int64_t mod) {
 int64_t InclusionExclusion(int n) {
   auto calc = [&] (int s) -> int64_t {
     // TODO
+    return 0;
   };
   int64_t ans = 0;
   for (int s = 1; s < 1 << n; ++s) {
-    if (__builtin_popcount(s) % 2) ans += calc(s);
-    else ans -= calc(s);  
+    if (__builtin_popcount(s) % 2) {
+      ans += calc(s);
+    }
+    else {
+      ans -= calc(s);
+    }
   }
   return ans;
 }

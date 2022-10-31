@@ -1,17 +1,26 @@
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 #include <vector>
 
 namespace hy {
-template <typename Monoid,
-          typename BinaryOp =
-              decltype([](const Monoid &x, const Monoid &y) { return x + y; }),
-          Monoid id = Monoid()>
+
+template <typename Monoid> struct SegTreeOp {
+  Monoid operator()(const Monoid &x, const Monoid &y) { return x + y; }
+};
+
+template <typename Monoid> struct MonoidId {
+  Monoid operator()() { return Monoid(); }
+};
+
+// 0-indexed implmentation.
+template <typename Monoid = std::int64_t, typename BinaryOp = SegTreeOp<Monoid>,
+          typename ID = MonoidId<Monoid>>
 struct SegTree {
   int n, size = 1;
   std::vector<Monoid> data;
   BinaryOp op;
+  Monoid id = ID()();
 
   SegTree() {}
 
