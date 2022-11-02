@@ -33,6 +33,7 @@
 #include "static_graph.hpp"
 #include "static_queue.hpp"
 #include "string_algos.hpp"
+#include "tensor.hpp"
 #include "topo_sorter.hpp"
 #include "transitive_closure.hpp"
 #include "tree_algos.hpp"

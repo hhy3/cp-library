@@ -1,6 +1,6 @@
 # My Code Library For Competitive Programming
 - **数据结构**
-  - [树状数组](https://github.com/hhy3/cp-library/blob/master/hy/fenwick_tree.hpp#L10-L33)
+  - [树状数组](https://github.com/hhy3/cp-library/blob/master/hy/fenwick_tree.hpp)
   - [线段树](https://github.com/hhy3/cp-library/blob/master/hy/seg_tree.hpp)
   - [区间更新线段树](https://github.com/hhy3/cp-library/blob/master/lazy_seg_tree.hpp)
   - [稀疏表](https://github.com/hhy3/cp-library/blob/master/hy/sparse_table.hpp)
@@ -21,6 +21,7 @@
   - [跳表](https://github.com/hhy3/cp-library/blob/master/hy/skip_list.hpp)
   - 可持久化数据结构
     - [可持久化栈](https://github.com/hhy3/cp-library/blob/master/hy/persistent_stack.hpp)
+  - [张量](https://github.com/hhy3/cp-library/blob/master/hy/tensor.hpp)
 - **字符串**
   - [前缀函数](https://github.com/hhy3/cp-library/blob/master/hy/string_algos.hpp)
     - 失配树
