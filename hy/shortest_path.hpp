@@ -34,6 +34,7 @@ namespace ShortestPath {
         }
       }
     }
+    return dist;
   }
 
   static void floyd(adjMatrix& adj) {
@@ -42,7 +43,7 @@ namespace ShortestPath {
       adj[i][j] = std::min(adj[i][j], adj[i][k] + adj[k][j]);
   }
 
-  static std::vector<int64_t>& bfs01(const graph& G, int src) {
+  static std::vector<int64_t> bfs01(const graph& G, int src) {
     int n = (int)G.size();
     std::vector<int64_t> dist(n, INF);
     dist[src] = 0;
@@ -58,6 +59,7 @@ namespace ShortestPath {
         }
       }
     }
+    return dist;
   }
     
 }
