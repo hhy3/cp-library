@@ -86,7 +86,6 @@
   - 平板电视
     - [平衡树](https://github.com/hhy3/cp-library/blob/master/hy/pbds.cc#L7)
     - [可持久化平衡树](https://github.com/hhy3/cp-library/blob/master/hy/pbds.cc#L24-L25)
-  - [玄学优化](https://github.com/hhy3/cp-library/blob/master/hy/prep.hpp)
 
 - **TODO**
   - 后缀自动机
