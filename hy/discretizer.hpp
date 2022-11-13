@@ -19,11 +19,11 @@ template <typename T = int64_t> struct Discretizer {
       mp[*it];
     }
     for (auto &[_, v] : mp) {
-      v = ++sz;
+      v = sz++;
     }
   }
 
-  int operator[](T x) { return mp[x]; }
+  int operator()(T x) { return mp[x]; }
 
   int size() { return sz; }
 };
