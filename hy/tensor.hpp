@@ -27,7 +27,7 @@ template <typename T, int NDIMS> struct TensorView {
     std::memcpy(&nshape[0], &shape[1], sizeof(shape[0]) * (NDIMS - 1));
     std::array<int, NDIMS - 1> nstrides;
     std::memcpy(&nstrides[0], &strides[1], sizeof(shape[0]) * (NDIMS - 1));
-    T *ndata = data + strides[0] + idx;
+    T *ndata = data + strides[0] * idx;
     return TensorView<T, NDIMS - 1>(ndata, nshape, nstrides);
   }
 
@@ -38,7 +38,7 @@ template <typename T, int NDIMS> struct TensorView {
 };
 
 template <typename T, int NDIMS> struct Tensor {
-  std::array<T, NDIMS> shape, strides;
+  std::array<int, NDIMS> shape, strides;
   int len;
   std::unique_ptr<T[]> data;
 
