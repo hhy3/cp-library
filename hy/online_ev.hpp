@@ -6,7 +6,7 @@
 namespace hy {
 
 template <typename T = double> struct OnlineEV {
-  static_assert(std::is_arithmetic_v<T>, "T should be arithmetic type");
+  static_assert(std::is_arithmetic<T>::value, "T should be arithmetic type");
 
   T s1 = 0, s2 = 0, n = 0;
 
