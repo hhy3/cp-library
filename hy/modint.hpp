@@ -11,7 +11,9 @@ template <uint64_t M> struct modint {
 
   modint() : modint(0) {}
 
-  template <typename T> modint(T x_) {
+  template <typename T,
+            std::enable_if_t<std::is_integral<T>::value> * = nullptr>
+  modint(T x_) {
     if constexpr (std::is_signed<T>::value) {
       x = (x_ % T(M) + T(M)) % T(M);
     } else {
@@ -26,8 +28,8 @@ template <uint64_t M> struct modint {
     return *this;
   }
 
-  template <typename T, typename std::enable_if<
-                            std::is_integral<T>::value>::type * = nullptr>
+  template <typename T,
+            std::enable_if_t<std::is_integral<T>::value> * = nullptr>
   operator T() {
     return this->x;
   }
@@ -56,22 +58,22 @@ template <uint64_t M> struct modint {
     return ret;
   }
 
-  modint &operator+=(const modint &rhs) {
+  modint &operator+=(modint rhs) {
     x = (x + rhs.x) % M;
     return *this;
   }
 
-  modint &operator-=(const modint &rhs) {
+  modint &operator-=(modint rhs) {
     x = (x - rhs.x + M) % M;
     return *this;
   }
 
-  modint &operator*=(const modint &rhs) {
+  modint &operator*=(modint rhs) {
     x = x * rhs.x % M;
     return *this;
   }
 
-  modint &operator/=(const modint &rhs) { return *this *= rhs.inv(); }
+  modint &operator/=(modint rhs) { return *this *= rhs.inv(); }
 
   modint inv() const {
     int64_t u, v, d = extgcd(int64_t(x), int64_t(M), u, v);
@@ -87,29 +89,17 @@ template <uint64_t M> struct modint {
     return ret;
   }
 
-  friend modint operator+(const modint &lhs, const modint &rhs) {
-    return modint(lhs) += rhs;
-  }
+  friend modint operator+(modint lhs, modint rhs) { return modint(lhs) += rhs; }
 
-  friend modint operator-(const modint &lhs, const modint &rhs) {
-    return modint(lhs) -= rhs;
-  }
+  friend modint operator-(modint lhs, modint rhs) { return modint(lhs) -= rhs; }
 
-  friend modint operator*(const modint &lhs, const modint &rhs) {
-    return modint(lhs) *= rhs;
-  }
+  friend modint operator*(modint lhs, modint rhs) { return modint(lhs) *= rhs; }
 
-  friend modint operator/(const modint &lhs, const modint &rhs) {
-    return modint(lhs) /= rhs;
-  }
+  friend modint operator/(modint lhs, modint rhs) { return modint(lhs) /= rhs; }
 
-  friend bool operator==(const modint &lhs, const modint &rhs) {
-    return lhs.x == rhs.x;
-  }
+  friend bool operator==(modint lhs, modint rhs) { return lhs.x == rhs.x; }
 
-  friend bool operator!=(const modint &lhs, const modint &rhs) {
-    return lhs.x != rhs.x;
-  }
+  friend bool operator!=(modint lhs, modint rhs) { return lhs.x != rhs.x; }
 
   friend std::ostream &operator<<(std::ostream &os, const modint &rhs) {
     return os << rhs.x;
