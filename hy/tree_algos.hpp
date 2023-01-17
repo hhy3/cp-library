@@ -132,22 +132,56 @@ struct Centroids {
 };
 
 struct Diameter {
+  int n;
   int diameter;
   int c = -1;
-  std::vector<int> dist;
-  Diameter(const std::vector<std::vector<int>>& G, int n) {
+  std::vector<int> dist, pa;
+  std::vector<int> a;
+  Diameter(const std::vector<std::vector<int>>& G) {
+    n = G.size();
     dist.resize(n);
-    std::function<void(int, int)> dfs = [&] (int u, int p) {
+    pa.resize(n);
+    std::function<void(int, int, bool)> dfs = [&] (int u, int p, bool second) {
+      if (second) {
+        pa[u] = p;
+      }
       for (auto v : G[u]) if (v != p) {
         dist[v] = dist[u] + 1;
         if (c == -1 || dist[v] > dist[c]) c = v;
-        dfs(v, u);
+        dfs(v, u, second);
       }
     };
-    dfs(0, -1);
+    dfs(0, -1, false);
+    if (c == -1) c = 0;
     dist[c] = 0;
-    dfs(c, -1);
+    dfs(c, -1, true);
     diameter = dist[c];
+    for (int u = c; u != -1; u = pa[u]) {
+      a.push_back(u);
+    }
+  }
+};
+
+struct DiameterDP {
+  int n;
+  int diameter = 0;
+  DiameterDP(const std::vector<std::vector<int>>& G) {
+    n = G.size();
+    std::vector<int> f1(n), f2(n);
+    std::function<void(int, int)> dfs = [&] (int u, int p) {
+      for (auto v : G[u]) if (v != p) {
+        dfs(v, u);
+        int x = f1[v] + 1;
+        if (x > f1[u]) {
+          f2[u] = f1[u];
+          f1[u] = x;
+        } else if (x > f2[u]) {
+          f2[u] = x;
+        }
+      }
+      diameter = std::max(diameter, f1[u] + f2[u]);
+    };
+    dfs(0, -1);
   }
 };
 
