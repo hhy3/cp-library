@@ -70,6 +70,7 @@
     - [最大流](https://github.com/hhy3/cp-library/blob/master/hy/maxflow.hpp)
 - **树**
   - [树的直径](https://github.com/hhy3/cp-library/blob/master/hy/tree_algos.hpp)
+  - [All Longest Path](https://github.com/hhy3/cp-library/blob/master/hy/tree_algos.hpp)
   - [树的重心](https://github.com/hhy3/cp-library/blob/master/hy/tree_algos.hpp)
   - [LCA](https://github.com/hhy3/cp-library/blob/master/hy/tree_algos.hpp)
   - [轻重链剖分](https://github.com/hhy3/cp-library/blob/master/hy/tree_algos.hpp)

@@ -137,7 +137,7 @@ struct Diameter {
   int c = -1;
   std::vector<int> dist, pa;
   std::vector<int> a;
-  Diameter(const std::vector<std::vector<int>>& G) {
+  explicit Diameter(const std::vector<std::vector<int>>& G) {
     n = G.size();
     dist.resize(n);
     pa.resize(n);
@@ -165,7 +165,7 @@ struct Diameter {
 struct DiameterDP {
   int n;
   int diameter = 0;
-  DiameterDP(const std::vector<std::vector<int>>& G) {
+  explicit DiameterDP(const std::vector<std::vector<int>>& G) {
     n = G.size();
     std::vector<int> f1(n), f2(n);
     std::function<void(int, int)> dfs = [&] (int u, int p) {
@@ -182,6 +182,30 @@ struct DiameterDP {
       diameter = std::max(diameter, f1[u] + f2[u]);
     };
     dfs(0, -1);
+  }
+};
+
+struct AllLongestPath {
+  int n;
+  std::vector<int> distance;
+  explicit AllLongestPath(const std::vector<std::vector<int>>& G) {
+    n = G.size();
+    distance.resize(n);
+    int c = 0;
+    std::vector<std::array<int, 2>> dist(n);
+    std::function<void(int, int, int, int)> dfs = [&] (int u, int p, int d, int i) {
+      dist[u][i] = d; 
+      if (d > dist[c][i]) c = u;
+      for (auto v : G[u]) if (v != p) {
+        dfs(v, u, d + 1, i);
+      }
+    };
+    dfs(0, -1, 0, 0);
+    dfs(c, -1, 0, 0);
+    dfs(c, -1, 0, 1);
+    for (int i = 0; i < n; ++i) {
+      distance[i] = std::max(dist[i][0], dist[i][1]);
+    }
   }
 };
 
