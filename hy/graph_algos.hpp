@@ -37,27 +37,25 @@ struct GraphBridges {
   std::vector<std::pair<int, int>> bridges;
   explicit GraphBridges(const std::vector<std::vector<int>>& G) {
     n = G.size();
-    tin.assign(n, -1);
-    low.assign(n, -1);
-    std::vector<bool> vis(n);
+    tin.assign(n, 0);
+    low.assign(n, 0);
     int timer = 0;
     std::function<void(int, int)> dfs = [&] (int u, int p) {
-      vis[u] = true;
       tin[u] = low[u] = ++timer;
       for (auto v : G[u]) if (v != p) {
-        if (vis[v]) {
+        if (tin[v]) {
           low[u] = std::min(low[u], tin[v]);
         } else {
           dfs(v, u);
           low[u] = std::min(low[u], low[v]);
-          if (low[v] >= tin[u]) {
-            bridges.emplace_back(u, v);
+          if (tin[u] < low[v]) {
+            bridges.emplace_back(std::min(u, v), std::max(u, v));
           }
         }
       }
     };
     for (int i = 0; i < n; ++i) {
-      if (!vis[i]) dfs(i, -1);
+      if (!tin[i]) dfs(i, -1);
     }
   }
 };
