@@ -65,7 +65,7 @@
     - [01BFS](https://github.com/hhy3/cp-library/blob/master/hy/shortest_path.hpp)
   - 最小生成树
     - [Kruskal](https://github.com/hhy3/cp-library/blob/master/hy/mst.hpp)
-  - [强连通分量/缩点](https://github.com/hhy3/cp-library/blob/master/hy/scc.hpp)
+  - [强连通分量/缩点](https://github.com/hhy3/cp-library/blob/master/hy/graph_algos.hpp)
   - [二分图判断](https://github.com/hhy3/cp-library/blob/master/hy/../../../../../../../hy/graph_algos.hpp.hpp)
   - [二分图最大匹配](https://github.com/hhy3/cp-library/blob/master/hy/hungarian.hpp)
   - 网络流
