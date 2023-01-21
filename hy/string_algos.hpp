@@ -8,21 +8,26 @@
 
 namespace hy {
 
-std::vector<int> prefix_function(const std::string& s) {
-  int n = (int)s.size();
-  std::vector<int> p(n+1);
-  for (int i = 1, j = 0; i < n; ++i) {
-    while (j > 0 && s[i] != s[j]) j = p[j];
-    p[i + 1] = j += (s[i] == s[j]);
+struct PrefixTree {
+  int n;
+  std::vector<int> p;
+  explicit PrefixTree(const std::string& s) : n(int(s.size())) {
+    p.resize(n + 1);
+    std::vector<int> p(n + 1);
+    for (int i = 1, j = 0; i < n; ++i) {
+      while (j > 0 && s[i] != s[j]) j = p[j];
+      p[i + 1] = j += (s[i] == s[j]);
+    }
   }
-  return p;
-}
+  int operator[](int idx) { return p[idx]; }
+};
 
-
-struct string_hash {
+// TODO: Use mod instead of overflow.
+// Ref: https://codeforces.com/blog/entry/4898
+struct StringHash {
   int n;
   std::vector<uint64_t> h, power;
-  string_hash(const std::string& s, uint64_t K): n((int)s.size()), h(n+1), power(n+1) {
+  StringHash(const std::string& s, uint64_t K): n((int)s.size()), h(n+1), power(n+1) {
     power[0] = 1;
     for (int i = 1; i <= n; ++i) h[i] = h[i-1] * K + s[i-1], power[i] = power[i-1] * K;
   }

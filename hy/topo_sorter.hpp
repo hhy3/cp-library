@@ -11,7 +11,7 @@ struct TopoSorter {
   std::vector<std::vector<int>> G;
   std::vector<int> topo, deg;
   bool prepared = false; 
-  TopoSorter(int n) : n(n), G(n), deg(n) { topo.reserve(n); }
+  TopoSorter(int num) : n(num), G(n), deg(n) { topo.reserve(n); }
   void add_edge(int u, int v) { G[u].push_back(v), deg[v]++; }
   void build() {
     std::queue<int> q;
@@ -26,7 +26,7 @@ struct TopoSorter {
   }
   bool is_dag() {
     assert(prepared);
-    return topo.size() == n;
+    return (int)topo.size() == n;
   }
   int operator[](int idx) {
     assert(idx < n);
