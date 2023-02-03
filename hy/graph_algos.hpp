@@ -1,12 +1,13 @@
 #pragma once
 
 #include <functional>
-#include <vector>
 #include <queue>
+#include <stack>
+#include <vector>
 
 namespace hy {
 
-inline bool is_biparitite(const std::vector<std::vector<int>> &graph) {
+inline bool is_biparitite(const std::vector<std::vector<int>>& graph) {
   int n = graph.size();
   std::vector<int> color(n, -1);
   std::function<bool(int, int)> dfs = [&](int u, int c) {
@@ -107,16 +108,18 @@ struct GraphBridges {
     tin.assign(n, 0);
     low.assign(n, 0);
     int timer = 0;
-    std::function<void(int, int)> dfs = [&] (int u, int p) {
+    std::function<void(int, int)> dfs = [&](int u, int p) {
       tin[u] = low[u] = ++timer;
-      for (auto v : G[u]) if (v != p) {
-        if (tin[v]) {
-          low[u] = std::min(low[u], tin[v]);
-        } else {
-          dfs(v, u);
-          low[u] = std::min(low[u], low[v]);
-          if (tin[u] < low[v]) {
-            bridges.emplace_back(std::min(u, v), std::max(u, v));
+      for (auto v : G[u]) {
+        if (v != p) {
+          if (tin[v]) {
+            low[u] = std::min(low[u], tin[v]);
+          } else {
+            dfs(v, u);
+            low[u] = std::min(low[u], low[v]);
+            if (tin[u] < low[v]) {
+              bridges.emplace_back(std::min(u, v), std::max(u, v));
+            }
           }
         }
       }
@@ -131,37 +134,50 @@ struct ArticulationPoints {
   int n;
   std::vector<int> tin, low;
   std::vector<bool> is_articulation;
+  std::vector<std::vector<int>> components;
   explicit ArticulationPoints(const std::vector<std::vector<int>>& G) {
     n = G.size();
-    tin.assign(n, -1);
-    low.assign(n, -1);
+    tin.assign(n, 0);
+    low.assign(n, 0);
     is_articulation.assign(n, false);
-    std::vector<bool> vis(n);
     int timer = 0;
-    std::function<void(int, int)> dfs = [&] (int u, int p) {
-      vis[u] = true;
+    std::stack<int> stk;
+    std::function<void(int, int)> dfs = [&](int u, int p) {
       tin[u] = low[u] = ++timer;
+      stk.push(u);
+      if (p == -1 && G[u].empty()) {
+        components.push_back({u});
+        return;
+      }
       int cnt = 0;
-      for (auto v : G[u]) if (v != p) {
-        if (vis[v]) {
+      for (auto v : G[u]) {
+        if (tin[v] > 0) {
           low[u] = std::min(low[u], tin[v]);
         } else {
           dfs(v, u);
           low[u] = std::min(low[u], low[v]);
-          if (low[v] >= tin[u] && p != -1) {
-            is_articulation[u] = true;
+          if (tin[u] <= low[v]) {
+            cnt++;
+            if (p != -1 || cnt > 1) {
+              is_articulation[u] = true;
+            }
+            std::vector<int> component;
+            do {
+              component.push_back(stk.top());
+              stk.pop();
+            } while (component.back() != v);
+            component.push_back(u);
+            components.push_back(component);
           }
-          cnt++;
         }
-      }
-      if (p == -1 && cnt > 1) {
-        is_articulation[u] = true;
       }
     };
     for (int i = 0; i < n; ++i) {
-      if (!vis[i]) dfs(i, -1);
+      if (tin[i] == 0) {
+        dfs(i, -1);
+      }
     }
   }
 };
 
-} // namespace hy
+}  // namespace hy

@@ -56,8 +56,11 @@
 - **图论**
   - [静态图结构(链式前向星)](https://github.com/hhy3/cp-library/blob/master/hy/static_graph.hpp)
   - [拓扑排序](https://github.com/hhy3/cp-library/blob/master/hy/graph_algos.hpp)
-  - [桥](https://github.com/hhy3/cp-library/blob/master/hy/graph_algos.hpp)
-  - [割点](https://github.com/hhy3/cp-library/blob/master/hy/graph_algos.hpp)
+  - 连通性相关
+    - [桥](https://github.com/hhy3/cp-library/blob/master/hy/graph_algos.hpp)
+    - [割点](https://github.com/hhy3/cp-library/blob/master/hy/graph_algos.hpp)
+      - 点双连通分量
+    - [强连通分量/缩点](https://github.com/hhy3/cp-library/blob/master/hy/graph_algos.hpp)
   - 最短路
     - [Dijkstra](https://github.com/hhy3/cp-library/blob/master/hy/shortest_path.hpp)
     - [Floyd](https://github.com/hhy3/cp-library/blob/master/hy/shortest_path.hpp)
@@ -65,7 +68,6 @@
     - [01BFS](https://github.com/hhy3/cp-library/blob/master/hy/shortest_path.hpp)
   - 最小生成树
     - [Kruskal](https://github.com/hhy3/cp-library/blob/master/hy/mst.hpp)
-  - [强连通分量/缩点](https://github.com/hhy3/cp-library/blob/master/hy/graph_algos.hpp)
   - [二分图判断](https://github.com/hhy3/cp-library/blob/master/hy/../../../../../../../hy/graph_algos.hpp.hpp)
   - [二分图最大匹配](https://github.com/hhy3/cp-library/blob/master/hy/hungarian.hpp)
   - 网络流
