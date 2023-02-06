@@ -61,6 +61,7 @@
     - [割点](https://github.com/hhy3/cp-library/blob/master/hy/graph_algos.hpp)
       - 点双连通分量
     - [强连通分量/缩点](https://github.com/hhy3/cp-library/blob/master/hy/graph_algos.hpp)
+    - [支配树](https://github.com/hhy3/cp-library/blob/master/hy/graph_algos.hpp)
   - 最短路
     - [Dijkstra](https://github.com/hhy3/cp-library/blob/master/hy/shortest_path.hpp)
     - [Floyd](https://github.com/hhy3/cp-library/blob/master/hy/shortest_path.hpp)
