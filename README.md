@@ -53,6 +53,8 @@
   - [矩阵](https://github.com/hhy3/cp-library/blob/master/hy/matrix.hpp)
     - 矩阵快速幂
     - 行列式
+  - 数值计算
+    - [实数三分](https://github.com/hhy3/cp-library/blob/master/hy/numeric.hpp)
 - **图论**
   - [静态图结构(链式前向星)](https://github.com/hhy3/cp-library/blob/master/hy/static_graph.hpp)
   - [拓扑排序](https://github.com/hhy3/cp-library/blob/master/hy/graph_algos.hpp)
