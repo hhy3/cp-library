@@ -6,7 +6,7 @@ target_include_directories(hy INTERFACE .)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_COMPILER "g++")
-set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON )
 
 add_executable(template template.cc)
 target_link_libraries(template hy)

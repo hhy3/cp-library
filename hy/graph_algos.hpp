@@ -42,7 +42,7 @@ struct SCC {
   Graph S;
   std::vector<int> id, topo;
   std::vector<std::vector<int>> components;
-  explicit SCC(const Graph& graph, bool build_condens = true)
+  explicit SCC(const Graph& graph)
       : n((int)graph.size()), G(graph), id(n, -1) {
     std::vector<bool> vis(n);
     std::vector<int> post;
@@ -67,35 +67,34 @@ struct SCC {
         if (id[v] == -1) dfs2(v, idx);
       }
     };
-    for (int i = n - 1; i >= 0; --i)
+    for (int i = n - 1; i >= 0; --i) {
       if (id[post[i]] == -1) {
         components.push_back({});
         dfs2(post[i], scc_num);
         scc_num++;
       }
-    if (build_condens) {
-      S.resize(scc_num);
-      std::vector<int> deg(scc_num);
-      for (int i = 0; i < n; ++i) {
-        for (auto v : G[i]) {
-          if (int x = id[i], y = id[v]; x != y) {
-            S[x].push_back(y);
-            deg[y]++;
-          }
+    }
+    S.resize(scc_num);
+    std::vector<int> deg(scc_num);
+    for (int i = 0; i < n; ++i) {
+      for (auto v : G[i]) {
+        if (int x = id[i], y = id[v]; x != y) {
+          S[x].push_back(y);
+          deg[y]++;
         }
       }
-      std::queue<int> q;
-      topo.reserve(scc_num);
-      for (int i = 0; i < scc_num; ++i) {
-        if (!deg[i]) q.push(i);
-      }
-      while (q.size()) {
-        int u = q.front();
-        q.pop();
-        topo.push_back(u);
-        for (auto v : S[u]) {
-          if (--deg[v] == 0) q.push(v);
-        }
+    }
+    std::queue<int> q;
+    topo.reserve(scc_num);
+    for (int i = 0; i < scc_num; ++i) {
+      if (!deg[i]) q.push(i);
+    }
+    while (q.size()) {
+      int u = q.front();
+      q.pop();
+      topo.push_back(u);
+      for (auto v : S[u]) {
+        if (--deg[v] == 0) q.push(v);
       }
     }
   }
