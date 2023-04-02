@@ -7,15 +7,7 @@
 
 namespace hy {
 
-template <typename T> struct MonotoneStackPred {
-  bool operator()(const T &x, const T &y) {
-    // Nearest greater: return x > y;
-    // Nearest smaller: return x < y;
-    return x < y;
-  }
-};
-
-template <typename T = std::int32_t, typename Pred = MonotoneStackPred<T>>
+template <typename T = std::int32_t, typename Pred = std::greater<T>>
 struct MonotoneStack {
   Pred pred;
   int id; // default index

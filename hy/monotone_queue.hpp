@@ -7,15 +7,7 @@
 
 namespace hy {
 
-template <typename T> struct MonotoneQueuePred {
-  bool operator()(const T &x, const T &y) {
-    // Sliding window maximum: return x > y;
-    // Sliding window mimimum: return x < y;
-    return x < y;
-  }
-};
-
-template <typename T = std::int32_t, typename Pred = MonotoneQueuePred<T>>
+template <typename T = std::int32_t, typename Pred = std::greater<T>>
 struct MonotoneQueue {
   Pred pred;
   std::deque<std::pair<int, T>> q;
