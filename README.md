@@ -69,6 +69,8 @@
     - [Floyd](https://github.com/hhy3/cp-library/blob/master/hy/shortest_path.hpp)
       - [传递闭包](https://github.com/hhy3/cp-library/blob/master/hy/transitive_closure.hpp#L8-L18)
     - [01BFS](https://github.com/hhy3/cp-library/blob/master/hy/shortest_path.hpp)
+  - [最小环](https://github.com/hhy3/cp-library/blob/master/hy/shortest_path.hpp)
+  - 
   - 最小生成树
     - [Kruskal](https://github.com/hhy3/cp-library/blob/master/hy/mst.hpp)
   - [二分图判断](https://github.com/hhy3/cp-library/blob/master/hy/../../../../../../../hy/graph_algos.hpp.hpp)

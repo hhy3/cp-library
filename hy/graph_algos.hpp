@@ -9,7 +9,7 @@
 
 namespace hy {
 
-inline bool is_biparitite(const std::vector<std::vector<int>>& graph) {
+inline bool is_biparitite(const std::vector<std::vector<int>> &graph) {
   int n = graph.size();
   std::vector<int> color(n, -1);
   std::function<bool(int, int)> dfs = [&](int u, int c) {
@@ -38,33 +38,36 @@ inline bool is_biparitite(const std::vector<std::vector<int>>& graph) {
 struct SCC {
   using Graph = std::vector<std::vector<int>>;
   int n, scc_num = 0;
-  const Graph& G;
+  const Graph &G;
   Graph S;
   std::vector<int> id, topo;
   std::vector<std::vector<int>> components;
-  explicit SCC(const Graph& graph)
-      : n((int)graph.size()), G(graph), id(n, -1) {
+  explicit SCC(const Graph &graph) : n((int)graph.size()), G(graph), id(n, -1) {
     std::vector<bool> vis(n);
     std::vector<int> post;
     std::function<void(int)> dfs1 = [&](int u) {
       vis[u] = true;
       for (auto v : G[u]) {
-        if (!vis[v]) dfs1(v);
+        if (!vis[v])
+          dfs1(v);
       }
       post.push_back(u);
     };
     for (int i = 0; i < n; ++i) {
-      if (!vis[i]) dfs1(i);
+      if (!vis[i])
+        dfs1(i);
     }
     Graph rG(n);
     for (int i = 0; i < n; ++i) {
-      for (auto v : G[i]) rG[v].push_back(i);
+      for (auto v : G[i])
+        rG[v].push_back(i);
     }
     std::function<void(int, int)> dfs2 = [&](int u, int idx) {
       id[u] = idx;
       components[idx].push_back(u);
       for (auto v : rG[u]) {
-        if (id[v] == -1) dfs2(v, idx);
+        if (id[v] == -1)
+          dfs2(v, idx);
       }
     };
     for (int i = n - 1; i >= 0; --i) {
@@ -87,14 +90,16 @@ struct SCC {
     std::queue<int> q;
     topo.reserve(scc_num);
     for (int i = 0; i < scc_num; ++i) {
-      if (!deg[i]) q.push(i);
+      if (!deg[i])
+        q.push(i);
     }
     while (q.size()) {
       int u = q.front();
       q.pop();
       topo.push_back(u);
       for (auto v : S[u]) {
-        if (--deg[v] == 0) q.push(v);
+        if (--deg[v] == 0)
+          q.push(v);
       }
     }
   }
@@ -104,7 +109,7 @@ struct GraphBridges {
   int n;
   std::vector<int> tin, low;
   std::vector<std::pair<int, int>> bridges;
-  explicit GraphBridges(const std::vector<std::vector<int>>& G) {
+  explicit GraphBridges(const std::vector<std::vector<int>> &G) {
     n = G.size();
     tin.assign(n, 0);
     low.assign(n, 0);
@@ -126,7 +131,8 @@ struct GraphBridges {
       }
     };
     for (int i = 0; i < n; ++i) {
-      if (!tin[i]) dfs(i, -1);
+      if (!tin[i])
+        dfs(i, -1);
     }
   }
 };
@@ -136,7 +142,7 @@ struct ArticulationPoints {
   std::vector<int> tin, low;
   std::vector<bool> is_articulation;
   std::vector<std::vector<int>> components;
-  explicit ArticulationPoints(const std::vector<std::vector<int>>& G) {
+  explicit ArticulationPoints(const std::vector<std::vector<int>> &G) {
     n = G.size();
     tin.assign(n, 0);
     low.assign(n, 0);
@@ -187,18 +193,8 @@ struct DominatorTree {
   std::basic_string<int> arr, par, rev, sdom, dom, dsu, label;
   int n, t;
   DominatorTree(int n)
-      : g(n),
-        rg(n),
-        bucket(n),
-        arr(n, -1),
-        par(n, -1),
-        rev(n, -1),
-        sdom(n, -1),
-        dom(n, -1),
-        dsu(n, 0),
-        label(n, 0),
-        n(n),
-        t(0) {}
+      : g(n), rg(n), bucket(n), arr(n, -1), par(n, -1), rev(n, -1), sdom(n, -1),
+        dom(n, -1), dsu(n, 0), label(n, 0), n(n), t(0) {}
   void add_edge(int u, int v) { g[u] += v; }
   void dfs(int u) {
     arr[u] = t;
@@ -214,10 +210,13 @@ struct DominatorTree {
     }
   }
   int find(int u, int x = 0) {
-    if (u == dsu[u]) return x ? -1 : u;
+    if (u == dsu[u])
+      return x ? -1 : u;
     int v = find(dsu[u], x + 1);
-    if (v < 0) return u;
-    if (sdom[label[dsu[u]]] < sdom[label[u]]) label[u] = label[dsu[u]];
+    if (v < 0)
+      return u;
+    if (sdom[label[dsu[u]]] < sdom[label[u]])
+      label[u] = label[dsu[u]];
     dsu[u] = v;
     return x ? v : label[u];
   }
@@ -225,8 +224,10 @@ struct DominatorTree {
     dfs(root);
     std::iota(dom.begin(), dom.end(), 0);
     for (int i = t - 1; i >= 0; i--) {
-      for (int w : rg[i]) sdom[i] = std::min(sdom[i], sdom[find(w)]);
-      if (i) bucket[sdom[i]] += i;
+      for (int w : rg[i])
+        sdom[i] = std::min(sdom[i], sdom[find(w)]);
+      if (i)
+        bucket[sdom[i]] += i;
       for (int w : bucket[i]) {
         int v = find(w);
         if (sdom[v] == sdom[w])
@@ -234,15 +235,45 @@ struct DominatorTree {
         else
           dom[w] = v;
       }
-      if (i > 1) dsu[i] = par[i];
+      if (i > 1)
+        dsu[i] = par[i];
     }
     for (int i = 1; i < t; i++) {
-      if (dom[i] != sdom[i]) dom[i] = dom[dom[i]];
+      if (dom[i] != sdom[i])
+        dom[i] = dom[dom[i]];
     }
     std::vector<int> outside_dom(n, -1);
-    for (int i = 1; i < t; i++) outside_dom[rev[i]] = rev[dom[i]];
+    for (int i = 1; i < t; i++)
+      outside_dom[rev[i]] = rev[dom[i]];
     return outside_dom;
   }
 };
 
-}  // namespace hy
+inline int girth(const std::vector<std::vector<int>> &G) {
+  int n = G.size();
+  int ans = 1e9;
+  auto bfs = [&](int s) {
+    std::queue<std::pair<int, int>> q;
+    std::vector<int> dist(n, -1);
+    q.push({s, -1});
+    dist[s] = 0;
+    while (q.size()) {
+      auto [u, p] = q.front();
+      q.pop();
+      for (auto v : G[u]) {
+        if (dist[v] == -1) {
+          q.push({v, u});
+          dist[v] = dist[u] + 1;
+        } else if (v != p) {
+          ans = std::min(ans, dist[u] + dist[v] + 1);
+        }
+      }
+    }
+  };
+  for (int i = 0; i < n; ++i) {
+    bfs(i);
+  }
+  return ans;
+}
+
+} // namespace hy
