@@ -172,4 +172,28 @@ template <typename T> T BSGS(T a, T b, T mod) {
   return -1;
 }
 
+template <typename Func> std::pair<int, int> floydCycleFinding(int x0, Func f) {
+  // finding k * mu
+  int slow = f(x0), fast = f(f(x0));
+  while (slow != fast) {
+    slow = f(slow);
+    fast = f(f(fast));
+  }
+  // finding mu
+  fast = x0;
+  while (slow != fast) {
+    slow = f(slow);
+    fast = f(fast);
+  }
+  int mu = slow;
+  // finding lambda
+  int lambda = 1;
+  fast = f(slow);
+  while (slow != fast) {
+    fast = f(fast);
+    lambda++;
+  }
+  return std::make_pair(mu, lambda);
+}
+
 } // namespace hy
