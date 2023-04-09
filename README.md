@@ -78,6 +78,7 @@
   - [二分图最大匹配](https://github.com/hhy3/cp-library/blob/master/hy/hungarian.hpp)
   - 网络流
     - [最大流](https://github.com/hhy3/cp-library/blob/master/hy/maxflow.hpp)
+  - [函数图](https://github.com/hhy3/cp-library/blob/master/hy/functional_graph.hpp)
 - **树**
   - [树的直径](https://github.com/hhy3/cp-library/blob/master/hy/tree_algos.hpp)
   - [All Longest Path](https://github.com/hhy3/cp-library/blob/master/hy/tree_algos.hpp)
