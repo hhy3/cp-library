@@ -23,6 +23,7 @@
     - [可持久化栈](https://github.com/hhy3/cp-library/blob/master/hy/persistent_stack.hpp)
   - [张量](https://github.com/hhy3/cp-library/blob/master/hy/tensor.hpp)
   - [bitset](https://github.com/hhy3/cp-library/blob/master/hy/bitset.hpp)
+  - [bitset(AVX512)](https://github.com/hhy3/cp-library/blob/master/hy/bitset_avx512.hpp)
 - **字符串**
   - [前缀函数](https://github.com/hhy3/cp-library/blob/master/hy/string_algos.hpp)
     - 失配树
