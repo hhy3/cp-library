@@ -11,9 +11,8 @@ template <uint64_t M> struct modint {
 
   modint() : modint(0) {}
 
-  template <typename T,
-            std::enable_if_t<std::is_integral<T>::value> * = nullptr>
-  modint(T x_) {
+  template <typename T> modint(T x_) {
+    static_assert(std::is_integral_v<T>);
     if constexpr (std::is_signed<T>::value) {
       x = (x_ % T(M) + T(M)) % T(M);
     } else {
@@ -28,9 +27,8 @@ template <uint64_t M> struct modint {
     return *this;
   }
 
-  template <typename T,
-            std::enable_if_t<std::is_integral<T>::value> * = nullptr>
-  operator T() {
+  template <typename T> operator T() {
+    static_assert(std::is_integral_v<T>);
     return this->x;
   }
 
@@ -101,11 +99,11 @@ template <uint64_t M> struct modint {
 
   friend bool operator!=(modint lhs, modint rhs) { return lhs.x != rhs.x; }
 
-  friend std::ostream &operator<<(std::ostream &os, const modint &rhs) {
+  friend std::ostream &operator<<(std::ostream &os, modint rhs) {
     return os << rhs.x;
   }
 
-  friend std::istream &operator>>(std::istream &is, modint &rhs) {
+  friend std::istream &operator>>(std::istream &is, modint& rhs) {
     return is >> rhs.x;
   }
 

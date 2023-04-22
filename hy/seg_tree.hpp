@@ -1,36 +1,39 @@
 #pragma once
 
 #include <cstdint>
+#include <functional>
+#include <limits>
 #include <vector>
 
 namespace hy {
 
-template <typename Monoid> struct SegTreeOp {
-  Monoid operator()(const Monoid &x, const Monoid &y) { return x + y; }
-};
-
-template <typename Monoid> struct MonoidId {
-  Monoid operator()() { return Monoid(); }
-};
-
 // 0-indexed implmentation.
-template <typename Monoid = std::int64_t, typename BinaryOp = SegTreeOp<Monoid>,
-          typename ID = MonoidId<Monoid>>
-struct SegTree {
+#if __cplusplus >= 201703L
+
+template <typename S, auto op, auto e> struct SegTree {
+  static_assert(std::is_convertible_v<decltype(op), std::function<S(S, S)>>,
+                "op must work as S(S, S)");
+  static_assert(std::is_convertible_v<decltype(e), std::function<S()>>,
+                "e must work as S()");
+
+#else
+
+template <class S, S (*op)(S, S), S (*e)()> struct segtree {
+
+#endif
+
   int n, size = 1;
-  std::vector<Monoid> data;
-  BinaryOp op;
-  Monoid id = ID()();
+  std::vector<S> data;
 
   SegTree() {}
 
-  explicit SegTree(int n_) : SegTree(std::vector<Monoid>(n_, id)) {}
+  explicit SegTree(int n_) : SegTree(std::vector<S>(n_, e())) {}
 
-  explicit SegTree(const std::vector<Monoid> &data_) : n(data_.size()) {
+  explicit SegTree(const std::vector<S> &data_) : n(data_.size()) {
     while (size < n) {
       size <<= 1;
     }
-    data.assign(size << 1, id);
+    data.assign(size << 1, e());
     for (int i = 0; i < n; ++i) {
       data[i + size] = data_[i];
     }
@@ -39,7 +42,7 @@ struct SegTree {
     }
   }
 
-  void set(int i, const Monoid &x) {
+  void set(int i, const S &x) {
     i += size;
     data[i] = x;
     for (i >>= 1; i >= 1; i >>= 1) {
@@ -47,7 +50,7 @@ struct SegTree {
     }
   }
 
-  void apply(int i, const Monoid &x) {
+  void apply(int i, const S &x) {
     i += size;
     data[i] = op(data[i], x);
     for (i >>= 1; i >= 1; i >>= 1) {
@@ -57,8 +60,8 @@ struct SegTree {
 
   void get(int i) { return data[i + size]; }
 
-  Monoid prod(int l, int r) {
-    Monoid lhs = id, rhs = id;
+  S prod(int l, int r) {
+    S lhs = e(), rhs = e();
     for (l += size, r += size; l <= r; l >>= 1, r >>= 1) {
       if (l % 2 == 1) {
         lhs = op(lhs, data[l++]);
