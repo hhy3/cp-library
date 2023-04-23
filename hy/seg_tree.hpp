@@ -50,15 +50,15 @@ template <class S, S (*op)(S, S), S (*e)()> struct segtree {
     }
   }
 
-  void apply(int i, const S &x) {
+  template <typename F> void apply(int i, F f) {
     i += size;
-    data[i] = op(data[i], x);
+    data[i] = f(data[i]);
     for (i >>= 1; i >= 1; i >>= 1) {
       merge(i);
     }
   }
 
-  void get(int i) { return data[i + size]; }
+  S get(int i) { return data[i + size]; }
 
   S prod(int l, int r) {
     S lhs = e(), rhs = e();
