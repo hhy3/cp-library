@@ -12,11 +12,11 @@ namespace hy {
 inline bool is_biparitite(const std::vector<std::vector<int>> &graph) {
   int n = graph.size();
   std::vector<int> color(n, -1);
-  std::function<bool(int, int)> dfs = [&](int u, int c) {
+  auto dfs = [&](auto self, int u, int c) -> bool {
     color[u] = c;
     for (auto v : graph[u]) {
       if (color[v] == -1) {
-        if (!dfs(v, c ^ 1)) {
+        if (!self(self, v, c ^ 1)) {
           return false;
         }
       } else if (color[v] == c) {
@@ -27,7 +27,7 @@ inline bool is_biparitite(const std::vector<std::vector<int>> &graph) {
   };
   for (int i = 0; i < n; ++i) {
     if (color[i] == -1) {
-      if (!dfs(i, 0)) {
+      if (!dfs(dfs, i, 0)) {
         return false;
       }
     }
