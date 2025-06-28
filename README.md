@@ -2,7 +2,6 @@
 - **数据结构**
   - [树状数组](https://github.com/hhy3/cp-library/blob/master/hy/fenwick_tree.hpp)
   - [线段树](https://github.com/hhy3/cp-library/blob/master/hy/seg_tree.hpp)
-  - [Lazy线段树](https://github.com/hhy3/cp-library/blob/master/hy/lazy_seg_tree.hpp)
   - [稀疏表](https://github.com/hhy3/cp-library/blob/master/hy/sparse_table.hpp)
   - [字典树](https://github.com/hhy3/cp-library/blob/master/hy/trie.hpp)
     - [AC自动机](https://github.com/hhy3/cp-library/blob/master/hy/trie.hpp)

@@ -7,7 +7,6 @@
 #include "fenwick_tree.hpp"
 #include "geometry.hpp"
 #include "hungarian.hpp"
-#include "lazy_seg_tree.hpp"
 #include "linear_bases.hpp"
 #include "lrm_tree.hpp"
 #include "math.hpp"
